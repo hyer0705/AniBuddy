@@ -40,6 +40,7 @@ public class UserLoginController extends HttpServlet {
 		// 전달파라미터 얻기 - 로그인 정보
 		UserTB user = userService.getLoginUser(req);
 		
+		
 		// 로그인 인증 
 		boolean login = userService.login(user);
 		
@@ -52,6 +53,10 @@ public class UserLoginController extends HttpServlet {
 			session.setAttribute("loginid", user.getUserId());
 			session.setAttribute("loginnick", user.getNick());
 			session.setAttribute("userno", user.getUserNo()); // 사용자 번호
+			
+			// 전문가 여부 인데 한 번 확인
+			session.setAttribute("username", user.getUserName());
+			session.setAttribute("isexpert", user.getIsExpert());
 			
 			session.setMaxInactiveInterval(21600);
 			

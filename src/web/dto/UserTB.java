@@ -18,7 +18,8 @@ public class UserTB {
 	private String firstAddr;
 	private String secondAddr;
 	private String animal;
-	private char isExpert;
+//	private char isExpert;
+	private String isExpert;
 	
 	@Override
 	public String toString() {
@@ -124,12 +125,20 @@ public class UserTB {
 		this.animal = animal;
 	}
 
-	public char getIsExpert() {
+	public String getIsExpert() {
 		return isExpert;
 	}
-
-	public void setIsExpert(char isExpert) {
+	
+	public void setIsExpert(String isExpert) {
 		this.isExpert = isExpert;
 	}
+	
+//	public char getIsExpert() {
+//		return isExpert;
+//	}
+//
+//	public void setIsExpert(char isExpert) {
+//		this.isExpert = isExpert;
+//	}
 	
 }

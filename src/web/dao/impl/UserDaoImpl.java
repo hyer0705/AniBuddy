@@ -89,7 +89,7 @@ public class UserDaoImpl implements UserDao{
 				result.setFirstAddr(rs.getString("first_addr"));
 				result.setSecondAddr(rs.getString("second_addr"));
 				result.setAnimal(rs.getString("animal"));
-				result.setIsExpert(rs.getString("is_expert").charAt(0));
+				result.setIsExpert(rs.getString("is_expert"));
 				
 				
 			}
@@ -267,7 +267,7 @@ public class UserDaoImpl implements UserDao{
 				result.setFirstAddr(rs.getString("first_addr"));
 				result.setSecondAddr(rs.getString("second_addr"));
 				result.setAnimal(rs.getString("animal"));
-				result.setIsExpert(rs.getString("is_expert").charAt(0));
+				result.setIsExpert(rs.getString("is_expert"));
 				
 			}
 
@@ -319,7 +319,7 @@ public class UserDaoImpl implements UserDao{
 				result.setFirstAddr(rs.getString("first_addr"));
 				result.setSecondAddr(rs.getString("second_addr"));
 				result.setAnimal(rs.getString("animal"));
-				result.setIsExpert(rs.getString("is_expert").charAt(0));
+				result.setIsExpert(rs.getString("is_expert"));
 
 			}
 

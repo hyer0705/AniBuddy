@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService{
 		user.setFirstAddr(req.getParameter("first_addr"));
 		user.setSecondAddr(req.getParameter("second_addr"));
 		user.setAnimal(req.getParameter("animal"));
-		user.setIsExpert(req.getParameter("is_expert").charAt(0));
+		user.setIsExpert(req.getParameter("is_expert"));
 		
 		return user;
 	}

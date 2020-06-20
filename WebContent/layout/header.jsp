@@ -66,13 +66,13 @@
 						<li><a href="#">나눔</a></li>
 						<li><a href="#">중고거래</a></li>
 						<li><a href="#">봉사</a></li>
-						<li><a href="#">전문가QnA</a></li>
-						<li><a href="#">자유 게시판</a></li>
+						<li><a href="<%=request.getContextPath() %>/expertboard/list">전문가QnA</a></li>
+						<li><a href="<%=request.getContextPath() %>/freeboard/list">자유 게시판</a></li>
 					</ul></li>
 
 				<c:choose>
 					<c:when test="${not adminLogin }">
-						<li><a href="/anibuddy/mypage/main">마이페이지</a>
+						<li><a href="<%=request.getContextPath() %>/mypage/main">마이페이지</a>
 							<ul class="dropdown-content">
 								<li><a href="#">회원정보</a></li>
 								<li><a href="#">활동 내역</a></li>
