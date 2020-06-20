@@ -54,9 +54,10 @@
 						<li><a href="#">소개</a></li>
 					</ul></li>
 
-				<li><a href="#">양육정보</a>
+				<!-- 기본적으로 놀거리 게시판으로 가게 했습니다. -->
+				<li><a href="<%=request.getContextPath() %>/hangout/place">양육정보</a>
 					<ul class="dropdown-content">
-						<li><a href="../HangOut/HangOutLocation.jsp">놀거리</a></li>
+						<li><a href="<%=request.getContextPath() %>/hangout/place">놀거리</a></li>
 						<li><a href="#">알거리</a></li>
 					</ul></li>
 
