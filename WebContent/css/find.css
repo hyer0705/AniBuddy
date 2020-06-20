@@ -1,0 +1,188 @@
+@charset "UTF-8";
+
+.find-cont
+, .updatepw-cont {
+	width: 60%;
+	margin: 0 auto;
+	margin-top: 60px;
+}
+
+.find-cont .find-cont__wrap
+, .updatepw-cont .updatepw-cont__wrap {
+    width: 500px;
+}
+
+.find-cont .find-cont__logo
+, .updatepw-cont .updatepw-cont__logo{
+	cursor: pointer;
+	width: 400px;
+    height: 150px;
+    background-image: url(/anibuddy/img/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.find-cont .find-cont__find
+, .updatepw-cont .updatepw-cont__update {
+	margin: 0 auto;
+	box-sizing: border-box;
+    width: 100%;
+/* 	width: 500px; */
+}
+
+
+.find-cont__find-form
+, .find_result
+, .updatepw-cont__update-form {
+/* 	width: 400px; */
+	margin: 0 auto;
+    padding: 50px 50px 30px 50px;
+    border: 0.5px solid #ffaf9a;
+}
+
+.find_result {
+	padding: 50px;
+	text-align: center;
+	display: flex;
+    flex-direction: column;
+}
+
+.update-form__group label{
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
+/* .find_result .join-form__group { */
+/* 	display: flex; */
+/* 	width: 100%; */
+/* 	flex-direction: column; */
+/* } */
+
+input:focus {
+	outline: none;
+}
+
+input[type="text"]
+, input[type="email"]
+, input[type="password"]
+, .btnFind
+, .btnUpdate
+, .btn {
+	box-sizing: border-box;
+/* 	width: 400px; */
+	width: 100%;
+	height: 40px;
+	margin-bottom: 20px;
+}
+
+#btnToLogin
+, #btnToMain {
+	margin-bottom: 0;
+}
+
+input[type="text"]:focus
+, input[type="email"]:focus
+, input[type="password"]:focus
+, .btnFind:focus
+, .btn:focus {
+	
+	border: 1px solid #ffaf9a;
+
+}
+
+input[type="text"]
+, input[type="email"]
+, input[type="password"] {
+	padding: 0 10px;
+}
+
+.btnFind
+, .btnUpdate {
+    background: #ffaf9a;
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.btn {
+	background: white;
+    border: 0.5px solid #ffaf9a;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.btnFind:focus
+, .btn:focus
+, .btnUpdate:focus {
+	outline: none;
+	background: #ffbf00;
+}
+
+.find-cont .find-cont__link
+, .updatepw-cont .updatepw-cont__link{
+/* 	width: 500px; */
+	width: 100%;
+}
+
+.find-cont__link {
+	box-sizing: border-box;
+}
+
+.find-cont__link .id-cont
+, .find-cont__link .pw-cont
+, .updatepw-cont__link .id-cont
+, .updatepw-cont__link .pw-cont {
+	font-size: 14px;
+	padding: 10px;
+    display: inline-block;
+}
+
+.find-cont__link .select
+, .updatepw-cont__link .select {
+ 	border: 0.5px solid #ffaf9a; 
+    background: #ffaf9a;
+}
+
+.find-cont__link a
+, .updatepw-cont__link a {
+	color: black
+}
+
+.find-cont__link .id-cont.unselect
+, .updatepw-cont__link .id-cont.unselect {
+	border-top: 0.5px solid #ffaf9a;
+/* 	border-right: 0.5px solid #ffaf9a; */
+	border-left: 0.5px solid #ffaf9a;
+}
+
+.find-cont__link .pw-cont.unselect
+, .updatepw-cont__link .pw-cont.unselect {
+	border-top: 0.5px solid #ffaf9a;
+	border-right: 0.5px solid #ffaf9a;
+}
+
+.find_result .find_result__title
+, .updatepw_result__title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.find_result .find_result__content
+, .find_result .find_result__title
+, .updatepw_result__title {
+	margin-bottom: 20px;
+}
+
+.updatepw_result__title {
+	display: inline-block;
+}
+
+#btnFindPw:hover
+, #btnFindId:hover
+, #btnUpdatePw:hover {
+	background: #99d4d9;
+	cursor: pointer;
+}

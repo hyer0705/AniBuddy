@@ -1,0 +1,162 @@
+
+-- 회원 테이블
+-- DROP TABLE USER_TB;
+CREATE TABLE USER_TB
+(
+    USER_NO        NUMBER           NOT NULL, 
+    USER_ID        VARCHAR2(20)     NOT NULL, 
+    USER_PW        VARCHAR2(20)     NOT NULL, 
+    USER_NAME      VARCHAR2(20)     NOT NULL, 
+    BIRTH          DATE             NOT NULL, 
+    GENDER         CHAR(1)      NOT NULL, 
+    NICK           VARCHAR2(20)     NOT NULL, 
+    EMAIL          VARCHAR2(320)    NOT NULL, 
+    TEL            VARCHAR2(14)     NULL, 
+    FIRST_ADDR     VARCHAR2(200)    NOT NULL, 
+    SECOND_ADDR    VARCHAR2(200)    NOT NULL, 
+    ANIMAL         VARCHAR2(20)     NULL, 
+    IS_EXPERT      CHAR(1)          NOT NULL, 
+    CONSTRAINT USER_TB_PK PRIMARY KEY (USER_NO)
+);
+
+COMMENT ON TABLE USER_TB IS '회원 정보 테이블';
+
+COMMENT ON COLUMN USER_TB.USER_NO IS '사용자 번호';
+
+COMMENT ON COLUMN USER_TB.USER_ID IS '사용자 아이디';
+
+COMMENT ON COLUMN USER_TB.USER_PW IS '사용자 비밀번호';
+
+COMMENT ON COLUMN USER_TB.USER_NAME IS '사용자 이름';
+
+COMMENT ON COLUMN USER_TB.BIRTH IS '생년월일';
+
+COMMENT ON COLUMN USER_TB.GENDER IS '성별';
+
+COMMENT ON COLUMN USER_TB.NICK IS '닉네임';
+
+COMMENT ON COLUMN USER_TB.EMAIL IS '이메일';
+
+COMMENT ON COLUMN USER_TB.TEL IS '전화번호';
+
+COMMENT ON COLUMN USER_TB.FIRST_ADDR IS '첫번째 주소';
+
+COMMENT ON COLUMN USER_TB.SECOND_ADDR IS '두번째 주소(상세 주소)';
+
+COMMENT ON COLUMN USER_TB.ANIMAL IS '동물종';
+
+COMMENT ON COLUMN USER_TB.IS_EXPERT IS '전문가';
+
+-- 회원 번호를 위한 시퀀스 생성
+DROP SEQUENCE user_seq;
+CREATE SEQUENCE user_seq;
+
+-- commit;
+
+-- 더미데이터 삽입
+INSERT INTO user_tb( 
+    user_no
+    , user_id
+    , user_pw
+    , user_name
+    , birth
+    , gender
+    , nick
+    , email
+    , tel
+    , first_addr
+    , second_addr
+    , animal
+    , is_expert) 
+VALUES(	
+    user_seq.nextval
+    ,	'cherry1'
+    ,	'cherry11'
+    ,	'김체리'
+    ,	'1996-06-17'
+    ,	'F'
+    ,	'강남체리'
+    ,	'cherry1@test.com'
+    ,	'01012345678'
+    ,	'서울특별시 강남구 테헤란로 10길 9'
+    ,	'그랑프리 빌딩'
+    ,	'개'
+    ,	'N');
+
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry2',	'cherry22',	'이체리',	'1990-03-18',	'M',	'천안체리',	'cherry2@test.com',	'01012345679',	'충청남도 천안시 동남구 봉명4길',	'봉서산 아이파크',	'고양이',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry3',	'cherry33',	'박체리',	'1997-06-19',	'M',	'서산체리',	'cherry3@test.com',	'01012345680',	'서울특별시 성동구 아치산로 83(성수동)',	'F2빌딩',	'금붕어/열대어',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry4',	'cherry44',	'조체리',	'1967-06-20',	'F',	'삼척체리',	'cherry4@test.com',	'01012345681',	'서울특별시 강남구 압구정로 423',	'삼척빌딩',	'햄스터',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry5',	'cherry55',	'사공체리',	'1996-06-21',	'M',	'부산체리',	'cherry5@test.com',	'01012345682',	'서울특별시 강남구 테헤란로 10길 13',	'알록달록 빌딩',	'토끼',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry6',	'cherry66',	'예체리',	'2000-01-06',	'F',	'대만체리',	'cherry6@test.com',	'01012345683',	'서울특별시 강남구 테헤란로 10길 14',	'강아지 세상',	'개',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry7',	'cherry77',	'옹체리',	'1984-06-23',	'M',	'오산체리',	'cherry7@test.com',	'01012345684',	'서울특별시 강남구 테헤란로 10길 15',	'고양이 세상',	'새',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry8',	'cherry88',	'서체리',	'1998-03-09',	'F',	'경기체리',	'cherry8@test.com',	'01012345685',	'서울특별시 강남구 테헤란로 10길 16',	'그랑프리 빌딩',	'개',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry9',	'cherry99',	'송체리',	'1987-06-25',	'F',	'베이징체리',	'cherry9@test.com',	'01012345686',	'서울특별시 강남구 테헤란로 10길 17',	'그랑프리 빌딩',	'고양이',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry10',	'cherry00',	'전체리',	'1998-06-26',	'F',	'양재체리',	'cherry10@test.com',	'01012345687',	'서울특별시 강남구 테헤란로 10길 18',	'그랑프리 빌딩',	'개',	'N');
+																										
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'expert1',	'expert11',	'김원장',	'1988-06-29',	'F',	'dr_kim',	'dr_kim@test.com',	'01012345690',	'서울특별시 강남구 테헤란로 10길 21',	'동물병원',	'개',	'Y');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'expert2',	'expert12',	'조원장',	'1988-06-30',	'M',	'dr_jo',	'dr_jo@test.com',	'01012345691',	'서울특별시 강남구 테헤란로 10길 22',	'동물병원',	null,	'Y');
+
+-- 제약조건 추가
+ALTER TABLE user_tb ADD CONSTRAINT uq_user_id UNIQUE (USER_ID);
+ALTER TABLE user_tb ADD CONSTRAINT uq_user_nick UNIQUE (NICK);
+ALTER TABLE user_tb ADD CONSTRAINT uq_email UNIQUE (EMAIL);
+
+-- 회원 조회
+SELECT * FROM user_tb
+ORDER BY user_no DESC;
+
+-- to_char(), to_date()
+SELECT TO_CHAR(TO_DATE('19960705', 'RR-MM-DD'), 'YYYY-MM-DD') YEAR
+FROM dual;
+
+-- 아이디와 비밀번호로 회원 조회
+SELECT * FROM user_tb
+WHERE user_id = 'cherry1'
+    and user_pw = 'cherry11';
+--commit;
+
+-- 아이디 있는지 없는지 확인하는 조회
+SELECT * FROM user_tb
+WHERE user_id = 'test';
+
+-- 닉네임으로 회원 조회
+SELECT * FROM user_tb
+WHERE nick = '닉네임';
+
+-- 이메일 회원 조회
+SELECT * FROM user_tb
+WHERE email = 'cherry1@test.com';
+
+-- 회원 조회
+SELECT * FROM user_tb
+ORDER BY user_no;
+
+-- 이름, 이메일로 회원 조회
+SELECT * FROM user_tb
+WHERE user_name = '예체리'
+    AND email = 'cherry6@test.com';
+
+-- 이름, 이메일, 아이디로 회원 조회
+SELECT * FROM user_tb
+WHERE user_name = '서체리'
+    AND email = 'cherry8@test.com'
+    AND user_id = 'cherry8';
+
+--commit;
+
+-- 유저 테이블 생성하고 commit; 실행해주세요
+
+-- 비밀번호 업데이트
+--UPDATE user_tb
+--SET
+--    user_pw = 'test1234'
+--WHERE
+--    user_no = 8;
+    
+SELECT * FROM user_tb
+WHERE user_no = 6;
+
+SELECT * FROM user_tb
+ORDER BY user_no desc;
+
+-- commit;

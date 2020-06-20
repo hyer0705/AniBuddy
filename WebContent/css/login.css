@@ -1,0 +1,96 @@
+@charset "UTF-8";
+.login-cont {
+	width: 60%;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+.login-cont .login-cont__logo{
+	cursor: pointer;
+	width: 400px;
+    height: 150px;
+    background-image: url(/anibuddy/img/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.login-cont .login-cont__login {
+	margin: 0 auto;
+    width: 400px;
+}
+
+input:focus {
+	outline: none;
+}
+
+input[type="text"]
+, input[type="password"]
+, .login-btn
+, .join-btn {
+	box-sizing: border-box;
+	width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+input[type="text"]
+, input[type="password"] {
+	padding: 0 10px;
+}
+
+input[type="text"]:focus
+, input[type="password"]:focus {
+	padding: 0 10px;
+	box-shadow: none;
+	border: 1px solid #99d4d9;
+}
+
+.login-cont__login-form .login-btn {
+	background: #99d4d9;
+    border: 0.5px solid black;
+    font-weight: 700;
+    outline: none;
+    cursor: pointer;
+}
+
+.login-cont .login-cont__btn-join {
+    margin: 0 auto;
+    width: 400px;
+}
+
+.login-cont__btn-join .join-btn{	
+	background: white;
+ 	border: 1px solid #99d4d9;
+	font-weight: 700;
+	outline: none;
+	cursor: pointer;
+}
+
+.login-cont .login-cont__find-info{
+	width: 400px;
+	margin: 0 auto;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.login-cont__find-info span{
+	padding: 0 5px;
+	border-right: 1px solid #ccc;
+}
+
+.login-cont__find-info span:last-child {
+	border: none;
+}
+
+.login-cont__find-info a {
+	color: black;
+    opacity: 0.7;
+}
+
+#btnLogin:hover {
+	background: #ffaf9a;
+}
+#btnJoin:hover {
+    border: 1px solid #ffaf9a;
+}

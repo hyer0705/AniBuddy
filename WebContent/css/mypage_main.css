@@ -1,0 +1,94 @@
+@charset "UTF-8";
+.wrapper {
+	width: 100%;
+	margin-top: 35px;
+}
+
+.wrapper .mypage-content{
+	width: 79.8%;
+	padding: 5px;
+	float: right;
+	margin-top: 35px;
+	
+}
+
+.mypage-content .card-wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.mypage-content .card-wrapper:last-child{
+	margin-top: 20px;
+}
+
+.card-wrapper .menu-card {
+	border: 1px solid #ffaf9a;
+    margin: 0;
+    width: 49.7%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    border-radius: 7px;
+}
+
+.card-wrapper .menu-card:first-child {
+	margin-right: 10px;
+}
+
+.menu-card .menu-card__icon
+, .menu-card .menu-card__title {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-card .menu-card__icon {
+    width: 29.9%;
+    font-size: 50px;
+}
+
+.menu-card .menu-card__title {
+    width: 69.9%;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-card .menu-card__title span {
+	width: 200px;
+    text-align: center;
+}
+
+.wrapper .mypage-sidebar{
+	width: 19.8%;
+	padding: 5px;
+	float: left;
+}
+
+.mypage-sidebar ul li:first-child{
+	font-size: 20px;
+    font-weight: 700;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+    padding: 5px 5px 10px 5px;
+}
+
+.mypage-sidebar ul li:not(:first-child){
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.mypage-sidebar ul li:not(:first-child):hover {
+    background: #ffaf9a;
+}
+
+.mypage-sidebar ul li a {
+	color: black;
+}
+
+.clear{
+	clear: both;
+	margin-bottom: 35px;
+}

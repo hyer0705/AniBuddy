@@ -1,0 +1,54 @@
+-- 관리자 테이블(관리자 로그인시 필요)
+
+-- DROP TABLE ADMIN;
+CREATE TABLE ADMIN
+(
+    admin_no    NUMBER           NOT NULL, 
+    admin_id    VARCHAR2(20)     NOT NULL, 
+    admin_pw    VARCHAR2(20)     NOT NULL, 
+    email       VARCHAR2(320)    NOT NULL, 
+    CONSTRAINT ADMIN_PK PRIMARY KEY (admin_no)
+);
+
+COMMENT ON TABLE ADMIN IS '관리자 로그인 정보';
+
+COMMENT ON COLUMN ADMIN.admin_no IS '관리자번호';
+
+COMMENT ON COLUMN ADMIN.admin_id IS '관리자 아이디';
+
+COMMENT ON COLUMN ADMIN.admin_pw IS '관리자 비밀번호';
+
+COMMENT ON COLUMN ADMIN.email IS '관리자 이메일';
+
+-- 관리자 번호를 위한 시퀀스 생성
+DROP SEQUENCE admin_seq;
+CREATE SEQUENCE admin_seq;
+
+-- 관리자 데이터 삽입
+INSERT INTO admin (admin_no, admin_id, admin_pw, email)
+VALUES (admin_seq.nextval, 'admin1', 'admin11', 'admin@test.com');
+INSERT INTO admin (admin_no, admin_id, admin_pw, email)
+VALUES (admin_seq.nextval, 'admin2', 'admin22', 'admin2@test.com');
+INSERT INTO admin (admin_no, admin_id, admin_pw, email)
+VALUES (admin_seq.nextval, 'admin3', 'admin33', 'admin@test.com');
+INSERT INTO admin (admin_no, admin_id, admin_pw, email)
+VALUES (admin_seq.nextval, 'admin4', 'admin44', 'admin@test.com');
+
+
+-- 관리자 테이블 전체 조회
+SELECT * FROM admin
+ORDER BY admin_no;
+
+-- commit;
+
+-- 아이디, 비밀번호로 관리자 조회하기
+SELECT * FROM admin
+WHERE admin_id = 'admin2'
+    AND admin_pw = 'admin22';
+    
+-- 아이디로 관리자 조회하기
+SELECT * FROM admin
+WHERE admin_id = 'admin2';
+
+
+-- 반드시 커밋후 사용하기
