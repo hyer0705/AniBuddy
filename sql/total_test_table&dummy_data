@@ -1,0 +1,749 @@
+DROP TABLE FILETB;
+DROP TABLE COMMENTTB;
+DROP TABLE BOARD CASCADE CONSTRAINTS;
+DROP TABLE BOARD_CATE;
+DROP TABLE USERTB;
+DROP TABLE REPORT;
+DROP TABLE GRADE;
+
+DROP TABLE USER_TB;
+
+
+-- 회원 테이블
+-- DROP TABLE USER_TB;
+CREATE TABLE USER_TB
+(
+    USER_NO        NUMBER           NOT NULL, 
+    USER_ID        VARCHAR2(20)     NOT NULL, 
+    USER_PW        VARCHAR2(20)     NOT NULL, 
+    USER_NAME      VARCHAR2(20)     NOT NULL, 
+    BIRTH          DATE             NOT NULL, 
+    GENDER         CHAR(1)      NOT NULL, 
+    NICK           VARCHAR2(20)     NOT NULL, 
+    EMAIL          VARCHAR2(320)    NOT NULL, 
+    TEL            VARCHAR2(14)     NULL, 
+    FIRST_ADDR     VARCHAR2(200)    NOT NULL, 
+    SECOND_ADDR    VARCHAR2(200)    NOT NULL, 
+    ANIMAL         VARCHAR2(20)     NULL, 
+    IS_EXPERT      CHAR(1)          NOT NULL, 
+    CONSTRAINT USER_TB_PK PRIMARY KEY (USER_NO)
+);
+
+COMMENT ON TABLE USER_TB IS '회원 정보 테이블';
+
+COMMENT ON COLUMN USER_TB.USER_NO IS '사용자 번호';
+
+COMMENT ON COLUMN USER_TB.USER_ID IS '사용자 아이디';
+
+COMMENT ON COLUMN USER_TB.USER_PW IS '사용자 비밀번호';
+
+COMMENT ON COLUMN USER_TB.USER_NAME IS '사용자 이름';
+
+COMMENT ON COLUMN USER_TB.BIRTH IS '생년월일';
+
+COMMENT ON COLUMN USER_TB.GENDER IS '성별';
+
+COMMENT ON COLUMN USER_TB.NICK IS '닉네임';
+
+COMMENT ON COLUMN USER_TB.EMAIL IS '이메일';
+
+COMMENT ON COLUMN USER_TB.TEL IS '전화번호';
+
+COMMENT ON COLUMN USER_TB.FIRST_ADDR IS '첫번째 주소';
+
+COMMENT ON COLUMN USER_TB.SECOND_ADDR IS '두번째 주소(상세 주소)';
+
+COMMENT ON COLUMN USER_TB.ANIMAL IS '동물종';
+
+COMMENT ON COLUMN USER_TB.IS_EXPERT IS '전문가';
+
+-- 회원 번호를 위한 시퀀스 생성
+DROP SEQUENCE user_seq;
+CREATE SEQUENCE user_seq;
+
+-- commit;
+
+-- 더미데이터 삽입
+INSERT INTO user_tb( 
+    user_no
+    , user_id
+    , user_pw
+    , user_name
+    , birth
+    , gender
+    , nick
+    , email
+    , tel
+    , first_addr
+    , second_addr
+    , animal
+    , is_expert) 
+VALUES(	
+    user_seq.nextval
+    ,	'cherry1'
+    ,	'cherry11'
+    ,	'김체리'
+    ,	'1996-06-17'
+    ,	'F'
+    ,	'강남체리'
+    ,	'cherry1@test.com'
+    ,	'01012345678'
+    ,	'서울특별시 강남구 테헤란로 10길 9'
+    ,	'그랑프리 빌딩'
+    ,	'개'
+    ,	'N');
+
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry2',	'cherry22',	'이체리',	'1990-03-18',	'M',	'천안체리',	'cherry2@test.com',	'01012345679',	'충청남도 천안시 동남구 봉명4길',	'봉서산 아이파크',	'고양이',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry3',	'cherry33',	'박체리',	'1997-06-19',	'M',	'서산체리',	'cherry3@test.com',	'01012345680',	'서울특별시 성동구 아치산로 83(성수동)',	'F2빌딩',	'금붕어/열대어',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry4',	'cherry44',	'조체리',	'1967-06-20',	'F',	'삼척체리',	'cherry4@test.com',	'01012345681',	'서울특별시 강남구 압구정로 423',	'삼척빌딩',	'햄스터',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry5',	'cherry55',	'사공체리',	'1996-06-21',	'M',	'부산체리',	'cherry5@test.com',	'01012345682',	'서울특별시 강남구 테헤란로 10길 13',	'알록달록 빌딩',	'토끼',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry6',	'cherry66',	'예체리',	'2000-01-06',	'F',	'대만체리',	'cherry6@test.com',	'01012345683',	'서울특별시 강남구 테헤란로 10길 14',	'강아지 세상',	'개',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry7',	'cherry77',	'옹체리',	'1984-06-23',	'M',	'오산체리',	'cherry7@test.com',	'01012345684',	'서울특별시 강남구 테헤란로 10길 15',	'고양이 세상',	'새',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry8',	'cherry88',	'서체리',	'1998-03-09',	'F',	'경기체리',	'cherry8@test.com',	'01012345685',	'서울특별시 강남구 테헤란로 10길 16',	'그랑프리 빌딩',	'개',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry9',	'cherry99',	'송체리',	'1987-06-25',	'F',	'베이징체리',	'cherry9@test.com',	'01012345686',	'서울특별시 강남구 테헤란로 10길 17',	'그랑프리 빌딩',	'고양이',	'N');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'cherry10',	'cherry00',	'전체리',	'1998-06-26',	'F',	'양재체리',	'cherry10@test.com',	'01012345687',	'서울특별시 강남구 테헤란로 10길 18',	'그랑프리 빌딩',	'개',	'N');
+																										
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'expert1',	'expert11',	'김원장',	'1988-06-29',	'F',	'dr_kim',	'dr_kim@test.com',	'01012345690',	'서울특별시 강남구 테헤란로 10길 21',	'동물병원',	'개',	'Y');
+INSERT INTO user_tb( user_no, user_id, user_pw, user_name, birth, gender, nick, email, tel, first_addr, second_addr, animal, is_expert) VALUES(	user_seq.nextval,	'expert2',	'expert12',	'조원장',	'1988-06-30',	'M',	'dr_jo',	'dr_jo@test.com',	'01012345691',	'서울특별시 강남구 테헤란로 10길 22',	'동물병원',	null,	'Y');
+
+
+-- 회원 조회
+SELECT * FROM user_tb
+ORDER BY user_no DESC;
+
+-- to_char(), to_date()
+SELECT TO_CHAR(TO_DATE('19960705', 'RR-MM-DD'), 'YYYY-MM-DD') YEAR
+FROM dual;
+
+-- 아이디와 비밀번호로 회원 조회
+SELECT * FROM user_tb
+WHERE user_id = 'cherry1'
+    and user_pw = 'cherry11';
+--commit;
+
+-- 제약조건 추가
+ALTER TABLE user_tb ADD CONSTRAINT uq_user_id UNIQUE (USER_ID);
+ALTER TABLE user_tb ADD CONSTRAINT uq_user_nick UNIQUE (NICK);
+ALTER TABLE user_tb ADD CONSTRAINT uq_email UNIQUE (EMAIL);
+
+-- 아이디 있는지 없는지 확인하는 조회
+SELECT * FROM user_tb
+WHERE user_id = 'test';
+
+-- 닉네임으로 회원 조회
+SELECT * FROM user_tb
+WHERE nick = '닉네임';
+
+-- 이메일 회원 조회
+SELECT * FROM user_tb
+WHERE email = 'cherry1@test.com';
+
+-- 회원 조회
+SELECT * FROM user_tb
+ORDER BY user_no;
+
+-- 이름, 이메일로 회원 조회
+SELECT * FROM user_tb
+WHERE user_name = '예체리'
+    AND email = 'cherry6@test.com';
+
+-- 이름, 이메일, 아이디로 회원 조회
+SELECT * FROM user_tb
+WHERE user_name = '예체리'
+    AND email = 'cherry6@test.com'
+    AND user_id = 'cherry6';
+
+--commit;
+CREATE TABLE BOARD
+(
+    BOARD_NO      NUMBER          NOT NULL, 
+    BOARD_NAME    VARCHAR2(30)    NOT NULL, 
+    CONSTRAINT BOARD_PK PRIMARY KEY (BOARD_NO)
+);
+
+COMMENT ON TABLE BOARD IS '테이블 관련 테이블';
+
+COMMENT ON COLUMN BOARD.BOARD_NO IS '게시판 번호';
+
+COMMENT ON COLUMN BOARD.BOARD_NAME IS '게시판 이름';
+
+-- 게시판 번호를 위한 시퀀스 생성
+DROP SEQUENCE board_seq;
+CREATE SEQUENCE board_seq;
+
+-- 게시판 삽입
+INSERT INTO board(board_no, board_name)
+VALUES (board_seq.nextval, '나눔');
+INSERT INTO board(board_no, board_name)
+VALUES (board_seq.nextval, '중고거래');
+INSERT INTO board(board_no, board_name)
+VALUES (board_seq.nextval, '봉사');
+INSERT INTO board(board_no, board_name)
+VALUES (board_seq.nextval, '전문가 질의응답');
+INSERT INTO board(board_no, board_name)
+VALUES (board_seq.nextval, '자유');
+
+-- 게시판 조회
+SELECT * FROM board
+ORDER BY board_no;
+
+
+-- 전문가 게시판 테이블
+DROP TABLE expert_post;
+DROP TABLE expert_comment;
+DROP TABLE expert_file;
+DROP TABLE free_post;
+DROP TABLE free_comment;
+DROP TABLE free_file;
+
+CREATE TABLE expert_post (
+	post_no NUMBER primary key, -- 글번호
+	board_no NUMBER, -- 게시판번호
+	title VARCHAR2(500) not null, -- 제목
+	content CLOB not null, -- 내용
+	write_date DATE default sysdate, -- 작성일
+	hit NUMBER, -- 조회수
+	range VARCHAR2(10), -- 범위
+	group_no NUMBER, -- 글의 그룹 번호(원글:자기자신)
+	group_ord NUMBER, -- 그룹 안에서 게시글 순서
+	depth NUMBER, -- 답답글
+	user_no NUMBER  -- 작성자
+);
+
+DROP SEQUENCE expert_seq;
+CREATE SEQUENCE expert_seq;
+
+-- 전문가 게시판 댓글 테이블
+
+CREATE TABLE expert_comment (
+	comment_no NUMBER primary key, 
+	post_no NUMBER,
+	user_no NUMBER,
+	content VARCHAR2(500) not null,
+	write_date DATE default sysdate,
+	is_reply CHAR(1),
+	parent_comment NUMBER,
+	is_delete CHAR(1)
+);
+
+DROP SEQUENCE expert_comment_seq;
+CREATE SEQUENCE expert_comment_seq;
+
+
+-- 전문가 게시판 파일 테이블
+
+CREATE TABLE expert_file (
+	fileno NUMBER primary key,
+	post_no NUMBER,
+	origin_name VARCHAR2(300),
+	stored_name VARCHAR2(300),
+	filesize NUMBER
+);
+
+DROP SEQUENCE expert_file_seq;
+CREATE SEQUENCE expert_file_seq;
+
+-- 자유게시판 테이블
+
+CREATE TABLE free_post (
+	post_no NUMBER primary key,
+	board_no NUMBER,
+	title VARCHAR2(500) not null,
+	content CLOB not null,
+	write_date DATE default sysdate, 
+	hit NUMBER, 
+	range VARCHAR2(10), 
+	user_no NUMBER
+);
+
+DROP SEQUENCE free_seq;
+CREATE SEQUENCE free_seq;
+
+
+CREATE TABLE free_comment (
+	comment_no NUMBER primary key, 
+	post_no NUMBER,
+	user_no NUMBER,
+	content VARCHAR2(500) not null,
+	write_date DATE default sysdate,
+	is_reply CHAR(1),
+	parent_comment NUMBER,
+	is_delete CHAR(1)
+);
+
+DROP SEQUENCE free_comment_seq;
+CREATE SEQUENCE free_comment_seq;
+
+-- 자유 게시판 파일 테이블
+
+CREATE TABLE free_file (
+	fileno NUMBER primary key,
+	post_no NUMBER,
+	origin_name VARCHAR2(300),
+	stored_name VARCHAR2(300),
+	filesize NUMBER,
+	CONSTRAINT FK_freefile foreign key(post_no) REFERENCES free_post(post_no)on delete cascade
+);
+
+DROP SEQUENCE free_file_seq;
+CREATE SEQUENCE free_file_seq;
+
+
+-- 게시판 번호 - 게시판 번호
+ALTER TABLE expert_post
+ADD CONSTRAINT expert_fk
+    FOREIGN KEY (board_no)
+    REFERENCES board(board_no);
+
+-- 작성자 - 사용자
+ALTER TABLE expert_post
+ADD CONSTRAINT expert_user_fk
+    FOREIGN KEY (user_no)
+    REFERENCES user_tb(user_no)on delete cascade;
+
+
+-- 게시판 번호 - 글 번호
+ALTER TABLE expert_comment 
+ADD CONSTRAINT expert_board_fk 
+    FOREIGN KEY (post_no)
+    REFERENCES expert_post(post_no)on delete cascade;
+
+-- 댓글 작성자 - 사용자
+ALTER TABLE expert_comment 
+ADD CONSTRAINT expert_comment_user_fk
+    FOREIGN KEY (user_no) 
+    REFERENCES user_tb(user_no)on delete cascade;
+
+-- 글번호 - 댓글번호
+ALTER TABLE expert_comment 
+ADD CONSTRAINT expert_comment_fk
+    FOREIGN KEY (parent_comment) 
+    REFERENCES expert_comment(comment_no);
+
+
+-- 파일 - 글번호
+ALTER TABLE expert_file
+ADD CONSTRAINT expert_file_fk
+    FOREIGN KEY (post_no)
+    REFERENCES expert_post(post_no)on delete cascade;
+
+
+-- 게시판 번호 - 게시판 번호
+ALTER TABLE free_post
+ADD CONSTRAINT free_fk
+    FOREIGN KEY (board_no)
+    REFERENCES board(board_no);
+
+-- 작성자 - 사용자
+ALTER TABLE free_post
+ADD CONSTRAINT free_user_fk
+    FOREIGN KEY (user_no) 
+    REFERENCES user_tb(user_no)on delete cascade;
+	
+
+-- 게시판 번호 - 글 번호
+ALTER TABLE expert_comment 
+ADD CONSTRAINT free_board_fk 
+    FOREIGN KEY (post_no)
+    REFERENCES expert_post(post_no) on delete cascade;
+
+-- 댓글 작성자 - 사용자
+ALTER TABLE free_comment 
+ADD CONSTRAINT free_comment_user_fk
+    FOREIGN KEY (user_no) 
+    REFERENCES user_tb(user_no)on delete cascade;
+
+-- 글번호 - 댓글번호
+ALTER TABLE free_comment 
+ADD CONSTRAINT free_comment_fk
+    FOREIGN KEY (parent_comment) 
+    REFERENCES free_comment(comment_no)on delete cascade;
+
+	
+
+	
+
+select * from free_file;
+select * from expert_comment;
+select * from oneonone;
+
+
+select*from expert_post;
+
+
+--dummy
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	1,	'질문1',	'질문합니다',	1,	'all',	1,	0,	1,	1);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'질문2',	'질문합니다2',	2,	'all',	2,	0,	1,	2);
+
+select * from expert_post;
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'답변1',	'답변입니다',	2,	'all',	1,	1,	2,	3);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'답변2',	'답변입니다2',	4,	'all',	2,	1,	2,	3);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'답변3',	'답변입니다3',	5,	'all',	2,	2,	3,	3);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'질문3',	'질문합니다3',	1,	'all',	6,	0,	1,	4);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'질문4',	'질문합니다4',	2,	'all',	7,	0,	1,	2);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'질문5',	'질문합니다5',	1,	'all',	8,	0,	1,	1);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'질문6',	'질문합니다6',	2,	'all',	9,	0,	1,	2);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'질문7',	'질문합니다7',	1,	'all',	10,	0,	1,	4);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'질문8',	'질문합니다8',	2,	'all',	11,	0,	1,	2);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'질문9',	'질문합니다9',	1,	'all',	12,	0,	1,	1);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'질문10',	'질문합니다10',	2,	'all',	13,	0,	1,	2);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'답변4',	'답변입니다',	2,	'all',	9,	1,	2,	3);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'답변5',	'답변입니다',	4,	'all',	9,	2,	3,	3);
+
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) 
+VALUES (expert_seq.nextval,	4,	'답변6',	'답변입니다',	5,	'all',	10,	1,	2,	3);
+
+
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,3	,'댓글1'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글2'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글3'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글4'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글5'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글6'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글7'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글8'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글9'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글10'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글11'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글12'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글13'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글14'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글15'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글16'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글17'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글18'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글19'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글20'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글21'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글22'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글23'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글24'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글25'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글26'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글27'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글28'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글29'	,'N'	);
+
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글1'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글2'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글3'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글4'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글5'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글6'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글7'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글8'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글9'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글10'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글11'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글12'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글13'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글14'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글15'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글16'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글17'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글18'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글19'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글20'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글21'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글22'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글23'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글24'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글25'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글26'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글27'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글28'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글29'	,'N'	);
+
+
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유1'	,'자유게시판이다아아아아'	,1	,'all'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유2'	,'자유게시판이다아아아아'	,2	,'all'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유3'	,'자유게시판이다아아아아'	,3	,'all'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유4'	,'자유게시판이다아아아아'	,4	,'all'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유5'	,'자유게시판이다아아아아'	,5	,'all'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유6'	,'자유게시판이다아아아아'	,6	,'all'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유7'	,'자유게시판이다아아아아'	,7	,'all'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유8'	,'자유게시판이다아아아아'	,8	,'all'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유9'	,'자유게시판이다아아아아'	,9	,'all'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유10'	,'자유게시판이다아아아아'	,10	,'all'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유11'	,'자유게시판이다아아아아'	,11	,'all'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유12'	,'자유게시판이다아아아아'	,12	,'all'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유13'	,'자유게시판이다아아아아'	,13	,'all'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유14'	,'자유게시판이다아아아아'	,14	,'all'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유15'	,'자유게시판이다아아아아'	,15	,'all'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유16'	,'자유게시판이다아아아아'	,16	,'all'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유17'	,'자유게시판이다아아아아'	,17	,'all'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유18'	,'자유게시판이다아아아아'	,18	,'all'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유19'	,'자유게시판이다아아아아'	,19	,'all'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유20'	,'자유게시판이다아아아아'	,20	,'all'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유21'	,'자유게시판이다아아아아'	,21	,'all'	,3	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유22'	,'자유게시판이다아아아아'	,22	,'all'	,3	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유23'	,'자유게시판이다아아아아'	,23	,'all'	,3	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유24'	,'자유게시판이다아아아아'	,24	,'all'	,3	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유25'	,'자유게시판이다아아아아'	,25	,'all'	,3	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유26'	,'자유게시판이다아아아아'	,26	,'all'	,3	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유27'	,'자유게시판이다아아아아'	,27	,'all'	,3	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유28'	,'자유게시판이다아아아아'	,28	,'all'	,3	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유29'	,'자유게시판이다아아아아'	,29	,'all'	,3	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유30'	,'자유게시판이다아아아아'	,30	,'all'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유31'	,'자유게시판이다아아아아'	,31	,'all'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유32'	,'자유게시판이다아아아아'	,32	,'all'	,2	);
+
+
+
+DROP TABLE OneOnOne;
+
+CREATE TABLE OneOnOne (
+	oneonone_no NUMBER primary key, --문의글 번호
+	title VARCHAR2(500), -- 문의글 제목
+    content CLOB, -- 내용
+    write_date DATE DEFAULT sysdate, -- 최초작성일
+	reply_progress VARCHAR2(1), -- 문의유형 
+    reply_no NUMBER,
+	condition VARCHAR2(100), -- 문의확인 여부 
+	user_no NUMBER,
+    CONSTRAINT oneonone_user_no FOREIGN KEY(user_no) REFERENCES user_tb(user_no) on delete cascade
+);
+
+DROP SEQUENCE OneOnOne_seq;
+CREATE SEQUENCE OneOnOne_seq;
+
+-- dummy 2
+INSERT INTO OneOnOne ( oneonone_no, title, content, reply_progress, reply_no, condition, user_no ) VALUES (	 oneonone_seq.nextval	,	 '제목1'	,	 '내용1'	,	 '1'	,	1	,	 'true'	,	1	 );
+INSERT INTO OneOnOne ( oneonone_no, title, content, reply_progress, reply_no, condition, user_no ) VALUES (	 oneonone_seq.nextval	,	 '제목2'	,	 '내용2'	,	 '1'	,	2	,	 'true'	,	2	 );
+INSERT INTO OneOnOne ( oneonone_no, title, content, reply_progress, reply_no, condition, user_no ) VALUES (	 oneonone_seq.nextval	,	 '제목3'	,	 '내용3'	,	 '1'	,	3	,	 'true'	,	3	 );
+INSERT INTO OneOnOne ( oneonone_no, title, content, reply_progress, reply_no, condition, user_no ) VALUES (	 oneonone_seq.nextval	,	 '제목4'	,	 '내용4'	,	 '1'	,	4	,	 'true'	,	4	 );
+INSERT INTO OneOnOne ( oneonone_no, title, content, reply_progress, reply_no, condition, user_no ) VALUES (	 oneonone_seq.nextval	,	 '제목5'	,	 '내용5'	,	 '1'	,	5	,	 'true'	,	5	 );
+INSERT INTO OneOnOne ( oneonone_no, title, content, reply_progress, reply_no, condition, user_no ) VALUES (	 oneonone_seq.nextval	,	 '제목6'	,	 '내용6'	,	 '1'	,	6	,	 'true'	,	6	 );
+INSERT INTO OneOnOne ( oneonone_no, title, content, reply_progress, reply_no, condition, user_no ) VALUES (	 oneonone_seq.nextval	,	 '제목7'	,	 '내용7'	,	 '1'	,	7	,	 'true'	,	7	 );
+INSERT INTO OneOnOne ( oneonone_no, title, content, reply_progress, reply_no, condition, user_no ) VALUES (	 oneonone_seq.nextval	,	 '제목8'	,	 '내용8'	,	 '1'	,	8	,	 'true'	,	8	 );
+INSERT INTO OneOnOne ( oneonone_no, title, content, reply_progress, reply_no, condition, user_no ) VALUES (	 oneonone_seq.nextval	,	 '제목9'	,	 '내용9'	,	 '1'	,	9	,	 'true'	,	9	 );
+INSERT INTO OneOnOne ( oneonone_no, title, content, reply_progress, reply_no, condition, user_no ) VALUES (	 oneonone_seq.nextval	,	 '제목10'	,	 '내용10'	,	 '1'	,	10	,	 'true'	,	10	 );
+INSERT INTO OneOnOne ( oneonone_no, title, content, reply_progress, reply_no, condition, user_no ) VALUES (	 oneonone_seq.nextval	,	 '제목11'	,	 '내용11'	,	 '1'	,	11	,	 'true'	,	11	 );
+INSERT INTO OneOnOne ( oneonone_no, title, content, reply_progress, reply_no, condition, user_no ) VALUES (	 oneonone_seq.nextval	,	 '제목12'	,	 '내용12'	,	 '1'	,	12	,	 'true'	,	12	 );
+
+
+commit;
+
+
+SELECT*FROM oneonone
+ORDER BY write_date DESC;
+
+SELECT * FROM (
+    SELECT rownum rnum, O.* FROM (
+        SELECT *  
+       FROM oneonone
+        ORDER BY write_date DESC
+    ) O
+  ) One
+WHERE rnum BETWEEN 1 AND 10;
+
+select * from oneonone order by oneonone_no;
+update oneonone set title = '제목1' where oneonone_no = 208;
+
+
+
+
+-- 나눔 게시판 --
+drop table share_post;
+
+CREATE TABLE SHARE_POST
+(
+    POST_NO           NUMBER , 
+    BOARD_NO          NUMBER , 
+    TITLE             VARCHAR2(500), 
+    CONTENT           CLOB, 
+    WRITE_DATE        DATE default sysdate, 
+    HIT               NUMBER , 
+    DEAL_PROGRESS     VARCHAR2(50), 
+    ANIMAL_SPECIES    VARCHAR2(100), 
+    DEAL_TYPE         VARCHAR2(50), 
+    USER_NO           NUMBER, 
+    CONSTRAINT SHARE_POST_PK PRIMARY KEY (POST_NO)
+);
+
+ALTER TABLE SHARE_POST
+    ADD CONSTRAINT FK_SHARE_POST_BOARD_NO_SHARE_P 
+        FOREIGN KEY (BOARD_NO)
+        REFERENCES BOARD (BOARD_NO);
+
+
+ALTER TABLE SHARE_POST
+    ADD CONSTRAINT FK_SHARE_POST_USER_NO_SHARE_PO 
+    FOREIGN KEY (USER_NO)
+    REFERENCES USER_TB (USER_NO) on delete cascade;
+
+
+SELECT * FROM SHARE_POST 
+ORDER BY POST_NO;
+
+DROP SEQUENCE SHARE_POST_seq;
+CREATE SEQUENCE SHARE_POST_seq;
+
+
+
+
+drop table share_comment;
+CREATE TABLE SHARE_COMMENT(
+    COMMENT_NO        NUMBER , 
+    POST_NO           NUMBER, 
+    USER_NO           NUMBER, 
+    CONTENT           VARCHAR2(500), 
+    WRITE_DATE        DATE default sysdate, 
+    CONSTRAINT SHARE_COMMENT_PK PRIMARY KEY (COMMENT_NO)
+);
+
+
+
+
+ALTER TABLE SHARE_COMMENT
+    ADD CONSTRAINT FK_SHARE_COMMENT_POST_NO_SHARE FOREIGN KEY (POST_NO)
+        REFERENCES SHARE_post (post_NO)  On DELETE CASCADE;
+
+
+ALTER TABLE SHARE_COMMENT
+    ADD CONSTRAINT FK_SHARE_COMMENT_USER_NO_SHARE FOREIGN KEY (USER_NO)
+        REFERENCES USER_TB (user_NO) On DELETE CASCADE;
+        
+
+
+DROP SEQUENCE SHARE_COMMENT_SEQ;
+CREATE SEQUENCE SHARE_COMMENT_SEQ;
+
+
+
+
+drop table share_call_dibs;
+CREATE TABLE SHARE_CALL_DIBS
+(
+    CALLDIBS_NO  NUMBER, 
+    USER_ID   NUMBER, 
+    POST_NO NUMBER, 
+    CONSTRAINT SHARE_CALL_DIBS_PK PRIMARY KEY (CALLDIBS_NO)
+);
+
+
+ALTER TABLE SHARE_CALL_DIBS
+    ADD CONSTRAINT FK_SHARE_CALL_DIBS_USER_ID_SHA FOREIGN KEY (USER_ID)
+        REFERENCES user_TB (user_no) on delete cascade;
+
+
+ALTER TABLE SHARE_CALL_DIBS
+    ADD CONSTRAINT FK_SHARE_CALL_DIBS_POST_NO_SHA FOREIGN KEY (POST_NO)
+        REFERENCES SHARE_post (post_no);
+
+
+
+DROP SEQUENCE SHARE_CALL_DIBS_SEQ;
+CREATE SEQUENCE SHARE_CALL_DIBS_SEQ;
+
+
+
+drop table share_file;
+
+CREATE TABLE SHARE_FILE
+(
+    FILENO         NUMBER, 
+    POST_NO        NUMBER , 
+    ORIGIN_NAME    VARCHAR2(300), 
+    STORED_NAME    VARCHAR(300), 
+    FILESIZE       NUMBER, 
+    write_date     DATE default sysdate,
+    CONSTRAINT SHARE_FILE_PK PRIMARY KEY (FILENO)
+);
+
+
+
+ALTER TABLE SHARE_FILE
+    ADD CONSTRAINT FK_SHARE_FILE_POST_NO_SHARE_FI FOREIGN KEY (POST_NO)
+        REFERENCES SHARE_post (post_no);
+        
+DROP SEQUENCE SHARE_FILE_SEQ;
+CREATE SEQUENCE SHARE_FILE_SEQ;
+
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목1' 	,	 '내용' 	,	1	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	2 );
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목2'	,	 '내용' 	,	2	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	3 );
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목3'	,	 '내용' 	,	3	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	4 );
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목4'	,	 '내용' 	,	4	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	5 );
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목5'	,	 '내용' 	,	5	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	6 );
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목6'	,	 '내용' 	,	6	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	7 );
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목7'	,	 '내용' 	,	7	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	8 );
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목8'	,	 '내용' 	,	8	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	9 );
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목9'	,	 '내용' 	,	9	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	10 );
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목10'	,	 '내용' 	,	10	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	11 );
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목11'	,	 '내용' 	,	11	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	12 );
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목12'	,	 '내용' 	,	12	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	1 );
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목13'	,	 '내용' 	,	13	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	2);
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목14'	,	 '내용' 	,	14	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	3);
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목15'	,	 '내용' 	,	15	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	4);
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목16'	,	 '내용' 	,	16	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	5);
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목17'	,	 '내용' 	,	17	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	6);
+INSERT INTO SHARE_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( SHARE_POST_SEQ.NEXTVAL ,	1	,	 '제목18'	,	 '내용' 	,	18	,	 '거래중' 	,	 'dog'	,	 '직거래'	,	7);
+
+commit;
+
+select * from share_post;
+
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	1	,	1	,	 '내용1' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	2	,	2	,	 '내용2' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	3	,	3	,	 '내용3' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	4	,	4	,	 '내용4' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	5	,	5	,	 '내용5' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	6	,	6	,	 '내용6' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	7	,	7	,	 '내용7' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	8	,	8	,	 '내용8' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	9	,	9	,	 '내용9' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	10	,	10	,	 '내용10' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	11	,	11	,	 '내용11' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	12	,	1	,	 '내용12' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	13	,	2	,	 '내용13' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	14	,	3	,	 '내용14' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	15	,	4	,	 '내용15' );
+INSERT INTO SHARE_COMMENT ( COMMENT_NO, POST_NO, USER_NO, CONTENT )  VALUES ( SHARE_COMMENT_SEQ.NEXTVAL	,	16	,	5	,	 '내용16' );
+
+commit;
+
+SELECT * FROM (
+    SELECT rownum rnum, O.* FROM (
+        SELECT * FROM user_tb
+        WHERE 1=1
+        ORDER BY user_no DESC
+    ) O
+) One
+ WHERE rnum BETWEEN 1 AND 10;
+
+DELETE user_tb
+ WHERE user_no IN '1';
+ 
+ 
+ select* from user_tb;
+
+
+
