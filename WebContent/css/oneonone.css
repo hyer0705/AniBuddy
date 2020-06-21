@@ -1,0 +1,58 @@
+@charset "UTF-8";
+.Manager{
+	width : 900px;
+	margin-bottom : 210px;
+}
+table{
+	overflow: scroll;
+	border : 1px solid #ccc;
+	width : 900px; 
+}
+th{
+	border : 1px solid #ccc;
+	height : 50px;	
+	padding : 0;
+	text-align: center;
+	background-color : #99d4d9;
+	width : 170px;
+}
+tr{
+	height : 50px;
+	border-bottom: 1px solid #ccc;
+	text-align: center;
+}
+
+
+.oneonone th.check{
+	width : 50px;
+}
+#btnSearch{
+	background-color : #99d4d9;
+}
+
+#btnSearch:hover{
+	font-weight: bold;
+	font-size: 14px;
+}
+#btnDelete{
+	background-color : #ffaf9a;
+	margin-top: 5px;
+}
+
+#btnDelete:hover{
+	font-weight: bold;
+	font-size: 14px;
+}
+td a{
+	color : black;
+}
+
+tr:hover td{
+	font-weight: bold;
+}
+.btn-group{
+	margin-bottom: 15px;
+}
+.dropdown-toggle{
+	background-color: #99d4d9;	
+}
