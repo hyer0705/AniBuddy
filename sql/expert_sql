@@ -1,0 +1,406 @@
+-- 전문가 게시판 게시글, 댓글, 첨부파일 테이블 
+-- 반드시 생성하고 commit; 후  테스트 진행할 것!
+
+-- 전문가 게시판 테이블
+DROP TABLE expert_post;
+DROP TABLE expert_comment;
+DROP TABLE expert_file;
+
+CREATE TABLE expert_post (
+	post_no NUMBER primary key, -- 글번호
+	board_no NUMBER, -- 게시판번호
+	title VARCHAR2(500) not null, -- 제목
+	content CLOB not null, -- 내용
+	write_date DATE default sysdate, -- 작성일
+	hit NUMBER, -- 조회수
+	range VARCHAR2(100), -- 범위
+	group_no NUMBER, -- 글의 그룹 번호(원글:자기자신)
+	group_ord NUMBER, -- 그룹 안에서 게시글 순서
+	depth NUMBER, -- 답답글
+	user_no NUMBER  -- 작성자
+);
+
+DROP SEQUENCE expert_seq;
+CREATE SEQUENCE expert_seq;
+
+
+-- 전문가 게시판 댓글 테이블
+
+CREATE TABLE expert_comment (
+	comment_no NUMBER primary key, 
+	post_no NUMBER,
+	user_no NUMBER,
+	content VARCHAR2(500) not null,
+	write_date DATE default sysdate,
+	is_reply CHAR(1),
+	parent_comment NUMBER,
+	is_delete CHAR(1)
+);
+
+DROP SEQUENCE expert_comment_seq;
+CREATE SEQUENCE expert_comment_seq;
+
+
+
+-- 전문가 게시판 파일 테이블
+
+CREATE TABLE expert_file (
+	fileno NUMBER primary key,
+	post_no NUMBER,
+	origin_name VARCHAR2(300),
+	stored_name VARCHAR2(300),
+	filesize NUMBER
+);
+
+DROP SEQUENCE expert_file_seq;
+CREATE SEQUENCE expert_file_seq;
+
+-- 답글
+ALTER TABLE expert_post
+ADD CONSTRAINT reply_fk
+    FOREIGN KEY(group_no)
+    REFERENCES expert_post(post_no);
+
+
+-- 게시판 번호 - 게시판 번호
+ALTER TABLE expert_post
+ADD CONSTRAINT expert_fk
+    FOREIGN KEY (board_no)
+    REFERENCES board(board_no);
+
+-- 작성자 - 사용자
+ALTER TABLE expert_post
+ADD CONSTRAINT expert_user_fk
+    FOREIGN KEY (user_no)
+    REFERENCES user_tb(user_no);
+
+
+-- 게시판 번호 - 글 번호
+ALTER TABLE expert_comment 
+ADD CONSTRAINT expert_board_fk 
+    FOREIGN KEY (post_no)
+    REFERENCES expert_post(post_no);
+
+-- 댓글 작성자 - 사용자
+ALTER TABLE expert_comment 
+ADD CONSTRAINT expert_comment_user_fk
+    FOREIGN KEY (user_no) 
+    REFERENCES user_tb(user_no);
+
+-- 글번호 - 댓글번호
+ALTER TABLE expert_comment 
+ADD CONSTRAINT expert_comment_fk
+    FOREIGN KEY (parent_comment) 
+    REFERENCES expert_comment(comment_no);
+
+
+-- 파일 - 글번호
+ALTER TABLE expert_file
+ADD CONSTRAINT expert_file_fk
+    FOREIGN KEY (post_no)
+    REFERENCES expert_post(post_no);
+	
+
+-- 게시판 번호 - 글 번호
+ALTER TABLE expert_comment 
+ADD CONSTRAINT free_board_fk 
+    FOREIGN KEY (board_no)
+    REFERENCES free_post(post_no);
+
+    
+-- 전문가 게시판 게시글 테이블 더미데이터
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판1',	'게시판1',	1,	'전문가 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판2',	'게시판2',	2,	'전문가 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판3',	'게시판3',	3,	'전문가 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판4',	'게시판4',	4,	'전문가 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판5',	'게시판5',	5,	'전문가 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판6',	'게시판6',	6,	'전문가 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판7',	'게시판7',	7,	'전문가 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판8',	'게시판8',	8,	'전문가 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판9',	'게시판9',	9,	'전문가 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판10',	'게시판10',	10,	'전문가 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판11',	'게시판11',	11,	'전문가 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판12',	'게시판12',	12,	'전체 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판13',	'게시판13',	13,	'전체 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판14',	'게시판14',	14,	'전체 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판15',	'게시판15',	15,	'전체 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판16',	'게시판16',	16,	'전체 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판17',	'게시판17',	17,	'전체 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판18',	'게시판18',	18,	'전체 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판19',	'게시판19',	19,	'전체 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판20',	'게시판20',	20,	'전체 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판21',	'게시판21',	21,	'회원 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판22',	'게시판22',	22,	'회원 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판23',	'게시판23',	23,	'회원 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판24',	'게시판24',	24,	'회원 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판25',	'게시판25',	25,	'회원 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판26',	'게시판26',	26,	'회원 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판27',	'게시판27',	27,	'회원 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판28',	'게시판28',	28,	'회원 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판29',	'게시판29',	29,	'전문가 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판30',	'게시판30',	30,	'전체 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판31',	'게시판31',	31,	'회원 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판32',	'게시판32',	32,	'전문가 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판33',	'게시판33',	33,	'전체 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판34',	'게시판34',	34,	'회원 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판35',	'게시판35',	35,	'전문가 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판36',	'게시판36',	36,	'전체 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판37',	'게시판37',	37,	'회원 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판38',	'게시판38',	38,	'전문가 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판39',	'게시판39',	39,	'회원 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판40',	'게시판40',	40,	'전문가 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판41',	'게시판41',	41,	'전체 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판42',	'게시판42',	42,	'회원 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판43',	'게시판43',	43,	'전문가 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판44',	'게시판44',	44,	'전체 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판45',	'게시판45',	45,	'회원 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판46',	'게시판46',	46,	'전문가 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판47',	'게시판47',	47,	'전체 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판48',	'게시판48',	48,	'회원 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판49',	'게시판49',	49,	'전문가 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판50',	'게시판50',	50,	'회원 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판51',	'게시판51',	51,	'전문가 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판52',	'게시판52',	52,	'전체 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판53',	'게시판53',	53,	'회원 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판54',	'게시판54',	54,	'전문가 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판55',	'게시판55',	55,	'전체 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판56',	'게시판56',	56,	'회원 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판57',	'게시판57',	57,	'전문가 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판58',	'게시판58',	58,	'전체 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판59',	'게시판59',	59,	'회원 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판60',	'게시판60',	60,	'전문가 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판61',	'게시판61',	61,	'회원 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판62',	'게시판62',	62,	'전문가 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판63',	'게시판63',	63,	'회원 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판64',	'게시판64',	64,	'전문가 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판65',	'게시판65',	65,	'전체 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판66',	'게시판66',	66,	'회원 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판67',	'게시판67',	67,	'전문가 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판68',	'게시판68',	68,	'전체 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판69',	'게시판69',	69,	'회원 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판70',	'게시판70',	70,	'전문가 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판71',	'게시판71',	71,	'전체 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판72',	'게시판72',	72,	'회원 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판73',	'게시판73',	73,	'전문가 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판74',	'게시판74',	74,	'회원 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판75',	'게시판75',	75,	'전문가 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판76',	'게시판76',	76,	'전체 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판77',	'게시판77',	77,	'회원 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판78',	'게시판78',	78,	'전문가 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판79',	'게시판79',	79,	'전체 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판80',	'게시판80',	80,	'회원 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판81',	'게시판81',	81,	'전문가 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판82',	'게시판82',	82,	'전체 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판83',	'게시판83',	83,	'회원 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판84',	'게시판84',	84,	'전문가 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판85',	'게시판85',	85,	'회원 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판86',	'게시판86',	86,	'전문가 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판87',	'게시판87',	87,	'전체 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판88',	'게시판88',	88,	'회원 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판89',	'게시판89',	89,	'전문가 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판90',	'게시판90',	90,	'전체 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판91',	'게시판91',	91,	'회원 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판92',	'게시판92',	92,	'전문가 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판93',	'게시판93',	93,	'전체 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판94',	'게시판94',	94,	'회원 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판95',	'게시판95',	95,	'전문가 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판96',	'게시판96',	96,	'회원 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판97',	'게시판97',	97,	'전문가 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판98',	'게시판98',	98,	'회원 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판99',	'게시판99',	99,	'전문가 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판100',	'게시판100',	100,	'전체 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판101',	'게시판101',	101,	'회원 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판102',	'게시판102',	102,	'전문가 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판103',	'게시판103',	103,	'전체 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판104',	'게시판104',	104,	'회원 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판105',	'게시판105',	105,	'전문가 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판106',	'게시판106',	106,	'전체 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판107',	'게시판107',	107,	'회원 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판108',	'게시판108',	108,	'전문가 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판109',	'게시판109',	109,	'회원 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판110',	'게시판110',	110,	'전문가 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판111',	'게시판111',	111,	'전체 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판112',	'게시판112',	112,	'회원 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판113',	'게시판113',	113,	'전문가 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판114',	'게시판114',	114,	'전체 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판115',	'게시판115',	115,	'회원 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판116',	'게시판116',	116,	'전문가 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판117',	'게시판117',	117,	'전체 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판118',	'게시판118',	118,	'회원 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판119',	'게시판119',	119,	'전문가 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판120',	'게시판120',	120,	'회원 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판121',	'게시판121',	121,	'전문가 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판122',	'게시판122',	122,	'전체 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판123',	'게시판123',	123,	'회원 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판124',	'게시판124',	124,	'전문가 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판125',	'게시판125',	125,	'전체 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판126',	'게시판126',	126,	'회원 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판127',	'게시판127',	127,	'전문가 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판128',	'게시판128',	128,	'전체 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판129',	'게시판129',	129,	'회원 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판130',	'게시판130',	130,	'전문가 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판131',	'게시판131',	131,	'회원 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판132',	'게시판132',	132,	'전문가 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판133',	'게시판133',	133,	'회원 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판134',	'게시판134',	134,	'전문가 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판135',	'게시판135',	135,	'전체 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판136',	'게시판136',	136,	'회원 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판137',	'게시판137',	137,	'전문가 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판138',	'게시판138',	138,	'전체 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판139',	'게시판139',	139,	'회원 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판140',	'게시판140',	140,	'전문가 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판141',	'게시판141',	141,	'전체 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판142',	'게시판142',	142,	'회원 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판143',	'게시판143',	143,	'전문가 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판144',	'게시판144',	144,	'회원 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판145',	'게시판145',	145,	'전문가 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판146',	'게시판146',	146,	'전체 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판147',	'게시판147',	147,	'회원 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판148',	'게시판148',	148,	'전문가 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판149',	'게시판149',	149,	'전체 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판150',	'게시판150',	150,	'회원 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판151',	'게시판151',	151,	'전문가 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판152',	'게시판152',	152,	'전체 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판153',	'게시판153',	153,	'회원 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판154',	'게시판154',	154,	'전문가 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판155',	'게시판155',	155,	'회원 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판156',	'게시판156',	156,	'전문가 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판157',	'게시판157',	157,	'전체 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판158',	'게시판158',	158,	'회원 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판159',	'게시판159',	159,	'전문가 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판160',	'게시판160',	160,	'전체 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판161',	'게시판161',	161,	'회원 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판162',	'게시판162',	162,	'전문가 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판163',	'게시판163',	163,	'전체 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판164',	'게시판164',	164,	'회원 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판165',	'게시판165',	165,	'전문가 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판166',	'게시판166',	166,	'회원 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판167',	'게시판167',	167,	'전문가 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판168',	'게시판168',	168,	'회원 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판169',	'게시판169',	169,	'전문가 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판170',	'게시판170',	170,	'전체 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판171',	'게시판171',	171,	'회원 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판172',	'게시판172',	172,	'전문가 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판173',	'게시판173',	173,	'전체 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판174',	'게시판174',	174,	'회원 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판175',	'게시판175',	175,	'전문가 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판176',	'게시판176',	176,	'전체 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판177',	'게시판177',	177,	'회원 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판178',	'게시판178',	178,	'전문가 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판179',	'게시판179',	179,	'회원 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판180',	'게시판180',	180,	'전문가 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판181',	'게시판181',	181,	'전체 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판182',	'게시판182',	182,	'회원 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판183',	'게시판183',	183,	'전문가 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판184',	'게시판184',	184,	'전체 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판185',	'게시판185',	185,	'회원 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판186',	'게시판186',	186,	'전문가 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판187',	'게시판187',	187,	'전체 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판188',	'게시판188',	188,	'회원 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판189',	'게시판189',	189,	'전문가 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판190',	'게시판190',	190,	'회원 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판191',	'게시판191',	191,	'전문가 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판192',	'게시판192',	192,	'전체 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판193',	'게시판193',	193,	'회원 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판194',	'게시판194',	194,	'전문가 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판195',	'게시판195',	195,	'전체 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판196',	'게시판196',	196,	'회원 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판197',	'게시판197',	197,	'전문가 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판198',	'게시판198',	198,	'전체 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판199',	'게시판199',	199,	'회원 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판200',	'게시판200',	200,	'전문가 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판201',	'게시판201',	201,	'회원 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판202',	'게시판202',	202,	'전문가 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판203',	'게시판203',	203,	'회원 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판204',	'게시판204',	204,	'전문가 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판205',	'게시판205',	205,	'전체 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판206',	'게시판206',	206,	'회원 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판207',	'게시판207',	207,	'전문가 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판208',	'게시판208',	208,	'전체 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판209',	'게시판209',	209,	'회원 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판210',	'게시판210',	210,	'전문가 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판211',	'게시판211',	211,	'전체 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판212',	'게시판212',	212,	'회원 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판213',	'게시판213',	213,	'전문가 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판214',	'게시판214',	214,	'회원 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판215',	'게시판215',	215,	'전문가 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판216',	'게시판216',	216,	'전체 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판217',	'게시판217',	217,	'회원 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판218',	'게시판218',	218,	'전문가 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판219',	'게시판219',	219,	'전체 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판220',	'게시판220',	220,	'회원 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판221',	'게시판221',	221,	'전문가 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판222',	'게시판222',	222,	'전체 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판223',	'게시판223',	223,	'회원 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판224',	'게시판224',	224,	'전문가 공개',	1,	0,	1,	8	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판225',	'게시판225',	225,	'회원 공개',	1,	0,	1,	9	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판226',	'게시판226',	226,	'전문가 공개',	1,	0,	1,	10	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판227',	'게시판227',	227,	'전체 공개',	1,	0,	1,	11	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판228',	'게시판228',	228,	'회원 공개',	1,	0,	1,	12	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판229',	'게시판229',	229,	'전문가 공개',	1,	0,	1,	1	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판230',	'게시판230',	230,	'전체 공개',	1,	0,	1,	2	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판231',	'게시판231',	231,	'회원 공개',	1,	0,	1,	3	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판232',	'게시판232',	232,	'전문가 공개',	1,	0,	1,	4	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판233',	'게시판233',	233,	'전체 공개',	1,	0,	1,	5	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판234',	'게시판234',	234,	'회원 공개',	1,	0,	1,	6	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판235',	'게시판235',	235,	'전문가 공개',	1,	0,	1,	7	);
+INSERT INTO expert_post (post_no, board_no, title, content, hit, range, group_no, group_ord, depth, user_no) VALUES 	(	expert_seq.nextval,	4,	'전문가게시판236',	'게시판236',	236,	'회원 공개',	1,	0,	1,	8	);
+
+-- commit;
+
+-- 전문가 게시판 댓글 테이블 더미데이터
+
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,3	,'댓글1'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글2'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글3'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글4'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글5'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글6'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글7'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글8'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글9'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,1	,1	,'댓글10'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글11'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글12'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글13'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글14'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글15'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글16'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글17'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글18'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글19'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,2	,2	,'댓글20'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글21'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글22'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글23'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글24'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글25'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글26'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글27'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글28'	,'N'	);
+INSERT INTO expert_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	expert_comment_seq.nextval	,3	,3	,'댓글29'	,'N'	);
+
+-- commit;
+
+SELECT * FROM expert_file;
+
+SELECT
+    u.user_id, u.nick, u.is_expert, p.*
+FROM user_tb u, expert_post p 
+WHERE u.user_no = p.user_no
+AND post_no = 241
+ORDER BY post_no DESC;
+
+
+-- commit;
+
+-- 전문가 게시판 게시글, 댓글, 파일 테이블 select 문
+SELECT * FROM free_post
+ORDER BY post_no;
+
+SELECT * FROM expert_post
+ORDER BY post_no;
+
+SELECT * FROM expert_comment;
+
+SELECT * FROM free_comment;

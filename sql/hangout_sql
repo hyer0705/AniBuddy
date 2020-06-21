@@ -1,0 +1,206 @@
+-- 놀거리 게시판 테이블
+-- 반드시 생성하고 commit; 후 테스트 진행할 것!
+
+/* 놀거리 (HangOut) */
+
+DROP TABLE HangOut;
+
+CREATE  TABLE HangOut (
+    h_no NUMBER PRIMARY KEY,
+    h_name VARCHAR2(100),
+    h_city1 VARCHAR2(30),
+    h_city2 VARCHAR2(30),
+    h_address VARCHAR2(300),
+    h_time VARCHAR2(30),
+    h_tel VARCHAR2(30),
+    h_email VARCHAR2(50),
+    h_domain VARCHAR2(100),
+    h_content VARCHAR2(300),
+    h_filter VARCHAR2(50),
+    user_no NUMBER
+);
+
+ALTER TABLE HangOut
+ADD CONSTRAINT HangOut_fk
+    FOREIGN KEY (user_no)
+    REFERENCES USER_TB(user_no);
+
+DROP SEQUENCE HangOut_seq;
+CREATE SEQUENCE HangOut_seq;
+
+
+
+
+
+DROP TABLE HangOutFile;
+
+CREATE TABLE HangOutFile (
+    file_no NUMBER PRIMARY KEY,
+    origin_name VARCHAR2(300),
+    stored_name VARCHAR2(300),
+    file_size NUMBER,
+    h_no NUMBER,
+    user_no NUMBER
+);
+
+ALTER TABLE HangOutFile
+ADD CONSTRAINT HangOutFile_fk
+    FOREIGN KEY (h_no) 
+    REFERENCES HangOut(h_no);
+
+ALTER TABLE HangOutFile
+ADD CONSTRAINT HangOutFile_fk2
+    FOREIGN KEY (user_no) 
+    REFERENCES USER_TB(user_no);
+
+DROP SEQUENCE HangOutFile_seq;
+CREATE SEQUENCE HangOutFile_seq;
+
+
+
+
+
+
+
+DROP TABLE BookMarkHangOut;
+
+CREATE TABLE BookMarkHangOut (
+    bm_no NUMBER PRIMARY KEY,
+    h_no NUMBER,
+    user_no NUMBER
+);
+
+ALTER TABLE BookMarkHangOut
+ADD CONSTRAINT BookMarkHangOut_fk
+    FOREIGN KEY (h_no) 
+    REFERENCES HangOut(h_no);
+
+ALTER TABLE BookMarkHangOut
+ADD CONSTRAINT BookMarkHangOut_fk2
+    FOREIGN KEY (user_no) 
+    REFERENCES USER_TB(user_no);
+
+DROP SEQUENCE BookMarkHangOut_seq;
+CREATE SEQUENCE BookMarkHangOut_seq;
+
+-- commit;
+
+-- 테이블 조회
+SELECT * FROM bookmarkhangout;
+SELECT * FROM hangout;
+SELECT * FROM hangoutfile;
+
+
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명1'	, '서울특별시'	, '강남구'	, '주소1'	, '영업시간1'	, '전화번호1'	, '이메일1'	, '사이트주소1'	, '특이사항1'	,'카페'	,'1'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명2'	, '서울특별시'	, '강남구'	, '주소2'	, '영업시간2'	, '전화번호2'	, '이메일2'	, '사이트주소2'	, '특이사항2'	,'식당'	,'2'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명3'	, '서울특별시'	, '강남구'	, '주소3'	, '영업시간3'	, '전화번호3'	, '이메일3'	, '사이트주소3'	, '특이사항3'	,'캠핑'	,'3'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명4'	, '서울특별시'	, '강남구'	, '주소4'	, '영업시간4'	, '전화번호4'	, '이메일4'	, '사이트주소4'	, '특이사항4'	,'운동장'	,'4'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명5'	, '서울특별시'	, '강남구'	, '주소5'	, '영업시간5'	, '전화번호5'	, '이메일5'	, '사이트주소5'	, '특이사항5'	,'펜션'	,'5'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명6'	, '서울특별시'	, '강남구'	, '주소6'	, '영업시간6'	, '전화번호6'	, '이메일6'	, '사이트주소6'	, '특이사항6'	,'기타'	,'6'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명7'	, '서울특별시'	, '강남구'	, '주소7'	, '영업시간7'	, '전화번호7'	, '이메일7'	, '사이트주소7'	, '특이사항7'	,'박람회'	,'7'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명8'	, '서울특별시'	, '강남구'	, '주소8'	, '영업시간8'	, '전화번호8'	, '이메일8'	, '사이트주소8'	, '특이사항8'	,'축제'	,'8'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명9'	, '서울특별시'	, '강남구'	, '주소9'	, '영업시간9'	, '전화번호9'	, '이메일9'	, '사이트주소9'	, '특이사항9'	,'대회'	,'9'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명10'	, '서울특별시'	, '강남구'	, '주소10'	, '영업시간10'	, '전화번호10'	, '이메일10'	, '사이트주소10'	, '특이사항10'	,'카페'	,'10'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명11'	, '서울특별시'	, '강남구'	, '주소11'	, '영업시간11'	, '전화번호11'	, '이메일11'	, '사이트주소11'	, '특이사항11'	,'식당'	,'11'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명12'	, '서울특별시'	, '강남구'	, '주소12'	, '영업시간12'	, '전화번호12'	, '이메일12'	, '사이트주소12'	, '특이사항12'	,'캠핑'	,'12'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명13'	, '서울특별시'	, '강남구'	, '주소13'	, '영업시간13'	, '전화번호13'	, '이메일13'	, '사이트주소13'	, '특이사항13'	,'운동장'	,'1'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명14'	, '서울특별시'	, '강남구'	, '주소14'	, '영업시간14'	, '전화번호14'	, '이메일14'	, '사이트주소14'	, '특이사항14'	,'펜션'	,'2'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명15'	, '서울특별시'	, '강남구'	, '주소15'	, '영업시간15'	, '전화번호15'	, '이메일15'	, '사이트주소15'	, '특이사항15'	,'기타'	,'3'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명16'	, '서울특별시'	, '강서구'	, '주소16'	, '영업시간16'	, '전화번호16'	, '이메일16'	, '사이트주소16'	, '특이사항16'	,'박람회'	,'4'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명17'	, '서울특별시'	, '강서구'	, '주소17'	, '영업시간17'	, '전화번호17'	, '이메일17'	, '사이트주소17'	, '특이사항17'	,'축제'	,'5'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명18'	, '서울특별시'	, '강서구'	, '주소18'	, '영업시간18'	, '전화번호18'	, '이메일18'	, '사이트주소18'	, '특이사항18'	,'대회'	,'6'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명19'	, '서울특별시'	, '강서구'	, '주소19'	, '영업시간19'	, '전화번호19'	, '이메일19'	, '사이트주소19'	, '특이사항19'	,'카페'	,'7'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명20'	, '서울특별시'	, '강서구'	, '주소20'	, '영업시간20'	, '전화번호20'	, '이메일20'	, '사이트주소20'	, '특이사항20'	,'식당'	,'8'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명21'	, '서울특별시'	, '강서구'	, '주소21'	, '영업시간21'	, '전화번호21'	, '이메일21'	, '사이트주소21'	, '특이사항21'	,'캠핑'	,'9'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명22'	, '서울특별시'	, '강서구'	, '주소22'	, '영업시간22'	, '전화번호22'	, '이메일22'	, '사이트주소22'	, '특이사항22'	,'운동장'	,'10'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명23'	, '서울특별시'	, '강서구'	, '주소23'	, '영업시간23'	, '전화번호23'	, '이메일23'	, '사이트주소23'	, '특이사항23'	,'펜션'	,'11'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명24'	, '서울특별시'	, '강서구'	, '주소24'	, '영업시간24'	, '전화번호24'	, '이메일24'	, '사이트주소24'	, '특이사항24'	,'기타'	,'12'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명25'	, '서울특별시'	, '강서구'	, '주소25'	, '영업시간25'	, '전화번호25'	, '이메일25'	, '사이트주소25'	, '특이사항25'	,'박람회'	,'1'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명26'	, '서울특별시'	, '강서구'	, '주소26'	, '영업시간26'	, '전화번호26'	, '이메일26'	, '사이트주소26'	, '특이사항26'	,'축제'	,'2'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명27'	, '서울특별시'	, '강서구'	, '주소27'	, '영업시간27'	, '전화번호27'	, '이메일27'	, '사이트주소27'	, '특이사항27'	,'대회'	,'3'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명28'	, '서울특별시'	, '강서구'	, '주소28'	, '영업시간28'	, '전화번호28'	, '이메일28'	, '사이트주소28'	, '특이사항28'	,'카페'	,'4'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명29'	, '서울특별시'	, '강서구'	, '주소29'	, '영업시간29'	, '전화번호29'	, '이메일29'	, '사이트주소29'	, '특이사항29'	,'식당'	,'5'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명30'	, '서울특별시'	, '강서구'	, '주소30'	, '영업시간30'	, '전화번호30'	, '이메일30'	, '사이트주소30'	, '특이사항30'	,'캠핑'	,'6'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명31'	, '경기도'	, '수원시'	, '주소31'	, '영업시간31'	, '전화번호31'	, '이메일31'	, '사이트주소31'	, '특이사항31'	,'운동장'	,'7'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명32'	, '경기도'	, '수원시'	, '주소32'	, '영업시간32'	, '전화번호32'	, '이메일32'	, '사이트주소32'	, '특이사항32'	,'펜션'	,'8'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명33'	, '경기도'	, '수원시'	, '주소33'	, '영업시간33'	, '전화번호33'	, '이메일33'	, '사이트주소33'	, '특이사항33'	,'기타'	,'9'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명34'	, '경기도'	, '수원시'	, '주소34'	, '영업시간34'	, '전화번호34'	, '이메일34'	, '사이트주소34'	, '특이사항34'	,'박람회'	,'10'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명35'	, '경기도'	, '수원시'	, '주소35'	, '영업시간35'	, '전화번호35'	, '이메일35'	, '사이트주소35'	, '특이사항35'	,'축제'	,'11'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명36'	, '경기도'	, '수원시'	, '주소36'	, '영업시간36'	, '전화번호36'	, '이메일36'	, '사이트주소36'	, '특이사항36'	,'대회'	,'12'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명37'	, '경기도'	, '수원시'	, '주소37'	, '영업시간37'	, '전화번호37'	, '이메일37'	, '사이트주소37'	, '특이사항37'	,'카페'	,'1'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명38'	, '경기도'	, '수원시'	, '주소38'	, '영업시간38'	, '전화번호38'	, '이메일38'	, '사이트주소38'	, '특이사항38'	,'식당'	,'2'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명39'	, '경기도'	, '수원시'	, '주소39'	, '영업시간39'	, '전화번호39'	, '이메일39'	, '사이트주소39'	, '특이사항39'	,'캠핑'	,'3'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명40'	, '경기도'	, '수원시'	, '주소40'	, '영업시간40'	, '전화번호40'	, '이메일40'	, '사이트주소40'	, '특이사항40'	,'운동장'	,'4'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명41'	, '경기도'	, '성남시'	, '주소41'	, '영업시간41'	, '전화번호41'	, '이메일41'	, '사이트주소41'	, '특이사항41'	,'펜션'	,'5'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명42'	, '경기도'	, '성남시'	, '주소42'	, '영업시간42'	, '전화번호42'	, '이메일42'	, '사이트주소42'	, '특이사항42'	,'기타'	,'6'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명43'	, '경기도'	, '성남시'	, '주소43'	, '영업시간43'	, '전화번호43'	, '이메일43'	, '사이트주소43'	, '특이사항43'	,'박람회'	,'7'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명44'	, '경기도'	, '성남시'	, '주소44'	, '영업시간44'	, '전화번호44'	, '이메일44'	, '사이트주소44'	, '특이사항44'	,'축제'	,'8'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명45'	, '경기도'	, '성남시'	, '주소45'	, '영업시간45'	, '전화번호45'	, '이메일45'	, '사이트주소45'	, '특이사항45'	,'대회'	,'9'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명46'	, '경기도'	, '성남시'	, '주소46'	, '영업시간46'	, '전화번호46'	, '이메일46'	, '사이트주소46'	, '특이사항46'	,'카페'	,'10'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명47'	, '경기도'	, '성남시'	, '주소47'	, '영업시간47'	, '전화번호47'	, '이메일47'	, '사이트주소47'	, '특이사항47'	,'식당'	,'11'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명48'	, '경기도'	, '성남시'	, '주소48'	, '영업시간48'	, '전화번호48'	, '이메일48'	, '사이트주소48'	, '특이사항48'	,'캠핑'	,'12'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명49'	, '경기도'	, '성남시'	, '주소49'	, '영업시간49'	, '전화번호49'	, '이메일49'	, '사이트주소49'	, '특이사항49'	,'운동장'	,'1'	);
+INSERT INTO HangOut (h_no, h_name, h_city1, h_city2, h_address, h_time, h_tel, h_email, h_domain, h_content, h_filter, user_no) VALUES  ( HangOut_seq.nextval	, '장소명50'	, '경기도'	, '성남시'	, '주소50'	, '영업시간50'	, '전화번호50'	, '이메일50'	, '사이트주소50'	, '특이사항50'	,'펜션'	,'2'	);
+
+
+--commit;
+
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '1'	,'1'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '2'	,'2'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '3'	,'3'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '4'	,'4'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '5'	,'5'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '6'	,'6'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '7'	,'7'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '8'	,'8'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '9'	,'9'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '10'	,'10'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '11'	,'11'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '12'	,'12'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '13'	,'1'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '14'	,'2'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '15'	,'3'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '16'	,'4'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '17'	,'5'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '18'	,'6'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '19'	,'7'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '20'	,'8'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '21'	,'9'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '22'	,'10'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '23'	,'11'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '24'	,'12'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '25'	,'1'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '26'	,'2'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '27'	,'3'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '28'	,'4'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '29'	,'5'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '30'	,'6'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '31'	,'7'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '32'	,'8'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '33'	,'9'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '34'	,'10'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '35'	,'11'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '36'	,'12'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '37'	,'1'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '38'	,'2'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '39'	,'3'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '40'	,'4'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '41'	,'5'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '42'	,'6'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '43'	,'7'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '44'	,'8'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '45'	,'9'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '46'	,'10'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '47'	,'11'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '48'	,'12'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '49'	,'1'	);
+INSERT INTO BookMarkHangOut (bm_no, h_no, user_no) VALUES ( BookMarkHangOut_seq.nextval	, '50'	,'2'	);
+
+
+--commit;
+
+
+SELECT * FROM hangout
+ORDER BY h_no DESC;
+
+SELECT * FROM hangoutfile;

@@ -1,0 +1,166 @@
+-- 자유게시판 게시글, 댓글, 첨부파일 테이블 및 더미데이터
+-- 반드시 commit; 후 테스트 진행
+
+-- 자유게시판 쿼리문 및 더미 데이터
+
+DROP TABLE free_post;
+DROP TABLE free_comment;
+DROP TABLE free_file;
+
+-- 자유게시판 테이블
+
+CREATE TABLE free_post (
+	post_no NUMBER primary key,
+	board_no NUMBER,
+	title VARCHAR2(500) not null,
+	content CLOB not null,
+	write_date DATE default sysdate, 
+	hit NUMBER, 
+	range VARCHAR2(100), 
+	user_no NUMBER
+);
+
+DROP SEQUENCE free_seq;
+CREATE SEQUENCE free_seq;
+
+
+-- 자유게시판 댓글 테이블
+
+CREATE TABLE free_comment (
+	comment_no NUMBER primary key, 
+	post_no NUMBER,
+	user_no NUMBER,
+	content VARCHAR2(500) not null,
+	write_date DATE default sysdate,
+	is_reply CHAR(1),
+	parent_comment NUMBER,
+	is_delete CHAR(1)
+);
+
+DROP SEQUENCE free_comment_seq;
+CREATE SEQUENCE free_comment_seq;
+
+-- 자유 게시판 파일 테이블
+
+CREATE TABLE free_file (
+	fileno NUMBER primary key,
+	post_no NUMBER,
+	origin_name VARCHAR2(300),
+	stored_name VARCHAR2(300),
+	filesize NUMBER,
+	CONSTRAINT FK_freefile foreign key(post_no) REFERENCES free_post(post_no)
+);
+
+DROP SEQUENCE free_file_seq;
+CREATE SEQUENCE free_file_seq;
+
+
+-- FK 연결
+
+
+-- 게시판 번호 - 게시판 번호
+ALTER TABLE free_post
+ADD CONSTRAINT free_fk
+    FOREIGN KEY (board_no)
+    REFERENCES board(board_no);
+
+-- 작성자 - 사용자
+ALTER TABLE free_post
+ADD CONSTRAINT free_user_fk
+    FOREIGN KEY (user_no) 
+    REFERENCES user_tb(user_no);
+	
+
+-- 댓글 작성자 - 사용자
+ALTER TABLE free_comment 
+ADD CONSTRAINT free_comment_user_fk
+    FOREIGN KEY (user_no) 
+    REFERENCES user_tb(user_no);
+
+-- 글번호 - 댓글번호
+ALTER TABLE free_comment 
+ADD CONSTRAINT free_comment_fk
+    FOREIGN KEY (parent_comment) 
+    REFERENCES free_comment(comment_no);
+
+	
+-- 파일 - 글번호
+ALTER TABLE free_file
+ADD CONSTRAINT free_file_fk
+    FOREIGN KEY (post_no)
+    REFERENCES free_post(post_no);
+
+
+
+
+-- 자유게시판 더미데이터
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유33'	,'자유게시판이다아아아아'	,1	,'전체 공개'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유34'	,'자유게시판이다아아아아'	,2	,'회원 공개'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유35'	,'자유게시판이다아아아아'	,3	,'전체 공개'	,3	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유36'	,'자유게시판이다아아아아'	,4	,'회원 공개'	,4	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유37'	,'자유게시판이다아아아아'	,5	,'전체 공개'	,5	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유38'	,'자유게시판이다아아아아'	,6	,'회원 공개'	,6	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유39'	,'자유게시판이다아아아아'	,7	,'전체 공개'	,7	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유40'	,'자유게시판이다아아아아'	,8	,'회원 공개'	,8	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유41'	,'자유게시판이다아아아아'	,9	,'전체 공개'	,9	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유42'	,'자유게시판이다아아아아'	,10	,'회원 공개'	,10	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유43'	,'자유게시판이다아아아아'	,11	,'전체 공개'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유44'	,'자유게시판이다아아아아'	,12	,'회원 공개'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유45'	,'자유게시판이다아아아아'	,13	,'전체 공개'	,3	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유46'	,'자유게시판이다아아아아'	,14	,'회원 공개'	,4	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유47'	,'자유게시판이다아아아아'	,15	,'전체 공개'	,5	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유48'	,'자유게시판이다아아아아'	,16	,'회원 공개'	,6	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유49'	,'자유게시판이다아아아아'	,17	,'전체 공개'	,7	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유50'	,'자유게시판이다아아아아'	,18	,'회원 공개'	,8	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유51'	,'자유게시판이다아아아아'	,19	,'전체 공개'	,9	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유52'	,'자유게시판이다아아아아'	,20	,'회원 공개'	,10	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유53'	,'자유게시판이다아아아아'	,21	,'전체 공개'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유54'	,'자유게시판이다아아아아'	,22	,'회원 공개'	,2	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유55'	,'자유게시판이다아아아아'	,23	,'전체 공개'	,3	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유56'	,'자유게시판이다아아아아'	,24	,'회원 공개'	,4	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유57'	,'자유게시판이다아아아아'	,25	,'전체 공개'	,5	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유58'	,'자유게시판이다아아아아'	,26	,'회원 공개'	,6	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유59'	,'자유게시판이다아아아아'	,27	,'전체 공개'	,7	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유60'	,'자유게시판이다아아아아'	,28	,'회원 공개'	,8	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유61'	,'자유게시판이다아아아아'	,29	,'전체 공개'	,9	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유62'	,'자유게시판이다아아아아'	,30	,'회원 공개'	,10	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유63'	,'자유게시판이다아아아아'	,31	,'전체 공개'	,1	);
+INSERT INTO free_post ( post_no, board_no, title, content, hit, range, user_no) VALUES	(	free_seq.nextval	,5	,'자유64'	,'자유게시판이다아아아아'	,32	,'회원 공개'	,2	);
+
+-- commit;
+
+
+-- 자유게시판 댓글 테이블 더미데이터
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글1'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글2'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글3'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글4'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글5'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글6'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글7'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글8'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글9'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,1	,1	,'댓글10'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글11'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글12'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글13'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글14'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글15'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글16'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글17'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글18'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글19'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,2	,2	,'댓글20'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글21'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글22'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글23'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글24'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글25'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글26'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글27'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글28'	,'N'	);
+INSERT INTO free_comment (comment_no, post_no, user_no, content, is_reply) VALUES	(	free_comment_seq.nextval	,3	,3	,'댓글29'	,'N'	);
+
+-- commit;
+
+SELECT * FROM free_comment;
