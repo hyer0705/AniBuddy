@@ -64,7 +64,7 @@ public class AdminLoginController extends HttpServlet {
 			session.setAttribute("adminid", admin.getAdminId());
 			session.setAttribute("adminno", admin.getAdminNo());
 			
-			session.setMaxInactiveInterval(21600);
+			session.setMaxInactiveInterval(43200);
 			
 			// 메인 화면으로
 			resp.sendRedirect(req.getContextPath() + "/");

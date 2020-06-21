@@ -10,7 +10,7 @@
 	$(document).ready(function() {
 
 		$("#btnSearch").click(function() {
-			location.href = "/board/expert?search=" + $("#search").val();
+			location.href = "/anibuddy/board/expert?search=" + $("#search").val();
 		})
 
 	})
@@ -35,7 +35,7 @@ $(document).ready(function(){
 		console.log("array tostring : " + map.get().join(","));
 		
 		var $form = $("<form>")
-						.attr("action", "/delete/expert")
+						.attr("action", "/anibuddy/delete/expert")
 						.attr("method", "post")
 						.append(
 								$("<input>")
@@ -70,7 +70,7 @@ $(document).ready(function(){
 		}
 	}
 </script>
-<link rel="stylesheet" href="/css/oneonone.css" />
+<link rel="stylesheet" href="/anibuddy/css/oneonone.css" />
 
 
 
@@ -86,10 +86,10 @@ $(document).ready(function(){
 		</button>
 		<ul class="dropdown-menu" role="menu">
 			
-			<li><a href="/board/main">나눔&중고 거래</a></li>
+			<li><a href="/anibuddy/board/main">나눔&중고 거래</a></li>
 			<li><a href="#">봉사</a></li>
-			<li><a href="/board/expert">전문가QnA</a></li>
-			<li><a href="/board/free">자유 게시판</a></li>
+			<li><a href="/anibuddy/board/expert">전문가QnA</a></li>
+			<li><a href="/anibuddy/board/free">자유 게시판</a></li>
 		</ul>
 	</div>
 	<table class="oneonone">
@@ -104,14 +104,14 @@ $(document).ready(function(){
 		</tr>
 		<c:forEach items="${expert }" var="expert">
 			<tr>
-				<td><input type="checkbox" name="checkRow"value="${expert.post_no }" /></td>
-				<td><a href="/share/answer?post_no=${expert.post_no }">${expert.post_no }</a></td>
-				<td><a href="/share/answer?post_no=${expert.post_no }">${expert.title }</a></td>
-				<td><a href="/share/answer?post_no=${expert.post_no }">${expert.user_no }</a></td>
-				<td><a href="/share/answer?post_no=${expert.post_no }">
-						<fmt:formatDate value="${expert.write_date }" pattern="yyyy.MM.dd" />
+				<td><input type="checkbox" name="checkRow"value="${expert.postno }" /></td>
+				<td><a href="/anibuddy/share/answer?post_no=${expert.postno }">${expert.postno }</a></td>
+				<td><a href="/anibuddy/share/answer?post_no=${expert.postno }">${expert.title }</a></td>
+				<td><a href="/anibuddy/share/answer?post_no=${expert.postno }">${expert.userno }</a></td>
+				<td><a href="/anibuddy/share/answer?post_no=${expert.postno }">
+						<fmt:formatDate value="${expert.writedate }" pattern="yyyy.MM.dd" />
 				</a></td>
-				<td><a href="/share/answer?post_no=${expert.post_no }">${expert.hit }</a></td>
+				<td><a href="/anibuddy/share/answer?post_no=${expert.postno }">${expert.hit }</a></td>
 			</tr>
 		</c:forEach>
 	</table>

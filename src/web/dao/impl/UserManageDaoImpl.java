@@ -117,16 +117,18 @@ public class UserManageDaoImpl implements UserManageDao{
 	@Override
 	public void deleteUser(String param) {
 		
+		System.out.println("UserManageDaoImpl deleteUser() param: " + param);
+		
 		conn = JDBCTemplate.getConnection();
 
 		String sql = "";
 		sql +="DELETE user_tb";
-		sql +=" WHERE user_no IN("+param+" )";
+		sql +=" WHERE user_no IN( " + param + " )";
 
 		try {
 			ps = conn.prepareStatement(sql);
-
-			ps.executeQuery();
+			
+			ps.executeUpdate();
 
 
 		} catch (SQLException e) {

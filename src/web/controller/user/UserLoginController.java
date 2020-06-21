@@ -58,7 +58,7 @@ public class UserLoginController extends HttpServlet {
 			session.setAttribute("username", user.getUserName());
 			session.setAttribute("isexpert", user.getIsExpert());
 			
-			session.setMaxInactiveInterval(21600);
+			session.setMaxInactiveInterval(43200); // 12시간 지속
 			
 			resp.sendRedirect(req.getContextPath() + "/");
 			
