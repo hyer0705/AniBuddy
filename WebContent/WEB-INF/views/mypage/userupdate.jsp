@@ -6,6 +6,15 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
+	// 프로필 이미지가 존재할 시 프로필 이미지 가져오기
+	if(${isProfile }){
+		var url = "../upload/${userProfile.storeName }"
+		$(".profile-image")
+			.css({
+				"background-image": "url("+ url +")"
+			})
+	}
+	
 	// 성별 선택하기
 	$("#gender").val('${user.gender}').prop("selected", true)
 	
@@ -17,14 +26,36 @@ $(document).ready(function(){
 	
 	// 생년월일 월 선택하기
 	$("#mm").val('${bmonth}').prop("selected", true)
-})
+	
+	
+	/* form submit 이벤트시 */
+	$("#join-form").on("submit", function(){
+		
+		// 반려동물이 비어있을 시에		
+		if(${not empty user.animal } && $("#animal").val() == '' ){
+			$("#animal option:eq(1)").attr("selected", "selected")
+		}
+
+		// 휴대폰 번호가 비어있을 시에
+		if(${not empty user.tel } && $("#tel").val() == ''){
+			$("#tel").val("null")
+			
+		} else if(${not empty user.tel } && $("#tel").val() != ''){
+			$("#tel").focus().select()
+			
+			return false
+		}
+	}) // form submit event - end
+	
+}) // $(document).ready(function(){ - end
+
 </script>
 
 <main class="wrapper">
 <div class="mypage-content">
 <div class="join-cont marginTop0">
 <div class="join-cont__join">
-		<form action="<%=request.getContextPath() %>/user/join" method="post"
+		<form action="<%=request.getContextPath() %>/mypage/userupdate" method="post"
 		class="join-cont__join-form" id="join-form" enctype="multipart/form-data" >
 
 		<!-- 프로필 이미지 -->
@@ -73,7 +104,7 @@ $(document).ready(function(){
 		<div class="join-form__group">
 			<label for="user_name" class="label-margin full-size">이름</label>
 			<input type="text" name="user_name" id="user_name" class="full-size height-size45 focus"
-			 value="${user.userName }" readonly="readonly" />
+			 value="${user.userName }" />
 			<div id="err-name"></div>
 		</div>
 
@@ -157,8 +188,10 @@ $(document).ready(function(){
 		<!-- 전화번호 -->
 		<div class="join-form__group">
 			<label for="tel" class="label-margin full-size">휴대폰 번호(선택사항)</label>
-			<input type="text" name="tel" id="tel" required="required"
-			class="full-size height-size45 focus" value="${user.tel }" />
+			<input type="tel" name="tel" id="tel" required="required"
+			class="full-size height-size45 focus" value="${user.tel }"
+			placeholder="예) 01000000000, '-' 빼고 입력해주세요" maxlength="11"/>
+			<div id="err-tel"></div>
 		</div>
 		
 		<!-- 주소 -->
@@ -185,7 +218,7 @@ $(document).ready(function(){
 		<div class="join-form__group">
 		<label for="animal" class="label-margin full-size">반려동물 선택(선택사항)</label>
 		<select name="animal" id="animal" class="full-size height-size45 focus" >
-			<option value>반려동물 선택</option>
+			<option value="null">반려동물 선택</option>
 			<option value="개">개</option>
 			<option value="고양이">고양이</option>
 			<option value="금붕어/열대어">금붕어/열대어</option>
@@ -220,7 +253,7 @@ $(document).ready(function(){
 	</div>
 	
 <div class="btn-wrap">
-	<button type="button" id="btnJoin" class="btn_type btn_primary btn-border btn-margin-auto" >회원 정보 수정</button>
+	<button type="button" id="btnUpdate" class="btn_type btn_primary btn-border btn-margin-auto" >회원 정보 수정</button>
 	<button type="button" id="btnCancel" class="btn_type btn_primary btn-border btn-margin-auto">취소</button>
 </div>
 </div>

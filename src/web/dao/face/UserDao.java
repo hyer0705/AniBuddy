@@ -1,5 +1,6 @@
 package web.dao.face;
 
+import web.dto.UserFile;
 import web.dto.UserTB;
 
 public interface UserDao {
@@ -74,6 +75,42 @@ public interface UserDao {
 	 * @return UserTB - 조회된 사용자 객체 반환
 	 */
 	UserTB selectUserByUserno(UserTB user);
+
+	/**
+	 * 회원 정보 수정
+	 * 
+	 * @param user
+	 */
+	void update(UserTB user);
+
+	/**
+	 * 회원 이미지 파일 업로드
+	 * 
+	 * @param userFile
+	 */
+	void insertFile(UserFile userFile);
+
+	/**
+	 * 유저 프로필 파일 조회
+	 * 
+	 * @param user - 유저 정보를 갖고 있는 UserTB 객체
+	 * @return UserFile - 조회된 파일 반환
+	 */
+	UserFile selectUserFile(UserTB user);
+
+	/**
+	 * 유저 핸드폰 번호 업데이트
+	 * 
+	 * @param user
+	 */
+	void updateUserTel(UserTB user);
+
+	/**
+	 * 반려동물 업데이트
+	 * 
+	 * @param user
+	 */
+	void updateAnimal(UserTB user);
 
 
 }

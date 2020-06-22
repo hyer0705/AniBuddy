@@ -2,6 +2,7 @@ package web.service.face;
 
 import javax.servlet.http.HttpServletRequest;
 
+import web.dto.UserFile;
 import web.dto.UserTB;
 
 public interface UserService {
@@ -124,6 +125,21 @@ public interface UserService {
 	 * @return UserTB - 사용자 번호 정보를 갖고 있는 UserTB 객체
 	 */
 	UserTB getLoginUserByUserno(HttpServletRequest req);
+
+	/**
+	 * 회원정보 수정
+	 * 
+	 * @param req
+	 */
+	void updateUserInfo(HttpServletRequest req);
+
+	/**
+	 * 유저 프로필 파일 정보 얻기
+	 * 
+	 * @param user - 유저 정보를 갖고 있는 UserTB 객체
+	 * @return UserFile - 조회된 파일 반환
+	 */
+	UserFile viewProfileFile(UserTB user);
 
 
 

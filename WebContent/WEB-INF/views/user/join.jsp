@@ -148,7 +148,8 @@ html, body {
 		<div class="join-form__group">
 			<label for="tel" class="label-margin full-size">휴대폰 번호(선택사항)</label>
 			<input type="text" name="tel" id="tel" required="required"
-			class="full-size height-size45 focus"/>
+			class="full-size height-size45 focus"
+			placeholder="예) 01000000000, '-' 빼고 입력해주세요" />
 		</div>
 		
 		<!-- 주소 -->

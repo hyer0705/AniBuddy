@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import web.dto.UserFile;
 import web.dto.UserTB;
 import web.service.face.UserService;
 import web.service.impl.UserServiceImpl;
@@ -43,20 +44,48 @@ public class UserUpdateController extends HttpServlet {
 		
 		// 사용자 정보 req에 설정
 		req.setAttribute("user", user);
+//		System.out.println(user.getGender());
+		
+		// 생년월일
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String birth = sdf.format(user.getBirth());
+//		System.out.println("UserUpdate birth: " + birth);
 		
 		String[] tmp = birth.split("-");
 		req.setAttribute("byear", tmp[0]);
 		req.setAttribute("bmonth", tmp[1]);
 		req.setAttribute("bday", tmp[2]);
-		
-		System.out.println("user email: " + user.getEmail());
+
+		// email
 		String[] email = user.getEmail().split("@");
 		req.setAttribute("email", email);
 		
+		// 이미지 프로필 사진 전달
+		UserFile userProfile = userService.viewProfileFile(user);
+//		System.out.println("UserUpdateController userProfile: " + userProfile);
+		if(userProfile != null) {
+			req.setAttribute("isProfile", true);
+			req.setAttribute("userProfile", userProfile);
+//			req.setAttribute("imgurl", "../upload/"+userProfile.getStoreName());
+		}
+		
+		// VIEW 지정 - forward
 		req.getRequestDispatcher("/WEB-INF/views/mypage/userupdate.jsp")
 			.forward(req, resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		// post 요청 완료 출력
+		System.out.println("/anibuddy/mypage/userupdate - [POST]");
+		
+		// 회원정보 수정
+		userService.updateUserInfo(req);
+		
+		
+		// 회원정보 수정 페이지로 리다이렉트
+		resp.sendRedirect( req.getContextPath() + "/mypage/userupdate");
 	}
 
 }

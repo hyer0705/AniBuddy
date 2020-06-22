@@ -98,7 +98,9 @@ $(document).ready(function(){
 			reg = /^[A-Za-z0-9]{8,20}$/
 			msg = "<h4>비밀번호는 8글자 이상 20자 이하의 영어 대소문자와 숫자만 사용 가능합니다.</h4>"
 
-			invalidMsg( currNode, reg, msg)
+			if( !reg.test( $(currNode).val() )){
+				invalidMsg( currNode, reg, msg)
+			}
 		}// 바깥쪽 else end
 		
 	}) // $("#user_pw").on("blur", function(){ end
@@ -154,7 +156,9 @@ $(document).ready(function(){
 			reg = /^[가-힣]{2,}$/
 			msg = "<h4>이름은 2자 이상의 한글만 사용 가능합니다.</h4>"
 
-			invalidMsg( currNode, reg, msg)
+			if( !reg.test( $(currNode).val() )){
+				invalidMsg( currNode, reg, msg)
+			}
 		}
 		
 	})
@@ -368,6 +372,15 @@ $(document).ready(function(){
 		/* 에러메시지 띄워주는 함수 */
 		emptyMsg(currNode, errNode)
 		
+	})
+	
+	// 9.2 상세주소
+	$("#sample6_detailAddress").on("blur", function(){
+		var currNode = $(this)
+		var errNode = $("#err-addr")
+		
+		/* 에러메시지 띄워주는 함수 */
+		emptyMsg(currNode, errNode)
 	})
 	
 	

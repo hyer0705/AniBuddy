@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import web.dao.face.UserDao;
 import web.dbutil.JDBCTemplate;
+import web.dto.UserFile;
 import web.dto.UserTB;
 
 public class UserDaoImpl implements UserDao{
@@ -361,6 +362,8 @@ public class UserDaoImpl implements UserDao{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
 		}
 		
 		return cnt;
@@ -412,6 +415,189 @@ public class UserDaoImpl implements UserDao{
 		}
 
 		return result;
+	}
+
+	@Override
+	public void update(UserTB user) {
+		
+		// DB 연결 객체
+		conn = JDBCTemplate.getConnection();
+		
+		// 다음 게시글 번호 조회 쿼리
+		String sql = "";
+		sql += "UPDATE user_tb";
+		sql += " SET";
+		sql += "    user_name = ?";
+		sql += "    , nick = ?";
+		sql += "    , gender = ?";
+		sql += "    , birth = ?";
+		sql += "    , email = ?";
+		sql += "    , first_addr = ?";
+		sql += "    , second_addr = ?";
+		sql += " WHERE user_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getUserName());
+			ps.setString(2, user.getNick());
+			ps.setString(3, String.valueOf(user.getGender()));
+			
+			// 생일은 다르게 해주어야함!
+			java.sql.Date sqlBirth = new java.sql.Date(user.getBirth().getTime());
+			ps.setDate(4, sqlBirth);
+			
+			ps.setString(5, user.getEmail());
+			ps.setString(6, user.getFirstAddr());
+			ps.setString(7, user.getSecondAddr());
+			ps.setInt(8, user.getUserNo());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+	}
+
+	@Override
+	public void insertFile(UserFile userFile) {
+
+		// DB 연결
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "INSERT INTO user_file ( fileno, user_no, origin_name, store_name, filesize)";
+		sql += " VALUES (USERFILE_SEQ.nextval, ?, ?, ?, ?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, userFile.getUserNo());
+			ps.setString(2, userFile.getOriginName());
+			ps.setString(3, userFile.getStoreName());
+			ps.setInt(4, userFile.getFilesize());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+	}
+	
+	
+	@Override
+	public UserFile selectUserFile(UserTB user) {
+
+		// DB 연결 객체
+		conn = JDBCTemplate.getConnection();
+		
+		//SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM user_file";
+		sql += " WHERE user_no = ?";
+		
+		// 결과 저장할 UserFile 객체
+		UserFile userFile = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, user.getUserNo());
+			
+			rs = ps.executeQuery();
+			
+			// 조회 결과 처리
+			while( rs.next() ) {
+				userFile = new UserFile();
+				
+				userFile.setFileno(rs.getInt("fileno"));
+				userFile.setUserNo(rs.getInt("user_no"));
+				userFile.setOriginName(rs.getString("origin_name"));
+				userFile.setStoreName(rs.getString("store_name"));
+				userFile.setFilesize(rs.getInt("filesize"));
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		return userFile;
+	}
+	
+	@Override
+	public void updateUserTel(UserTB user) {
+		// DB 연결
+		conn = JDBCTemplate.getConnection();
+
+		// Sql 작성
+		String sql = "";
+		sql += "UPDATE user_tb";
+		sql += " SET";
+		sql += "    tel = ?";
+		sql += " WHERE";
+		sql += "     user_no = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			if(user.getTel().equals("null")) {
+				ps.setString(1, "");
+			} else {
+				ps.setString(1, user.getTel());
+			}
+			ps.setInt(2, user.getUserNo());
+			
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(ps);
+		}
+
+	}
+	
+	@Override
+	public void updateAnimal(UserTB user) {
+		// DB 연결
+		conn = JDBCTemplate.getConnection();
+
+		// Sql 작성
+		String sql = "";
+		sql += "UPDATE user_tb";
+		sql += " SET";
+		sql += "   	animal = ?";
+		sql += " WHERE";
+		sql += "     user_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			if(user.getAnimal().equals("null")) {
+				ps.setString(1, "");
+			} else {
+				ps.setString(1, user.getAnimal());
+			}
+			ps.setInt(2, user.getUserNo());
+
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(ps);
+		}
 	}
 	
 }
