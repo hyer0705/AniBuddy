@@ -3,11 +3,20 @@
 
 <jsp:include page="/layout/header.jsp"></jsp:include>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".toUpdate").on("click", function(){
+// 		console.log("회원정보 clicked")
+		$(location).attr("href", "/anibuddy/mypage/userupdate")
+	})
+})
+</script>
+
 <main class="wrapper">
 <div class="mypage-content">
 
 	<div class="card-wrapper">
-	<div class="menu-card">
+	<div class="menu-card toUpdate">
 		<div class="menu-card__icon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
 		<div class="menu-card__title">
 			<h4>회원정보</h4>
@@ -44,7 +53,8 @@
 <div class="mypage-sidebar">
 <ul>
 	<li><a href="/anibuddy/mypage/main">마이페이지</a></li>
-	<li><a href="#">회원정보</a></li>
+<!-- 	<li><a href="/anibuddy/mypage/userupdate">회원정보</a></li> -->
+	<li class="toUpdate">회원정보</li>
 	<li><a href="#">활동내역</a></li>
 	<li><a href="#">쪽지함</a></li>
 	<li><a href="#">1:1문의</a></li>

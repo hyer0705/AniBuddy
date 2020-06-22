@@ -1,0 +1,83 @@
+@charset "UTF-8";
+.marginTop0 {
+	margin-top: 0;
+}
+
+.btn-margin-auto {
+	margin: 0 auto;
+}
+
+.profile__file {
+	display: flex;
+	border: 1px solid #747474;
+}
+
+.profile__file .profile-image {
+    border-right: 1px solid #747474;
+	margin: 0;
+	width: 120px;
+	height: 120px;
+	background-image: url(../img/default-profile.png);
+	background-size: cover;
+}
+
+.profile__file .profile__desc {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    justify-content: flex-end;
+}
+
+.profile__desc span {
+	margin: 0;
+    margin-bottom: 10px;
+}
+
+.profile__desc .profile-filebox {
+ 	margin: 5px auto;
+ 	display: flex;
+ 	align-self: flex-end; 
+}
+
+.profile-filebox label {
+	display: inline-block;
+    padding: .5em .75em;
+    color: #fff;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #ffaf9a;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+}
+
+.profile-filebox input[type="file"] { /* 파일 필드 숨기기 */
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
+}
+
+/* named upload */
+.profile-filebox .profile-filename {
+	height: 35px;
+	display: inline-block;
+	padding: .5em .75em; /* label의 패딩값과 일치 */
+	font-size: inherit;
+	font-family: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}

@@ -100,6 +100,14 @@ public interface UserService {
 	 * @return UserTB - 비밀번호, 비밀번호 확인, userno 정보를 갖고 있는 사용자 객체 반환
 	 */
 	UserTB getFindUserByUserno(HttpServletRequest req);
+	
+	/**
+	 * 사용자 번호로 사용자 조회하기
+	 * 
+	 * @param user - 사용자 번호를 갖고 있는 사용자 객체
+	 * @return UserTB - 사용자 번호로 조회된 사용자 객체
+	 */
+	UserTB getFindUserByUserno(UserTB user);
 
 	/**
 	 * 비밀번호 재설정
@@ -108,6 +116,15 @@ public interface UserService {
 	 * @return true: 업데이트 완료, false: 업데이트 오류
 	 */
 	boolean updatePw(UserTB user);
+
+	/**
+	 * session.getAttribute("userno") 사용하여 사용자 번호 얻기
+	 *  
+	 * @param req - 요청 객체
+	 * @return UserTB - 사용자 번호 정보를 갖고 있는 UserTB 객체
+	 */
+	UserTB getLoginUserByUserno(HttpServletRequest req);
+
 
 
 

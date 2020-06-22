@@ -42,7 +42,7 @@
 				<span>${adminid } 님</span> | <span><a href="<%=request.getContextPath()%>/admin/logout">로그아웃</a></span>
 			</c:when>
 			<c:when test="${not login }">
-				<span><a href="<%=request.getContextPath()%>/user/login">로그인</a></span> | <span><a href="<%=request.getContextPath()%>/user/join">회원가입</a></span>
+				<span><a href="<%=request.getContextPath() %>/user/login">로그인</a></span> | <span><a href="<%=request.getContextPath()%>/user/join">회원가입</a></span>
 			</c:when>
 			<c:when test="${login }">
 				<span>${loginnick } 님</span> | <span><a href="<%=request.getContextPath() %>/user/logout">로그아웃</a></span>
@@ -73,9 +73,9 @@
 					</ul></li>
 				<c:choose>
 					<c:when test="${not adminLogin }">
-						<li><a href="<%=request.getContextPath() %> %>/mypage/main">마이페이지</a>
+						<li><a href="<%=request.getContextPath() %>/mypage/main">마이페이지</a>
 							<ul class="dropdown-content">
-								<li><a href="#">회원정보</a></li>
+								<li><a href="/anibuddy/mypage/userupdate">회원정보</a></li>
 								<li><a href="#">활동 내역</a></li>
 								<li><a href="#">쪽지함</a></li>
 								<li><a href="#">1:1 문의</a></li>

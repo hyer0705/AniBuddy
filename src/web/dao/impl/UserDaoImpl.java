@@ -366,4 +366,52 @@ public class UserDaoImpl implements UserDao{
 		return cnt;
 	}
 	
+	@Override
+	public UserTB selectUserByUserno(UserTB user) {
+		
+		// DB 연결 객체
+		conn = JDBCTemplate.getConnection();
+
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM user_tb";
+		sql += " WHERE user_no = ?";
+
+		// 결과를 저장할 변수
+		UserTB result = null;
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, user.getUserNo());
+
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				result = new UserTB();
+				result.setUserNo(rs.getInt("user_no"));
+				result.setUserId(rs.getString("user_id"));
+				result.setUserName(rs.getString("user_name"));
+				result.setBirth(rs.getDate("birth"));
+				result.setGender(rs.getString("gender").charAt(0));
+				result.setNick(rs.getString("nick"));
+				result.setEmail(rs.getString("email"));
+				result.setTel(rs.getString("tel"));
+				result.setFirstAddr(rs.getString("first_addr"));
+				result.setSecondAddr(rs.getString("second_addr"));
+				result.setAnimal(rs.getString("animal"));
+				result.setIsExpert(rs.getString("is_expert"));
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+		return result;
+	}
+	
 }

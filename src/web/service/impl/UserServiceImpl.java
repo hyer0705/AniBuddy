@@ -35,6 +35,28 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public UserTB getLoginUserByUserno(HttpServletRequest req) {
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// 결과 반환 객체
+		UserTB user = null;
+		
+		if( req.getSession().getAttribute("userno") != null 
+				&& !"".equals(req.getSession().getAttribute("userno")) ) {
+			int userno = (int) req.getSession().getAttribute("userno");
+			user = new UserTB();
+			user.setUserNo(userno);
+		}
+		
+		return user;
+	}
+	
+	@Override
 	public boolean login(UserTB user) {
 		
 		int cnt = userDao.selectCntUserByUseridUserpw(user);
@@ -92,7 +114,10 @@ public class UserServiceImpl implements UserService{
 		}
 		user.setBirth(bday);
 		
-		user.setEmail(req.getParameter("email"));
+		// email 고치기
+		String email = req.getParameter("email") + "@" + req.getParameter("e-domain");
+//		System.out.println("UserJoinController email: " + email);
+		user.setEmail(email);
 		user.setTel(req.getParameter("tel"));
 		user.setFirstAddr(req.getParameter("first_addr"));
 		user.setSecondAddr(req.getParameter("second_addr"));
@@ -217,6 +242,11 @@ public class UserServiceImpl implements UserService{
 		} else {
 			return false;
 		}
+	}
+	
+	@Override
+	public UserTB getFindUserByUserno(UserTB user) {
+		return userDao.selectUserByUserno(user);
 	}
 	
 }

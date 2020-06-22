@@ -67,5 +67,13 @@ public interface UserDao {
 	 */
 	int updateUserPw(UserTB user);
 
+	/**
+	 * 사용자 번호로 사용자 조회하기
+	 * 
+	 * @param user - 사용자 번호를 갖고 있는 UserTB 객체
+	 * @return UserTB - 조회된 사용자 객체 반환
+	 */
+	UserTB selectUserByUserno(UserTB user);
+
 
 }
