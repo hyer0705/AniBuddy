@@ -1,3 +1,4 @@
+<%@page import="web.dto.UserTB"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -5,9 +6,10 @@
 <script type="text/javascript" src="../js/user-update.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	<% UserTB user = (UserTB)request.getAttribute("user"); %>
 	
 	// 프로필 이미지가 존재할 시 프로필 이미지 가져오기
-	if(${isProfile }){
+	if(<%=request.getAttribute("isProfile") %>){
 		var url = "../upload/${userProfile.storeName }"
 		$(".profile-image")
 			.css({
@@ -16,16 +18,16 @@ $(document).ready(function(){
 	}
 	
 	// 성별 선택하기
-	$("#gender").val('${user.gender}').prop("selected", true)
+	$("#gender").val('<%=user.getGender() %>').prop("selected", true)
 	
 	// 반려동물 선택하기
-	$("#animal").val('${user.animal}').prop("selected", true)
+	$("#animal").val('<%=user.getAnimal() %>').prop("selected", true)
 	
 	// 전문가/비전문가 선택하기
-	$("input:radio[name='is_expert']:radio[value='${user.isExpert}']").prop("checked", true)
+	$("input:radio[name='is_expert']:radio[value='<%=user.getIsExpert() %>']").prop("checked", true)
 	
 	// 생년월일 월 선택하기
-	$("#mm").val('${bmonth}').prop("selected", true)
+	$("#mm").val('<%=request.getAttribute("bmonth") %>').prop("selected", true)
 	
 	
 	/* form submit 이벤트시 */
@@ -40,10 +42,6 @@ $(document).ready(function(){
 		if(${not empty user.tel } && $("#tel").val() == ''){
 			$("#tel").val("null")
 			
-		} else if(${not empty user.tel } && $("#tel").val() != ''){
-			$("#tel").focus().select()
-			
-			return false
 		}
 	}) // form submit event - end
 	
@@ -253,8 +251,10 @@ $(document).ready(function(){
 	</div>
 	
 <div class="btn-wrap">
-	<button type="button" id="btnUpdate" class="btn_type btn_primary btn-border btn-margin-auto" >회원 정보 수정</button>
-	<button type="button" id="btnCancel" class="btn_type btn_primary btn-border btn-margin-auto">취소</button>
+	<button type="button" id="btnUpdate" class="btn_type btn_primary btn-border btn-margin-auto btn-width100" >회원 정보 수정</button>
+</div>
+<div class="delete-link">
+	<a href="<%=request.getContextPath() %>/mypage/userdelete">회원 탈퇴</a>
 </div>
 </div>
 
@@ -267,7 +267,7 @@ $(document).ready(function(){
 	<li><a href="#">활동내역</a></li>
 	<li><a href="#">쪽지함</a></li>
 	<li><a href="#">1:1문의</a></li>
-	<li><a href="#">회원탈퇴</a></li>
+	<li><a href="<%=request.getContextPath() %>/mypage/userdelete">회원탈퇴</a></li>
 </ul>
 </div>
 </main>

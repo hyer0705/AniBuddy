@@ -112,5 +112,27 @@ public interface UserDao {
 	 */
 	void updateAnimal(UserTB user);
 
+	/**
+	 * 입력한 비밀번호와 사용자 번호로 해당 회원 select
+	 * 
+	 * @param deleteUser - 사용자 번호와 입력한 비밀번호 정보를 가진 UserTB 객체
+	 * @return 0 이상: 비밀번호 일치, -1: 에러, 0: 비밀번호 불일치
+	 */
+	int selectCntChkPw(UserTB deleteUser);
+
+	/**
+	 * delete 회원
+	 * 
+	 * @param deleteUser - 사용자 번호, 사용자 비밀번호 정보를 갖고있는 UserTB 객체
+	 */
+	void deleteUser(UserTB deleteUser);
+
+	/**
+	 * delete user_file
+	 * 사용자를 지우기 전에 사용자 번호를 참조하고 있는 User_file 객체의 데이터를 지워야 한다.
+	 * 
+	 * @param deleteUser - 사용자 번호를 갖고 있는 UserTB 객체
+	 */
+	void deleteUserFile(UserTB deleteUser);
 
 }

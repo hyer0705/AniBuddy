@@ -482,4 +482,41 @@ public class UserServiceImpl implements UserService{
 		return userDao.selectUserFile(user);
 	}
 	
+	@Override
+	public UserTB getFindDeleteUser(HttpServletRequest req) {
+		
+		// 한글 인코딩
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// 결과 반환 객체
+		UserTB deleteUser = new UserTB();
+		String param = String.valueOf(req.getSession().getAttribute("userno"));
+		if( param != null && !"".equals(param) ) {
+			deleteUser.setUserNo(Integer.parseInt(param));
+		}
+		deleteUser.setUserPw(req.getParameter("upw"));
+		
+		return deleteUser;
+	}
+	
+	@Override
+	public boolean chkPw(UserTB deleteUser) {
+		
+		int cnt = userDao.selectCntChkPw(deleteUser);
+		if(cnt > 0) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public void deleteUser(UserTB deleteUser) {
+		userDao.deleteUser(deleteUser);
+	}
 }

@@ -141,6 +141,29 @@ public interface UserService {
 	 */
 	UserFile viewProfileFile(UserTB user);
 
+	/**
+	 * 삭제할 회원정보 얻기
+	 * 
+	 * @param req - 요청 객체
+	 * @return UserTB - 삭제할 회원 정보를 갖고있는 회원 객체 반환
+	 */
+	UserTB getFindDeleteUser(HttpServletRequest req);
+
+	/**
+	 * 입력한 비밀번호와 현재 비밀번호가 일치하는지 확인
+	 * 
+	 * @param deleteUser - 사용자번호, 사용자가 입력한 비밀번호에 대한 정보를 갖고 잇는 UserTB 객체
+	 * @return true: 비밀번호 일치, false: 비밀번호 불일치
+	 */
+	boolean chkPw(UserTB deleteUser);
+
+	/**
+	 * 회원 탈퇴 진행~
+	 * 
+	 * @param deleteUser - 탈퇴할 회원 정보를 갖고 있는 UserTB 객체
+	 */
+	void deleteUser(UserTB deleteUser);
+
 
 
 

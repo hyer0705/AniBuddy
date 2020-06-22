@@ -98,9 +98,7 @@ $(document).ready(function(){
 			reg = /^[A-Za-z0-9]{8,20}$/
 			msg = "<h4>비밀번호는 8글자 이상 20자 이하의 영어 대소문자와 숫자만 사용 가능합니다.</h4>"
 
-			if( !reg.test( $(currNode).val() )){
-				invalidMsg( currNode, reg, msg)
-			}
+			invalidMsg( currNode, reg, msg)
 		}// 바깥쪽 else end
 		
 	}) // $("#user_pw").on("blur", function(){ end

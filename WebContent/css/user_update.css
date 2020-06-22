@@ -81,3 +81,17 @@
 	-moz-appearance: none;
 	appearance: none;
 }
+
+.btn-width100{
+	width: 100%;
+}
+
+.delete-link{
+	margin-top: 20px;
+    text-align: right;
+}
+
+.delete-link a {
+    color: #ccc;
+    font-size: 12px;
+}

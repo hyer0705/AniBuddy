@@ -1,0 +1,71 @@
+@charset "UTF-8";
+.delete-cont {
+	width: 60%;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+.delete-cont .delete-cont__logo {
+	cursor: pointer;
+    width: 400px;
+    height: 150px;
+    background-image: url(../img/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+.delete-cont .delete-cont__img {
+	width: 400px;
+    height: 300px;
+    background-image: url(../img/wait.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    line-height: 135px;
+}
+
+.delete-cont .delete-cont__delete {
+	margin: 0 auto;
+    width: 400px;
+}
+
+input:focus {
+	outline: none;
+}
+
+input[type="password"]
+, .delete-btn {
+	box-sizing: border-box;
+	width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+input[type="password"] {
+	padding: 0 10px;
+}
+
+input[type="password"]:focus {
+	padding: 0 10px;
+	box-shadow: none;
+	border: 1px solid #99d4d9;
+}
+
+.delete-cont__delete-form .delete-btn {
+	background: #99d4d9;
+    border: 0.5px solid black;
+    font-weight: 700;
+    outline: none;
+    cursor: pointer;
+}
+
+.delete-cont__delete-form label {
+    margin-bottom: 10px;
+    display: inline-block;	
+}

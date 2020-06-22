@@ -600,4 +600,95 @@ public class UserDaoImpl implements UserDao{
 		}
 	}
 	
+	@Override
+	public int selectCntChkPw(UserTB deleteUser) {
+		
+		//DB 연결 객체
+		conn = JDBCTemplate.getConnection();
+		
+		// Sql 작성
+		String sql = "";
+		sql += "SELECT * FROM user_tb";
+		sql += " WHERE";
+		sql += "    user_no = ?";
+		sql += "    and user_pw = ?";
+		
+		
+		// 결과 반환 변수
+		int result = -1;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, deleteUser.getUserNo());
+			ps.setString(2, deleteUser.getUserPw());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public void deleteUser(UserTB deleteUser) {
+		
+		// DB 연결 객체
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "DELETE user_tb";
+		sql += " WHERE user_no = ?";
+		
+		// user 객체와 연결된 테이블에 있는 행들도 모두 삭제
+		// 일단 user_file 테이블만 on cascade delete 연결 안됨...
+		deleteUserFile(deleteUser);
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, deleteUser.getUserNo());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	
+	public void deleteUserFile(UserTB deleteUser) {
+
+		// DB 연결
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "DELETE user_file";
+		sql += " WHERE user_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, deleteUser.getUserNo());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		
+	}
+	
 }
