@@ -28,6 +28,12 @@ public class OneOnOneDelete extends HttpServlet {
 		if( !"".equals(names) && names != null) {
 			oneOnOneService.oneOnOneDelete(names);
 		}
+		
+		// 일반 사용자 일 때
+		if( req.getSession().getAttribute("login") != null) {
+			resp.sendRedirect("/anibuddy/mypage/oneononelist");
+			return;
+		}
 
 		resp.sendRedirect( req.getContextPath() + "/oneonone/reply");
 

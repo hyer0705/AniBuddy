@@ -25,12 +25,21 @@ public class OneOnOneDaoImpl implements OneOnOneDao{
 		//SQL 작성
 		String sql = "";
 		sql += "SELECT count(*) FROM oneonone";
+		sql += " WHERE 1=1";
+		
+		// search 가 null이 아닐 때
+		if( search != null && !"".equals(search) ) {
+			sql += "    AND title LIKE '%'||?||'%'";
+		}
 
 		//최종 결과값
 		int cnt = 0;
 
 		try {
 			ps = conn.prepareStatement(sql); //SQL수행 객체
+			if(search != null && !"".equals(search)) {
+				ps.setString(1, search);
+			}
 
 			rs = ps.executeQuery(); //SQL수행 및 결과집합 반환
 
@@ -71,12 +80,12 @@ public class OneOnOneDaoImpl implements OneOnOneDao{
 		try {
 			ps = conn.prepareStatement(sql);
 
-			int idx = 1;
+			int idx = 0;
 			if( paging.getSearch() != null && !"".equals(paging.getSearch())) {
-				ps.setString(idx++, paging.getSearch());	
+				ps.setString(++idx, paging.getSearch());	
 			}
-			ps.setInt(idx++, paging.getStartNo());	//페이징 게시글 시작 번호
-			ps.setInt(idx++, paging.getEndNo());	//페이징 게시글 끝 번호
+			ps.setInt(++idx, paging.getStartNo());	//페이징 게시글 시작 번호
+			ps.setInt(++idx, paging.getEndNo());	//페이징 게시글 끝 번호
 
 
 			rs = ps.executeQuery();

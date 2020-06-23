@@ -12,6 +12,12 @@ $(document).ready(function(){
 	$("#btnSearch").click(function(){
 		location.href="<%=request.getContextPath() %>/oneonone/reply?search="+$("#search").val();
 	})
+	// 검색어 입력 폼에서 enter 키를 눌렀을 때
+	$("#search").on("keydown", function( ev ){
+		if( ev.keyCode == 13){
+			$(location).attr("href", "/anibuddy/oneonone/reply?search=" + $("#search").val())
+		}
+	})
 	
 })
 </script>
@@ -70,9 +76,6 @@ $(document).ready(function(){
 	}
 </script>
 <link rel="stylesheet" href="/anibuddy/css/oneonone.css" />
-
-
-
 
 <div class="Manager">
 <h3>QnA 관리</h3><br>

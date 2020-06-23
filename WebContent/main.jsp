@@ -78,7 +78,7 @@
 								<li><a href="/anibuddy/mypage/userupdate">회원정보</a></li>
 								<li><a href="#">활동 내역</a></li>
 								<li><a href="#">쪽지함</a></li>
-								<li><a href="#">1:1 문의</a></li>
+								<li><a href="<%=request.getContextPath() %>/mypage/oneononelist">1:1 문의</a></li>
 							</ul></li>
 					</c:when>
 					<c:when test="${adminLogin }">

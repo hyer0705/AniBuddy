@@ -3,6 +3,11 @@
  */
 $(document).ready(function(){
 	
+	// 로고 클릭시 메인 화면으로
+	$("#logo").on("click", function(){
+		$(location).attr("href", "/anibuddy/")
+	})
+	
 	// 비밀번호를 입력할 수 있도록 focus
 	$("#userpw").focus()
 	

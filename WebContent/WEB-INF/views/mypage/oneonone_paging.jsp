@@ -10,10 +10,10 @@
 	<c:if test="${paging.curPage ne 1 }"><!-- 첫 페이지가 아닐 때 보여줌 -->
 	<c:choose>
 		<c:when test="${empty paging.search }">
-			<li><a href="/anibuddy/oneonone/reply">&larr;</a></li>
+			<li><a href="/anibuddy/mypage/oneononelist">&larr;</a></li>
 		</c:when>
 		<c:when test="${not empty paging.search }">
-			<li><a href="/anibuddy/oneonone/reply?search=${paging.search }">&larr;</a></li>
+			<li><a href="/anibuddy/mypage/oneononelist?search=${paging.search }">&larr;</a></li>
 		</c:when>
 	</c:choose>
 	</c:if>
@@ -24,10 +24,10 @@
 	<c:if test="${paging.startPage gt paging.pageCount }">
 	<c:choose>
 		<c:when test="${empty paging.search }">
-			<li><a href="/anibuddy/oneonone/reply?curPage=${paging.startPage - paging.pageCount }">&laquo;</a></li>
+			<li><a href="/anibuddy/mypage/oneononelist?curPage=${paging.startPage - paging.pageCount }">&laquo;</a></li>
 		</c:when>
 		<c:when test="${not empty paging.search }">
-			<li><a href="/anibuddy/oneonone/reply?search=${paging.search }&curPage=${paging.startPage - paging.pageCount }">&laquo;</a></li>
+			<li><a href="/anibuddy/mypage/oneononelist?search=${paging.search }&curPage=${paging.startPage - paging.pageCount }">&laquo;</a></li>
 		</c:when>
 	</c:choose>
 	</c:if>
@@ -42,10 +42,10 @@
 	<c:if test="${paging.curPage ne 1 }">
 	<c:choose>
 		<c:when test="${empty paging.search }">
-			<li><a href="/anibuddy/oneonone/reply?curPage=${paging.curPage - 1 }">&lt;</a></li>
+			<li><a href="/anibuddy/mypage/oneononelist?curPage=${paging.curPage - 1 }">&lt;</a></li>
 		</c:when>
 		<c:when test="${not empty paging.search }">
-			<li><a href="/anibuddy/oneonone/reply?search=${paging.search }&curPage=${paging.curPage - 1 }">&lt;</a></li>
+			<li><a href="/anibuddy/mypage/oneononelist?search=${paging.search }&curPage=${paging.curPage - 1 }">&lt;</a></li>
 		</c:when>
 	</c:choose>
 	</c:if>
@@ -60,12 +60,13 @@
 		<li class="active">
 		<c:choose>
 			<c:when test="${empty paging.search }">
-				<a href="/anibuddy/oneonone/reply?curPage=${i }">${i }</a>
+				<a href="/anibuddy/mypage/oneononelist?curPage=${i }">${i }</a>
 			</c:when>
 			<c:when test="${not empty paging.search }">
-				<a href="/anibuddy/oneonone/reply?search=${paging.search }&curPage=${i }">${i }</a>
+				<a href="/anibuddy/mypage/oneononelist?search=${paging.search }&curPage=${i }">${i }</a>
 			</c:when>
 		</c:choose>
+			
 		</li>
 	</c:if>
 	
@@ -74,10 +75,10 @@
 		<li>
 		<c:choose>
 			<c:when test="${empty paging.search }">
-				<a href="/anibuddy/oneonone/reply?curPage=${i }">${i }</a>
+				<a href="/anibuddy/mypage/oneononelist?curPage=${i }">${i }</a>
 			</c:when>
 			<c:when test="${not empty paging.search }">
-				<a href="/anibuddy/oneonone/reply?search=${paging.search }&curPage=${i }">${i }</a>
+				<a href="/anibuddy/mypage/oneononelist?search=${paging.search }&curPage=${i }">${i }</a>
 			</c:when>
 		</c:choose>
 		</li>
@@ -89,32 +90,32 @@
 	
 	<!-- 다음 페이지로 가기 -->
 	<c:if test="${paging.curPage ne paging.totalPage }">
-	<li>
-	<c:choose>
-		<c:when test="${empty paging.search }">
-			<a href="/anibuddy/oneonone/reply?curPage=${paging.curPage + 1 }">&gt;</a>
-		</c:when>
-		<c:when test="${not empty paging.search }">
-			<a href="/anibuddy/oneonone/reply?search=${paging.search }&curPage=${paging.curPage + 1 }">&gt;</a>
-		</c:when>
-	</c:choose>
-	</li>
+		<li>
+		<c:choose>
+			<c:when test="${empty paging.search }">
+				<a href="/anibuddy/mypage/oneononelist?curPage=${paging.curPage + 1 }">&gt;</a>
+			</c:when>
+			<c:when test="${not empty paging.search }">
+				<a href="/anibuddy/mypage/oneononelist?search=${paging.search }&curPage=${paging.curPage + 1 }">&gt;</a>
+			</c:when>
+		</c:choose>
+		</li>
 	</c:if>
 	
 	
 	
 	<!-- 다음 페이징 리스트로 가기 -->
 	<c:if test="${paging.endPage ne paging.totalPage }">
-	<li>
-	<c:choose>
-		<c:when test="${empty paging.search }">
-			<a href="/anibuddy/oneonone/reply?curPage=${paging.startPage + paging.pageCount }">&raquo;</a>
-		</c:when>
-		<c:when test="${not empty paging.search }">
-			<a href="/anibuddy/oneonone/reply?search=${paging.search }&curPage=${paging.startPage + paging.pageCount }">&raquo;</a>
-		</c:when>
-	</c:choose>
-	</li>
+		<li>
+		<c:choose>
+			<c:when test="${empty paging.search }">
+				<a href="/anibuddy/mypage/oneononelist?curPage=${paging.startPage + paging.pageCount }">&raquo;</a>
+			</c:when>
+			<c:when test="${not empty paging.search }">
+				<a href="/anibuddy/mypage/oneononelist?search=${paging.search }&curPage=${paging.startPage + paging.pageCount }">&raquo;</a>
+			</c:when>
+		</c:choose>
+		</li>
 	</c:if>
 
 	<c:if test="${paging.endPage eq paging.totalPage }">
@@ -125,16 +126,16 @@
 	
 	<!-- 마지막 페이지로 가기 -->
 	<c:if test="${paging.curPage ne paging.totalPage }"><!-- 끝 페이지가 아닐 때 보여준다 -->
-	<li>
-	<c:choose>
-		<c:when test="${empty paging.search }">
-			<a href="/anibuddy/oneonone/reply?curPage=${paging.totalPage }">&rarr;</a>
-		</c:when>
-		<c:when test="${not empty paging.search }">
-			<a href="/anibuddy/oneonone/reply?search=${paging.search }&curPage=${paging.totalPage }">&rarr;</a>
-		</c:when>
-	</c:choose>
-	</li>
+		<li>
+		<c:choose>
+			<c:when test="${empty paging.search }">
+				<a href="/anibuddy/mypage/oneononelist?curPage=${paging.totalPage }">&rarr;</a>
+			</c:when>
+			<c:when test="${not empty paging.search }">
+				<a href="/anibuddy/mypage/oneononelist?search=${paging.search }&curPage=${paging.totalPage }">&rarr;</a>
+			</c:when>
+		</c:choose>
+		</li>
 	</c:if>
 </ul>
 </div>

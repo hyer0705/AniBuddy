@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="../css/mypage_main.css"/>
 <link rel="stylesheet" href="../css/join.css">
 <link rel="stylesheet" href="../css/user_update.css" />
+<link rel="stylesheet" href="../css/mypage_oneonone.css" />
 
 </head>
 <body>
@@ -78,7 +79,7 @@
 								<li><a href="/anibuddy/mypage/userupdate">회원정보</a></li>
 								<li><a href="#">활동 내역</a></li>
 								<li><a href="#">쪽지함</a></li>
-								<li><a href="#">1:1 문의</a></li>
+								<li><a href="<%=request.getContextPath() %>/mypage/oneononelist">1:1 문의</a></li>
 							</ul></li>
 					</c:when>
 					<c:when test="${adminLogin }">

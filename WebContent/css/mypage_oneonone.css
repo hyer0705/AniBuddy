@@ -1,0 +1,81 @@
+@charset "UTF-8";
+.o3-content {
+	width: 79.8%;
+    padding: 5px;
+    float: right;
+    margin-top: 0;
+}
+
+.o3-content .o3-cont {
+	width: 700px;
+}
+
+.o3-cont .o3-cont__title {
+	font-size: 20px;
+    font-weight: 700;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+    padding: 5px 5px 10px 5px;
+}
+
+table {
+    overflow: scroll;
+    border: 1px solid #ccc;
+    width: 700px;
+}
+
+th{
+	border : 1px solid #ccc;
+	height : 50px;	
+	padding : 0;
+	text-align: center;
+	background-color : #99d4d9;
+	width : 170px;
+}
+
+tr {
+    height: 50px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.oneonone th.check{
+	width : 50px;
+}
+
+.oneonone th:nth-child(2) {
+	width: 60px;
+}
+
+.oneonone th:nth-child(4) {
+	width: 70px;
+}
+
+#btnDelete:hover
+, #btnO3:hover {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#btnDelete {
+    background-color: #ffaf9a;
+    margin-top: 5px;
+}
+
+#btnO3 {
+	background-color: #99d4d9;
+	margin-top: 5px;
+}
+
+.o3-content .o3-cont__wrap {
+	width: 700px;
+}
+
+#btnSearch:hover {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#btnSearch {
+    background-color: #99d4d9;
+}

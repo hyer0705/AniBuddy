@@ -32,7 +32,11 @@ public class OneOnOneServiceImpl implements OneOnOneService{
 		//Paging 객체 생성 - 현재 페이지(curPage), 총 게시글 수(totalCount) 활용
 		Paging paging = new Paging(totalCount, curPage);
 		
-		paging.setSearch(search);
+		
+		// 검색어가 있을 시
+		if( search != null && !"".equals(search)) {
+			paging.setSearch(search);
+		}
 		
 		//Paging 객체 반환
 		return paging;

@@ -260,16 +260,7 @@ $(document).ready(function(){
 
 </div>
 
-<div class="mypage-sidebar">
-<ul>
-	<li><a href="/anibuddy/mypage/main">마이페이지</a></li>
-	<li><a href="/anibuddy/mypage/userupdate">회원정보</a></li>
-	<li><a href="#">활동내역</a></li>
-	<li><a href="#">쪽지함</a></li>
-	<li><a href="#">1:1문의</a></li>
-	<li><a href="<%=request.getContextPath() %>/mypage/userdelete">회원탈퇴</a></li>
-</ul>
-</div>
+<jsp:include page="/layout/mypage_sidebar.jsp"></jsp:include>
 </main>
 
 <!-- footer float 속성에 대한 피해 막기 -->

@@ -26,13 +26,19 @@ public class OneOnOneReplyController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		// 관리자 로그인이 아니면 메인페이지로 리다이렉트
+		if(req.getSession().getAttribute("adminLogin") == null) {
+			resp.sendRedirect("/anibuddy/");
+			return;
+		}
+		
+		// 페이징 정보 설정
 		Paging paging = oneOnOneService.getPaging(req);
 
 		List<OneOnOne> oneonone = oneOnOneService.getOneOnOne(paging);		
-
+		
 		req.setAttribute("paging", paging);
 		req.setAttribute("oneonone", oneonone);
-
 
 		req.getRequestDispatcher("/WEB-INF/views/admin/oneonone.jsp").forward(req, resp);
 

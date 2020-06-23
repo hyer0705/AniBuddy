@@ -53,8 +53,15 @@ html, body{
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	// 메인으로 가기 버튼 클릭시 메인으로 이동
 	$("#btnToMain").on("click", function(){
 		$(location).attr("href", "/anibuddy/")
+	})
+	
+	// 로고 클릭시 메인으로 이동
+	$("#logo").on("click", function(){
+		$(location).attr("href", "/anibudd/")
 	})
 })
 </script>

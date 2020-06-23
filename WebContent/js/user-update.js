@@ -1,5 +1,5 @@
 /**
- * 
+ * 회원정보 수정 관련 javascript
  */
 $(document).ready(function(){
 	
@@ -26,6 +26,7 @@ $(document).ready(function(){
 		
 	})
 	
+	// 파일명 input에 보이게 하기
 	var fileTarget = $(".profile-filebox .upload-hidden")
 	
 	fileTarget.on("change", function(){ // 값이 변경되면
@@ -156,12 +157,15 @@ $(document).ready(function(){
 	
 	// 휴대폰 11자 맞는지 확인
 	$("#tel").on("blur",function(){
+		console.log($(this).val().length )
 		if($(this).val().length != 11){
 // 			console.log("휴대폰 번호가 맞는지 확인하세요")	
 			$("#err-tel")
 				.html("휴대폰 번호가 11자리가 아닙니다!")
 				.css("color", "red")
 				.css("font-size", "10px")
+		} else {
+			$("#err-tel").html("")
 		}
 	}) // $("#tel").on("blur",function(){ - end
 	
@@ -179,9 +183,10 @@ $(document).ready(function(){
 		if( $(this).val() == ''){ // 닉네임 폼이 비었을 경우 에러 메시지 띄우기
 			emptyMsg(currNode, errNode)
 		} else {
-			// #nick : 닉네임은 2자 이상, 20자 이하의 한글과 영어대소문자, 숫자만 사용가능합니다.
-			reg = /^[A-Za-z0-9가-힣]{2,20}$/
-			msg = "닉네임은 2자 이상, 20자 이하의 한글과 영어대소문자, 숫자만 사용가능합니다."
+			// #nick : 닉네임은 2자 이상, 20자 이하의 영어대소문자, 숫자만 사용가능합니다.
+			// 한글 6자 넘어가면 too large 걸려서 일단 한글은 뺐어요
+			reg = /^[A-Za-z0-9]{2,20}$/
+			msg = "닉네임은 2자 이상, 20자 이하의 영어대소문자, 숫자만 사용가능합니다."
 
 			if( !reg.test( $(currNode).val() )){
 				invalidMsg( currNode, reg, msg)
@@ -291,7 +296,7 @@ $(document).ready(function(){
 					if(res.data){
 						// 이메일 존재
 						$("#err-email")
-							.html(res.msg)
+							.html(res.msg + "변경하지 않으셔도 됩니다.")
 							.css("color", "red")
 							.css("font-size", "10px")
 						$("#isEmail").val("N")
