@@ -15,7 +15,7 @@ import web.service.impl.OneOnOneServiceImpl;
 /**
  * Servlet implementation class OneOnOneReplyDeleteController
  */
-@WebServlet("/oneonone/replyDelete")
+@WebServlet("/oneonone/replydelete")
 public class OneOnOneReplyDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +29,7 @@ public class OneOnOneReplyDeleteController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/oneonone/replyDelete - [GET]");
+		System.out.println("/anibuddy/oneonone/replydelete - [GET]");
 		
 		// oneonone_no 정보 얻기
 		OneOnOne o3 = o3Service.getparam(req);

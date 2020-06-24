@@ -88,7 +88,7 @@ $(document).ready(function() {
 <hr>
 
 <div>
-<form action="/anibuddy/oneonone/replyUpdate" method="post" enctype="application/x-www-form-urlencoded" name="fm">
+<form action="/anibuddy/oneonone/replyupdate" method="post" enctype="application/x-www-form-urlencoded" name="fm">
 
 <table class="table table-bordered">
 <tr><td class="info">1:1문의고객</td><td>${userid } 님</td></tr>

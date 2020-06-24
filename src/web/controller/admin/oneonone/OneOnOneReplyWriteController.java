@@ -20,7 +20,7 @@ import web.service.impl.UserServiceImpl;
 /**
  * Servlet implementation class OneOnOneReplyWriteController
  */
-@WebServlet("/oneonone/replyWrite")
+@WebServlet("/oneonone/replywrite")
 public class OneOnOneReplyWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -36,7 +36,7 @@ public class OneOnOneReplyWriteController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/oneonone/replyWrite - [GET]");
+		System.out.println("/anibuddy/oneonone/replywrite - [GET]");
 		
 		// 1:1 문의 내용 얻어오기 - 제목, 내용
 		//	1) 문의 번호 얻기
@@ -72,7 +72,7 @@ public class OneOnOneReplyWriteController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/oneonone/replyWrite - [POST] ");
+		System.out.println("/anibuddy/oneonone/replywrite - [POST] ");
 		
 		
 		// 글 삽입 -> 답변한 글의 부모글 업데이트

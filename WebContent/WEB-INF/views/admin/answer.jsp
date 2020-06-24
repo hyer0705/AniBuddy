@@ -15,18 +15,18 @@ $(document).ready(function() {
 	
 	// 글쓰기 버튼 동작
 	$("#btnO3Write").on("click", function(){
-		$(location).attr("href", "/anibuddy/oneonone/replyWrite?oneonone_no=" + $("#oneonone_no").val() )
+		$(location).attr("href", "/anibuddy/oneonone/replywrite?oneonone_no=" + $("#oneonone_no").val() )
 	})
 	
 	// 글 수정 버튼 동작
 	$("#btnO3Update").on("click", function(){
-		$(location).attr("href", "/anibuddy/oneonone/replyUpdate?oneonone_no=" + $("#oneonone_no").val() )
+		$(location).attr("href", "/anibuddy/oneonone/replyupdate?oneonone_no=" + $("#oneonone_no").val() )
 	})
 	
 	// 글 삭제 버튼 동작
 	$("#btnO3Delete").on("click", function(){
 // 		console.log("delete btn clicked")
-		$(location).attr("href", "/anibuddy/oneonone/replyDelete?oneonone_no=" + $("#oneonone_no").val() )
+		$(location).attr("href", "/anibuddy/oneonone/replydelete?oneonone_no=" + $("#oneonone_no").val() )
 	})
 	
 });
