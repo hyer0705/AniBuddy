@@ -82,10 +82,10 @@
 							</ul></li>
 					</c:when>
 					<c:when test="${adminLogin }">
-						<li><a href="<%=request.getContextPath() %>/admin/main">관리자페이지</a>
+						<li><a href="<%=request.getContextPath() %>/manage/user">관리자페이지</a>
 							<ul class="dropdown-content">
-								<li><a href="#">회원 관리</a></li>
-								<li><a href="#">게시판 관리</a></li>
+								<li><a href="<%=request.getContextPath() %>/manage/user">회원 관리</a></li>
+								<li><a href="<%=request.getContextPath() %>/board/main">게시판 관리</a></li>
 								<li><a href="/anibuddy/oneonone/reply">QnA 관리</a></li>
 								<li><a href="#">메일 관리</a></li>
 							</ul></li>

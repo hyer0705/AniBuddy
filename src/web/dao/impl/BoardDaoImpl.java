@@ -11,6 +11,7 @@ import web.dao.face.BoardDao;
 import web.dbutil.JDBCTemplate;
 import web.dto.ExpertBoard;
 import web.dto.FreeBoard;
+import web.dto.HelpPost;
 import web.dto.SharePost;
 import web.util.Paging;
 
@@ -63,7 +64,7 @@ public class BoardDaoImpl implements BoardDao{
 		if( paging.getSearch() != null && !"".equals(paging.getSearch())) {
 		sql += "		AND title LIKE '%'||?||'%'";
 		}
-		sql += "        ORDER BY write_date DESC";
+		sql += "        ORDER BY write_date DESC, post_no DESC";
 		sql += "    ) O";
 		sql += " ) One";
 		sql += " WHERE rnum BETWEEN ? AND ?";
@@ -126,7 +127,7 @@ public class BoardDaoImpl implements BoardDao{
 		if( paging.getSearch() != null && !"".equals(paging.getSearch())) {
 		sql += "		AND title LIKE '%'||?||'%'";
 		}
-		sql += "        ORDER BY write_date DESC";
+		sql += "        ORDER BY write_date DESC, post_no DESC";
 		sql += "    ) O";
 		sql += " ) One";
 		sql += " WHERE rnum BETWEEN ? AND ?";
@@ -191,7 +192,7 @@ public class BoardDaoImpl implements BoardDao{
 		if( paging.getSearch() != null && !"".equals(paging.getSearch())) {
 		sql += "		AND title LIKE '%'||?||'%'";
 		}
-		sql += "        ORDER BY write_date DESC";
+		sql += "        ORDER BY write_date DESC, post_no DESC";
 		sql += "    ) O";
 		sql += " ) One";
 		sql += " WHERE rnum BETWEEN ? AND ?";
@@ -307,5 +308,328 @@ public class BoardDaoImpl implements BoardDao{
 		}
 		
 	}
+
+	@Override
+	public int selectCntBySearch(String search) {
+		
+		// DB 연결 객체
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM SHARE_POST";
+		sql += " WHERE 1=1";
+		sql += "    AND title LIKE '%'||?||'%'";
+		sql += " ORDER BY write_date DESC, post_no DESC";
+		
+		// 결과 반환 변수
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, search);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		
+		return cnt;
+	}
+
+	@Override
+	public int selectCntExpert() {
+		conn = JDBCTemplate.getConnection(); //DB연결
+		
+		//SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM expert_POST";
+		
+		//최종 결과값
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			
+			rs = ps.executeQuery(); //SQL수행 및 결과집합 반환
+			
+			//조회결과 처리
+			while( rs.next() ) {
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public int selectCntExpert(String search) {
+		conn = JDBCTemplate.getConnection(); //DB연결
+		
+		//SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM expert_post";
+		sql += " WHERE title LIKE '%'||?||'%'";
+		
+		//최종 결과값
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			ps.setString(1, search);
+			
+			
+			rs = ps.executeQuery(); //SQL수행 및 결과집합 반환
+			
+			//조회결과 처리
+			while( rs.next() ) {
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public int selectCntFree() {
+		conn = JDBCTemplate.getConnection(); //DB연결
+		
+		//SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM free_POST";
+		
+		//최종 결과값
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			
+			rs = ps.executeQuery(); //SQL수행 및 결과집합 반환
+			
+			//조회결과 처리
+			while( rs.next() ) {
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public int selectCntFree(String search) {
+		conn = JDBCTemplate.getConnection(); //DB연결
+		
+		//SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM free_POST";
+		sql += " WHERE title LIKE '%'||?||'%'";
+		
+		//최종 결과값
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			ps.setString(1, search);
+			
+			rs = ps.executeQuery(); //SQL수행 및 결과집합 반환
+			
+			//조회결과 처리
+			while( rs.next() ) {
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public int selectCntHelp(String search) {
+		conn = JDBCTemplate.getConnection(); //DB연결
+		
+		//SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM help_POST";
+		sql += " WHERE title LIKE '%'||?||'%'";
+		
+		//최종 결과값
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			ps.setString(1, search);
+			
+			rs = ps.executeQuery(); //SQL수행 및 결과집합 반환
+			
+			//조회결과 처리
+			while( rs.next() ) {
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public int selectCntHelp() {
+		conn = JDBCTemplate.getConnection(); //DB연결
+		
+		//SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM help_POST";
+		
+		//최종 결과값
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			
+			rs = ps.executeQuery(); //SQL수행 및 결과집합 반환
+			
+			//조회결과 처리
+			while( rs.next() ) {
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return cnt;
+	}
+	
+	@Override
+	public List<HelpPost> selectHelp(Paging paging) {
+		conn = JDBCTemplate.getConnection();
+
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "    SELECT rownum rnum, O.* FROM (";
+		sql += "        SELECT * FROM help_post";
+		sql += "        WHERE 1=1";
+		if( paging.getSearch() != null && !"".equals(paging.getSearch())) {
+		sql += "		AND title LIKE '%'||?||'%'";
+		}
+		sql += "        ORDER BY write_date DESC";
+		sql += "    ) O";
+		sql += " ) One";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+
+		List<HelpPost> list = new ArrayList<>();
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			int idx = 1;
+			if( paging.getSearch() != null && !"".equals(paging.getSearch())) {
+				ps.setString(idx++, paging.getSearch());	
+			}
+			ps.setInt(idx++, paging.getStartNo());	//페이징 게시글 시작 번호
+			ps.setInt(idx++, paging.getEndNo());	//페이징 게시글 끝 번호
+
+
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+
+				HelpPost help = new HelpPost();
+				
+				help.setPostNo(rs.getInt("post_no"));
+				help.setBoardNo(rs.getInt("board_no"));
+				help.setTitle(rs.getString("title"));
+				help.setContent(rs.getString("content"));
+				help.setWriteDate(rs.getDate("write_date"));
+				help.setHit(rs.getInt("hit"));
+				help.setDealProgress(rs.getString("deal_progress"));
+				help.setUserNo(rs.getInt("user_no"));
+				
+				list.add(help);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+
+		}
+
+
+		return list;
+	}
+	
+	@Override
+	public void deleteHelp(String param) {
+		conn = JDBCTemplate.getConnection();
+
+		String sql = "";
+		sql +="DELETE help_post";
+		sql +=" WHERE post_no IN("+param+" )";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.executeQuery();
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(ps);
+		}
+		
+	}
 	
 }
+
+
+
+
+
+
+
+
+

@@ -9,8 +9,16 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
+		// 검색어 버튼 클릭시 검색
 		$("#btnSearch").click(function() {
 			location.href = "/anibuddy/board/expert?search=" + $("#search").val();
+		})
+		
+		// 검색 입력폼에서 엔터키 누를 시 검색
+		$("#search").on("keydown", function( ev ){
+			if( ev.keyCode == 13){
+				$(location).attr("href", "/anibuddy/board/expert?search=" + $("#search").val())
+			}
 		})
 
 	})
@@ -87,7 +95,7 @@ $(document).ready(function(){
 		<ul class="dropdown-menu" role="menu">
 			
 			<li><a href="/anibuddy/board/main">나눔&중고 거래</a></li>
-			<li><a href="#">봉사</a></li>
+			<li><a href="/anibuddy/board/help">봉사</a></li>
 			<li><a href="/anibuddy/board/expert">전문가QnA</a></li>
 			<li><a href="/anibuddy/board/free">자유 게시판</a></li>
 		</ul>
@@ -105,13 +113,13 @@ $(document).ready(function(){
 		<c:forEach items="${expert }" var="expert">
 			<tr>
 				<td><input type="checkbox" name="checkRow"value="${expert.postno }" /></td>
-				<td><a href="/anibuddy/share/answer?post_no=${expert.postno }">${expert.postno }</a></td>
-				<td><a href="/anibuddy/share/answer?post_no=${expert.postno }">${expert.title }</a></td>
-				<td><a href="/anibuddy/share/answer?post_no=${expert.postno }">${expert.userno }</a></td>
-				<td><a href="/anibuddy/share/answer?post_no=${expert.postno }">
+				<td><a href="/anibuddy/expertboard/view?postno=${expert.postno }">${expert.postno }</a></td>
+				<td><a href="/anibuddy/expertboard/view?postno=${expert.postno }">${expert.title }</a></td>
+				<td><a href="/anibuddy/expertboard/view?postno=${expert.postno }">${expert.userno }</a></td>
+				<td><a href="/anibuddy/expertboard/view?postno=${expert.postno }">
 						<fmt:formatDate value="${expert.writedate }" pattern="yyyy.MM.dd" />
 				</a></td>
-				<td><a href="/anibuddy/share/answer?post_no=${expert.postno }">${expert.hit }</a></td>
+				<td><a href="/anibuddy/expertboard/view?postno=${expert.postno }">${expert.hit }</a></td>
 			</tr>
 		</c:forEach>
 	</table>

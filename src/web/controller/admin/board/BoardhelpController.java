@@ -10,34 +10,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import web.dto.FreeBoard;
+import web.dto.HelpPost;
 import web.service.face.BoardService;
 import web.service.impl.BoardServiceImpl;
 import web.util.Paging;
 
 /**
- * Servlet implementation class BoardFreeController
+ * Servlet implementation class BoardhelpController
  */
-@WebServlet("/board/free")
-public class BoardFreeController extends HttpServlet {
+@WebServlet("/board/help")
+public class BoardhelpController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	private BoardService boardService = new BoardServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		Paging paging = boardService.getPagingFree(req);
-		System.out.println("BoardFreeController paging: " + paging);
+		Paging paging = boardService.getPagingHelp(req);
 
-		List<FreeBoard> free = boardService.getFree(paging);		
+		List<HelpPost> help = boardService.gethelp(paging);		
 
 		req.setAttribute("paging", paging);
 
-		req.setAttribute("free", free);
+		req.setAttribute("help", help);
 
 
-		req.getRequestDispatcher("/WEB-INF/views/admin/free.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/admin/help.jsp").forward(req, resp);
 
 	}
-	
 }

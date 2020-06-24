@@ -10,10 +10,10 @@
 	<c:if test="${paging.curPage ne 1 }"><!-- 첫 페이지가 아닐 때 보여줌 -->
 	<c:choose>
 		<c:when test="${empty paging.search }">
-			<li><a href="/anibuddy/board/expert">&larr;</a></li>
+			<li><a href="/anibuddy/board/help">&larr;</a></li>
 		</c:when>
 		<c:when test="${not empty paging.search }">
-			<li><a href="/anibuddy/board/expert?search=${paging.search }">&larr;</a></li>
+			<li><a href="/anibuddy/board/help?search=${paging.search }">&larr;</a></li>
 		</c:when>
 	</c:choose>
 	</c:if>
@@ -24,10 +24,10 @@
 	<c:if test="${paging.startPage gt paging.pageCount }">
 	<c:choose>
 		<c:when test="${empty paging.search }">
-			<li><a href="/anibuddy/board/expert?curPage=${paging.startPage - paging.pageCount }">&laquo;</a></li>
+			<li><a href="/anibuddy/board/help?curPage=${paging.startPage - paging.pageCount }">&laquo;</a></li>
 		</c:when>
 		<c:when test="${not empty paging.search }">
-			<li><a href="/anibuddy/board/expert?search=${paging.search }&curPage=${paging.startPage - paging.pageCount }">&laquo;</a></li>
+			<li><a href="/anibuddy/board/help?search=${paging.search }&curPage=${paging.startPage - paging.pageCount }">&laquo;</a></li>
 		</c:when>
 	</c:choose>
 	</c:if>
@@ -42,10 +42,10 @@
 	<c:if test="${paging.curPage ne 1 }">
 	<c:choose>
 		<c:when test="${empty paging.search }">
-			<li><a href="/anibuddy/board/expert?curPage=${paging.curPage - 1 }">&lt;</a></li>
+			<li><a href="/anibuddy/board/help?curPage=${paging.curPage - 1 }">&lt;</a></li>
 		</c:when>
 		<c:when test="${not empty paging.search }">
-			<li><a href="/anibuddy/board/expert?search=${paging.search }&curPage=${paging.curPage - 1 }">&lt;</a></li>
+			<li><a href="/anibuddy/board/help?search=${paging.search }&curPage=${paging.curPage - 1 }">&lt;</a></li>
 		</c:when>
 	</c:choose>
 	</c:if>
@@ -60,10 +60,10 @@
 		<li class="active">
 		<c:choose>
 			<c:when test="${empty paging.search }">
-				<a href="/anibuddy/board/expert?curPage=${i }">${i }</a>
+				<a href="/anibuddy/board/help?curPage=${i }">${i }</a>
 			</c:when>
 			<c:when test="${not empty paging.search }">
-				<a href="/anibuddy/board/expert?search=${paging.search }&curPage=${i }">${i }</a>
+				<a href="/anibuddy/board/help?search=${paging.search }&curPage=${i }">${i }</a>
 			</c:when>
 		</c:choose>
 		</li>
@@ -74,10 +74,10 @@
 		<li>
 		<c:choose>
 			<c:when test="${empty paging.search }">
-				<a href="/anibuddy/board/expert?curPage=${i }">${i }</a>
+				<a href="/anibuddy/board/help?curPage=${i }">${i }</a>
 			</c:when>
 			<c:when test="${not empty paging.search }">
-				<a href="/anibuddy/board/expert?search=${paging.search }&curPage=${i }">${i }</a>
+				<a href="/anibuddy/board/help?search=${paging.search }&curPage=${i }">${i }</a>
 			</c:when>
 		</c:choose>
 		</li>
@@ -92,10 +92,10 @@
 	<li>
 	<c:choose>
 		<c:when test="${empty paging.search }">
-			<a href="/anibuddy/board/expert?curPage=${paging.curPage + 1 }">&gt;</a>
+			<a href="/anibuddy/board/help?curPage=${paging.curPage + 1 }">&gt;</a>
 		</c:when>
 		<c:when test="${not empty paging.search }">
-			<a href="/anibuddy/board/expert?search=${paging.search }&curPage=${paging.curPage + 1 }">&gt;</a>
+			<a href="/anibuddy/board/help?search=${paging.search }&curPage=${paging.curPage + 1 }">&gt;</a>
 		</c:when>
 	</c:choose>
 	</li>
@@ -108,10 +108,10 @@
 	<li>
 	<c:choose>
 		<c:when test="${empty paging.search }">
-			<a href="/anibuddy/board/expert?curPage=${paging.startPage + paging.pageCount }">&raquo;</a>
+			<a href="/anibuddy/board/help?curPage=${paging.startPage + paging.pageCount }">&raquo;</a>
 		</c:when>
 		<c:when test="${not empty paging.search }">
-			<a href="/anibuddy/board/expert?search=${paging.search }&curPage=${paging.startPage + paging.pageCount }">&raquo;</a>
+			<a href="/anibuddy/board/help?search=${paging.search }&curPage=${paging.startPage + paging.pageCount }">&raquo;</a>
 		</c:when>
 	</c:choose>
 	</li>
@@ -128,10 +128,10 @@
 	<li>
 	<c:choose>
 		<c:when test="${empty paging.search }">
-			<a href="/anibuddy/board/expert?curPage=${paging.totalPage }">&rarr;</a>
+			<a href="/anibuddy/board/help?curPage=${paging.totalPage }">&rarr;</a>
 		</c:when>
 		<c:when test="${not empty paging.search }">
-			<a href="/anibuddy/board/expert?search=${paging.search }&curPage=${paging.totalPage }">&rarr;</a>
+			<a href="/anibuddy/board/help?search=${paging.search }&curPage=${paging.totalPage }">&rarr;</a>
 		</c:when>
 	</c:choose>
 	</li>

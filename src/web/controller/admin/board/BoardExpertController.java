@@ -26,9 +26,10 @@ public class BoardExpertController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		Paging paging = boardService.getPaging(req);
+		Paging paging = boardService.getPagingExpert(req);
+//		System.out.println("BoardExpertController paging: " + paging);
 
-		List<ExpertBoard> expert = boardService.getExpert(paging);		
+		List<ExpertBoard> expert = boardService.getExpert(paging);
 
 		req.setAttribute("paging", paging);
 

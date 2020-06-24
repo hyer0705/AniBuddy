@@ -10,12 +10,12 @@
 	$(document).ready(function() {
 
 		$("#btnSearch").click(function() {
-			location.href = "/anibuddy/board/free?search=" + $("#search").val();
+			location.href = "/anibuddy/board/help?search=" + $("#search").val();
 		})
 		
 		$("#search").on("keydown", function( ev ){
-			if( ev.keyCode == 13){
-				$(location).attr("href", "/anibuddy/board/free?search=" + $("#search").val())
+			if( ev.keyCode == 13 ){
+				$(location).attr("href", "/anibuddy/board/help?search=" + $("#search").val())
 			}
 		})
 
@@ -41,7 +41,7 @@ $(document).ready(function(){
 		console.log("array tostring : " + map.get().join(","));
 		
 		var $form = $("<form>")
-						.attr("action", "/anibuddy/delete/free")
+						.attr("action", "/anibuddy/helpboard/delete")
 						.attr("method", "post")
 						.append(
 								$("<input>")
@@ -50,6 +50,7 @@ $(document).ready(function(){
 									.attr("value", names)
 						)
 		$(document.body).append($form);
+
 		$form.submit();
 		
 	})
@@ -83,16 +84,16 @@ $(document).ready(function(){
 <div class="Manager">
 	<h3>게시판 관리</h3>
 	<br>
-	<h2>자유 게시판</h2>
+	<h2>봉사</h2>
 	<hr>
 	<div class="btn-group pull-right">
 		<button type="button" class="btn dropdown-toggle"
 			data-toggle="dropdown" aria-expanded="false">
-			자유 게시판 <span class="caret"></span>
+			봉사 <span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" role="menu">
 			
-			<li><a href="/anibuddy/board/main">나눔&중고 거래</a></li>
+			<li><a href="/anibuddy/board/main">나눔&중고거래</a></li>
 			<li><a href="/anibuddy/board/help">봉사</a></li>
 			<li><a href="/anibuddy/board/expert">전문가QnA</a></li>
 			<li><a href="/anibuddy/board/free">자유 게시판</a></li>
@@ -106,24 +107,24 @@ $(document).ready(function(){
 			<th>제목</th>
 			<th>작성자</th>
 			<th>등록일</th>
-			<th>조회수</th>
+			<th>거래  상황</th>
 		</tr>
-		<c:forEach items="${free }" var="free">
+		<c:forEach items="${help }" var="help">
 			<tr>
-				<td><input type="checkbox" name="checkRow"value="${free.postno }" /></td>
-				<td><a href="/anibuddy/freeboard/view?postno=${free.postno }">${free.postno }</a></td>
-				<td><a href="/anibuddy/freeboard/view?postno=${free.postno }">${free.title }</a></td>
-				<td><a href="/anibuddy/freeboard/view?postno=${free.postno }">${free.userno }</a></td>
-				<td><a href="/anibuddy/freeboard/view?postno=${free.postno }">
-						<fmt:formatDate value="${free.writedate }" pattern="yyyy.MM.dd" />
+				<td><input type="checkbox" name="checkRow"value="${help.postNo }" /></td>
+				<td><a href="/anibuddy/help/view?postno=${help.postNo }">${help.postNo }</a></td>
+				<td><a href="/anibuddy/help/view?postno=${help.postNo }">${help.title }</a></td>
+				<td><a href="/anibuddy/help/view?postno=${help.postNo }">${help.userNo }</a></td>
+				<td><a href="/anibuddy/help/view?postno=${help.postNo }">
+						<fmt:formatDate value="${help.writeDate }" pattern="yyyy.MM.dd" />
 				</a></td>
-				<td><a href="/anibuddy/freeboard/view?postno=${free.postno }">${free.hit }</a></td>
+				<td><a href="/anibuddy/help/view?postno=${help.postNo }">${help.dealProgress }</a></td>
 			</tr>
 		</c:forEach>
 	</table>
 	<button id="btnDelete" class="btn pull-right">삭제</button>
 	<div class="clearfix"></div>
-	<c:import url="/layout/pagingfree.jsp" />
+	<c:import url="/layout/paginghelp.jsp" />
 
 	<div class="form-inline text-center">
 		<input class="form-control" type="text" id="search" placeholder="제목검색"/>

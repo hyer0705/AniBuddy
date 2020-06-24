@@ -25,7 +25,16 @@ public class UserManageServiceImpl implements UserManageService{
 		String search = (String)req.getParameter("search");
 		
 		//Board 테이블의 총 게시글 수를 조회한다
-		int totalCount = userDao.selectCntAll();
+		int totalCount =  0; 
+		if( search != null && !"".equals(search) ) {
+			totalCount = userDao.selectCntBySearch(search);
+		} else {
+			totalCount = userDao.selectCntAll(); 
+		}
+		
+		
+		//검색어가 있을 때 다르게 해주어야 함!
+		
 
 		//Paging 객체 생성 - 현재 페이지(curPage), 총 게시글 수(totalCount) 활용
 		Paging paging = new Paging(totalCount, curPage);

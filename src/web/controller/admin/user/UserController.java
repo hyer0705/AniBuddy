@@ -27,6 +27,7 @@ public class UserController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		Paging paging = userService.getPaging(req);
+//		System.out.println("UserController 검색어가 있을 때? paging: " + paging);
 
 		List<UserTB> userinfo = userService.getUser(paging);		
 

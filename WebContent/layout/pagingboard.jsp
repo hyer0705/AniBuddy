@@ -8,14 +8,28 @@
 
 	<!-- 첫 페이지로 가기 -->
 	<c:if test="${paging.curPage ne 1 }"><!-- 첫 페이지가 아닐 때 보여줌 -->
-	<li><a href="/anibuddy/board/main">&larr;</a></li>
+	<c:choose>
+		<c:when test="${empty paging.search }">
+			<li><a href="/anibuddy/board/main">&larr;</a></li>
+		</c:when>
+		<c:when test="${not empty paging.search }">
+			<li><a href="/anibuddy/board/main?search=${paging.search }">&larr;</a></li>
+		</c:when>
+	</c:choose>
 	</c:if>
 	
 	
 	
 	<!-- 이전 페이징 리스트로 가기 -->
 	<c:if test="${paging.startPage gt paging.pageCount }">
-	<li><a href="/anibuddy/board/main?curPage=${paging.startPage - paging.pageCount }">&laquo;</a></li>
+	<c:choose>
+		<c:when test="${empty paging.search }">
+			<li><a href="/anibuddy/board/main?curPage=${paging.startPage - paging.pageCount }">&laquo;</a></li>
+		</c:when>
+		<c:when test="${not empty paging.search }">
+			<li><a href="/anibuddy/board/main?search=${paging.search }&curPage=${paging.startPage - paging.pageCount }">&laquo;</a></li>
+		</c:when>
+	</c:choose>
 	</c:if>
 
 	<c:if test="${paging.startPage le paging.pageCount }">
@@ -26,7 +40,14 @@
 	
 	<!-- 이전 페이지로 가기 -->
 	<c:if test="${paging.curPage ne 1 }">
-	<li><a href="/anibuddy/board/main?curPage=${paging.curPage - 1 }">&lt;</a></li>
+	<c:choose>
+		<c:when test="${empty paging.search }">
+			<li><a href="/anibuddy/board/main?curPage=${paging.curPage - 1 }">&lt;</a></li>
+		</c:when>
+		<c:when test="${not empty paging.search }">
+			<li><a href="/anibuddy/board/main?search=${paging.search }&curPage=${paging.curPage - 1 }">&lt;</a></li>
+		</c:when>
+	</c:choose>
 	</c:if>
 	
 
@@ -36,12 +57,30 @@
 	
 	<!-- 보고 있는 페이지번호 강조 (.active) -->
 	<c:if test="${paging.curPage eq i }">
-		<li class="active"><a href="/anibuddy/board/main?curPage=${i }">${i }</a></li>
+	<li class="active">
+	<c:choose>
+		<c:when test="${empty paging.search }">
+			<a href="/anibuddy/board/main?curPage=${i }">${i }</a>
+		</c:when>
+		<c:when test="${not empty paging.search }">
+			<a href="/anibuddy/board/main?search=${paging.search }&curPage=${i }">${i }</a>
+		</c:when>
+	</c:choose>
+	</li>
 	</c:if>
 	
 	<!-- 보고 있는 페이지번호가 아니면 평소 모양으로 보여주기 -->
 	<c:if test="${paging.curPage ne i }">
-		<li><a href="/anibuddy/board/main?curPage=${i }">${i }</a></li>
+	<li>
+	<c:choose>
+		<c:when test="${empty paging.search }">
+			<a href="/anibuddy/board/main?curPage=${i }">${i }</a>
+		</c:when>
+		<c:when test="${not empty paging.search }">
+			<a href="/anibuddy/board/main?search=${paging.search }&curPage=${i }">${i }</a>
+		</c:when>
+	</c:choose>
+	</li>
 	</c:if>
 	
 	</c:forEach>
@@ -50,14 +89,32 @@
 	
 	<!-- 다음 페이지로 가기 -->
 	<c:if test="${paging.curPage ne paging.totalPage }">
-	<li><a href="/anibuddy/board/main?curPage=${paging.curPage + 1 }">&gt;</a></li>
+	<li>
+	<c:choose>
+		<c:when test="${empty paging.search }">
+			<a href="/anibuddy/board/main?curPage=${paging.curPage + 1 }">&gt;</a>
+		</c:when>
+		<c:when test="${not empty paging.search }">
+			<a href="/anibuddy/board/main?search=${paging.search }&curPage=${paging.curPage + 1 }">&gt;</a>
+		</c:when>
+	</c:choose>
+	</li>
 	</c:if>
 	
 	
 	
 	<!-- 다음 페이징 리스트로 가기 -->
 	<c:if test="${paging.endPage ne paging.totalPage }">
-	<li><a href="/anibuddy/board/main?curPage=${paging.startPage + paging.pageCount }">&raquo;</a></li>
+	<li>
+	<c:choose>
+		<c:when test="${empty paging.search }">
+			<a href="/anibuddy/board/main?curPage=${paging.startPage + paging.pageCount }">&raquo;</a>
+		</c:when>
+		<c:when test="${not empty paging.search }">
+			<a href="/anibuddy/board/main?search=${paging.search }&curPage=${paging.startPage + paging.pageCount }">&raquo;</a>
+		</c:when>
+	</c:choose>
+	</li>
 	</c:if>
 
 	<c:if test="${paging.endPage eq paging.totalPage }">
@@ -68,7 +125,16 @@
 	
 	<!-- 마지막 페이지로 가기 -->
 	<c:if test="${paging.curPage ne paging.totalPage }"><!-- 끝 페이지가 아닐 때 보여준다 -->
-	<li><a href="/anibuddy/board/main?curPage=${paging.totalPage }">&rarr;</a></li>
+	<li>
+	<c:choose>
+		<c:when test="${empty paging.search }">
+			<a href="/anibuddy/board/main?curPage=${paging.totalPage }">&rarr;</a>
+		</c:when>
+		<c:when test="${not empty paging.search }">
+			<a href="/anibuddy/board/main?search=${paging.search }&curPage=${paging.totalPage }">&rarr;</a>
+		</c:when>
+	</c:choose>
+	</li>
 	</c:if>
 </ul>
 </div>

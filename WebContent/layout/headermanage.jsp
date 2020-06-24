@@ -38,7 +38,7 @@
 <body>
 	<div class="header" style="width: 1000px;">
 		<div id="icon">
-			<a href="/"><img src="/anibuddy/img/logo.png"></a>
+			<a href="/anibuddy/"><img src="/anibuddy/img/logo.png"></a>
 		</div>
 
 
@@ -61,7 +61,7 @@
 <!-- 		</div> -->
 		<nav>
 			<ul class="nav nav-pills nav-justified">
-				<li><a href="/">홈</a>
+				<li><a href="/anibuddy/">홈</a>
 
 				<li><a href="<%=request.getContextPath() %>/manage/user">회원관리</a>
 

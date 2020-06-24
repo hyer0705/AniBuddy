@@ -138,5 +138,47 @@ public class UserManageDaoImpl implements UserManageDao{
 		}
 		
 	}
+
+	@Override
+	public int selectCntBySearch(String search) {
+		
+		// DB 연결
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM user_tb";
+		sql += " WHERE 1=1";
+		sql += "    AND user_id LIKE '%'||?||'%'";
+		sql += " ORDER BY user_no";
+		
+		// 결과 반환 변수 선언
+		int cnt = 0;
+
+		try {
+			// 쿼리 수행
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, search);
+			
+			// 쿼리 결과 저장
+			rs = ps.executeQuery();
+			
+			// 결과 조회 처리
+			while(rs.next()) {
+				cnt = rs.getInt(1);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		return cnt;
+	}
 	
 }

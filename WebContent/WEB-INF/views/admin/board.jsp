@@ -9,8 +9,17 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
+		// 검색 버튼 클릭할 때
 		$("#btnSearch").click(function() {
 			location.href = "/anibuddy/board/main?search=" + $("#search").val();
+		})
+		
+		// 검색 입력 폼에서 엔터 키 눌렀을 때
+		$("#search").on("keydown", function( ev ){
+			if(ev.keyCode == 13){
+// 				console.log("enter key down!!!")
+				$(location).attr("href", "/anibuddy/board/main?search=" + $("#search").val() )
+			}
 		})
 
 	})

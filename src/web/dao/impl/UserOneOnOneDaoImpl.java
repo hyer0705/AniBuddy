@@ -177,7 +177,7 @@ public class UserOneOnOneDaoImpl implements UserOneOnOneDao{
 		// SQL 작성
 		String sql = "";
 		sql += "INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no)";
-		sql += " VALUES (oneonone_seq.nextval, ?, ?, sysdate, '0', 0, 'false', ?)";
+		sql += " VALUES (oneonone_seq.nextval, ?, ?, sysdate, '0', 0, 'true', ?)";
 
 		try {
 			ps = conn.prepareStatement(sql);

@@ -9,8 +9,17 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
+		// 검색 버튼 클릭했을 때
 		$("#btnSearch").click(function() {
 			location.href = "/anibuddy/manage/user?search=" + $("#search").val();
+		})
+		
+		// 검색 입력 폼에서 enter key 눌렀을 때
+		$("#search").on("keydown", function(ev){
+			if(ev.keyCode == 13){
+// 				console.log("enter key down!")
+				$(location).attr("href", "/anibuddy/manage/user?search=" + $("#search").val())
+			}
 		})
 
 	})
@@ -107,6 +116,7 @@ $(document).ready(function(){
 	</table>
 	<button id="btnDelete" class="btn pull-right">삭제</button>
 	<div class="clearfix"></div>
+	
 	<c:import url="/layout/paginguser.jsp" />
 
 	<div class="form-inline text-center">

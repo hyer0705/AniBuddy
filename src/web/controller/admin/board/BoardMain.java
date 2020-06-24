@@ -28,6 +28,7 @@ public class BoardMain extends HttpServlet {
 
 
 		Paging paging = boardService.getPaging(req);
+		System.out.println("BoardMain paging: " + paging);
 
 		List<SharePost> share = boardService.getShare(paging);		
 
