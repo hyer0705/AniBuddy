@@ -64,16 +64,31 @@ public class OneOnOneDaoImpl implements OneOnOneDao{
 
 		String sql = "";
 		sql += "SELECT * FROM (";
-		sql += "    SELECT rownum rnum, O.* FROM (";
-		sql += "        SELECT * FROM oneonone";
-		sql += "        WHERE 1=1";
+		sql += "	    SELECT rownum rnum, O.* FROM (";
+		sql += "	        SELECT * FROM oneonone";
+		sql += "	        WHERE 1=1";
 		if( paging.getSearch() != null && !"".equals(paging.getSearch())) {
-		sql += "		AND title LIKE '%'||?||'%'";
+			sql += "	            AND title LIKE '%'||?||'%'";
 		}
-		sql += "        ORDER BY write_date DESC";
-		sql += "    ) O";
-		sql += " ) One";
-		sql += " WHERE rnum BETWEEN ? AND ?";
+		sql += "	        START WITH reply_no IS NULL";
+		sql += "	        CONNECT BY reply_no = PRIOR oneonone_no";
+		sql += "	        ORDER SIBLINGS BY oneonone_no DESC";
+		sql += "	    ) O";
+		sql += "	) One";
+		sql += "	WHERE rnum BETWEEN ? AND ?";
+		
+//		String sql = "";
+//		sql += "SELECT * FROM (";
+//		sql += "    SELECT rownum rnum, O.* FROM (";
+//		sql += "        SELECT * FROM oneonone";
+//		sql += "        WHERE 1=1";
+//		if( paging.getSearch() != null && !"".equals(paging.getSearch())) {
+//		sql += "		AND title LIKE '%'||?||'%'";
+//		}
+//		sql += "        ORDER BY write_date DESC";
+//		sql += "    ) O";
+//		sql += " ) One";
+//		sql += " WHERE rnum BETWEEN ? AND ?";
 
 		List<OneOnOne> list = new ArrayList<OneOnOne>();
 
@@ -102,6 +117,7 @@ public class OneOnOneDaoImpl implements OneOnOneDao{
 				one.setReplyNo(rs.getInt("reply_no"));
 				one.setCondition(rs.getString("condition"));
 				one.setUserNo(rs.getInt("user_no"));
+				one.setAdminNo(rs.getInt("admin_no"));
 
 				list.add(one);
 			}
@@ -146,6 +162,7 @@ public class OneOnOneDaoImpl implements OneOnOneDao{
 				oneOnOne.setReplyNo(rs.getInt("reply_no"));
 				oneOnOne.setCondition(rs.getString("condition"));
 				oneOnOne.setUserNo(rs.getInt("user_no"));
+				oneOnOne.setAdminNo(rs.getInt("admin_no"));
 
 			}
 
@@ -205,5 +222,136 @@ public class OneOnOneDaoImpl implements OneOnOneDao{
 		}
 		
 	}
+	
+	@Override
+	public void insert(OneOnOne o3) {
+		
+		// DB 연결
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no, admin_no)";
+		sql += " VALUES (oneonone_seq.nextval, ?, ?, sysdate, '1', ?, 'checked', null, ?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, o3.getTitle());
+			ps.setString(2, o3.getContent());
+			ps.setInt(3, o3.getReplyNo());
+			ps.setInt(4, o3.getAdminNo());
+			
+			// 쿼리 수행
+			ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+	}
 
+	@Override
+	public void updateQuestion(OneOnOne q) {
+		
+		// DB 연결 객체
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "UPDATE oneonone";
+		sql += " SET";
+		sql += "    condition = 'checked'";
+		sql += "    , reply_progress = '1'";
+		sql += " WHERE oneonone_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, q.getOneononeNo());
+			
+			// 쿼리문 처리
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+	}
+	
+	@Override
+	public OneOnOne selectOneOnOneByReplyno(OneOnOne o3) {
+		
+		// DB 연결
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM oneonone";
+		sql += " WHERE oneonone_no = (";
+		sql += "    SELECT reply_no FROM oneonone";
+		sql += "    WHERE oneonone_no= ?)";
+		
+		// 결과 반환 객체
+		OneOnOne result = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, o3.getOneononeNo());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				result = new OneOnOne();
+				result.setOneononeNo(rs.getInt("oneonone_no"));
+				result.setTitle(rs.getString("title"));
+				result.setContent(rs.getString("content"));
+				result.setWriteDate(rs.getDate("write_date"));
+				result.setReplyProgress(rs.getBoolean("reply_progress"));
+				result.setReplyNo(rs.getInt("reply_no"));
+				result.setCondition(rs.getString("condition"));
+				result.setUserNo(rs.getInt("user_no"));
+				result.setAdminNo(rs.getInt("admin_no"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public void update(OneOnOne q) {
+		
+		// DB 연결
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "UPDATE oneonone";
+		sql += " SET";
+		sql += "	title = ?";
+		sql += "	, content = ?";
+		sql += " WHERE oneonone_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, q.getTitle());
+			ps.setString(2, q.getContent());
+			ps.setInt(3, q.getOneononeNo());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

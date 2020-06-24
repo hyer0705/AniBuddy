@@ -36,12 +36,20 @@ public class MypageOneOnOneDetailController extends HttpServlet {
 		OneOnOne detailO3 = userO3Service.getParam(req);
 //		System.out.println("MypageO3DetailController detailO3: " + detailO3);
 		
-		// oneonone_no 값으로 글 조회
+		// oneonone_no 값으로 질문글 조회
 		detailO3 = userO3Service.detail(detailO3);
 //		System.out.println("MypageO3DetailController detailO3: " + detailO3);
 		
-		// 조회된 게시글 req에 값 넘겨주기
+		// oneonone_no 값으로 답변글 조회
+		OneOnOne q = userO3Service.detailQ(detailO3);
+//		System.out.println("MypageO3DetailController q: " + q);
+		
+		
+		// 조회된 게시글 req에 값 설정
 		req.setAttribute("detailO3", detailO3);
+		
+		// 조회된 답변글 req에 설정
+		req.setAttribute("q", q);
 		
 		req.getRequestDispatcher("/WEB-INF/views/mypage/oneonone_detail.jsp")
 			.forward(req, resp);

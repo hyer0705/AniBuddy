@@ -63,5 +63,13 @@ public interface UserOneOnOneDao {
 	 */
 	void delete(OneOnOne o3);
 
+	/**
+	 * 1:1 답변글 조회
+	 * 
+	 * @param detailO3 - 질문글 번호를 저장하고 있는 OneOnOne 객체
+	 * @return OneOnOne - 질문글 번호로 조회된 답변글 
+	 */
+	OneOnOne selectReplyByNo(OneOnOne detailO3);
+
 
 }

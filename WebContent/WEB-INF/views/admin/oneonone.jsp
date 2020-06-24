@@ -94,7 +94,14 @@ $(document).ready(function(){
 					<td><input type="checkbox" name="checkRow" value="${oneonone.oneononeNo }" /></td>
 					<td><a href="<%=request.getContextPath() %>/oneonone/answer?oneonone_no=${oneonone.oneononeNo }">${oneonone.oneononeNo }</a></td>
 					<td><a href="<%=request.getContextPath() %>/oneonone/answer?oneonone_no=${oneonone.oneononeNo }">${oneonone.title }</a></td>
-					<td><a href="<%=request.getContextPath() %>/oneonone/answer?oneonone_no=${oneonone.oneononeNo }">${oneonone.userNo }</a></td>
+					<c:choose>
+						<c:when test="${oneonone.userNo eq 0 }">
+							<td><a href="<%=request.getContextPath() %>/oneonone/answer?oneonone_no=${oneonone.oneononeNo }">${oneonone.adminNo }</a></td>
+						</c:when>
+						<c:when test="${oneonone.userNo ne 0 }">
+							<td><a href="<%=request.getContextPath() %>/oneonone/answer?oneonone_no=${oneonone.oneononeNo }">${oneonone.userNo }</a></td>
+						</c:when>
+					</c:choose>
 					<td><a href="<%=request.getContextPath() %>/oneonone/answer?oneonone_no=${oneonone.oneononeNo }"><fmt:formatDate value="${oneonone.writeDate }"
 							pattern="yyyy.MM.dd" /></a></td>
 					<td><a href="<%=request.getContextPath() %>/oneonone/answer?oneonone_no=${oneonone.oneononeNo }">${oneonone.condition }</a></td>

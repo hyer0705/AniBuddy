@@ -64,4 +64,12 @@ public interface UserOneOnOneService {
 	 */
 	void delete(OneOnOne o3);
 
+	/**
+	 * 1:1문의 게시글 번호로 답변글 조회하기
+	 * 
+	 * @param detailO3
+	 * @return OneOnOne - 게시글 번호로 조회된 답변글 반환
+	 */
+	OneOnOne detailQ(OneOnOne detailO3);
+
 }

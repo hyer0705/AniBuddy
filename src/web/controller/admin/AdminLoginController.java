@@ -59,7 +59,8 @@ public class AdminLoginController extends HttpServlet {
 			
 			// 세션 정보 저장하기
 			HttpSession session = req.getSession();
-//			session.setAttribute("login", false);
+			// admin 관리자도 로그인 했다는 것을 표시하면 모든 게시판에 들어갈 수 있다
+			session.setAttribute("login", true);
 			session.setAttribute("adminLogin", adminLogin);
 			session.setAttribute("adminid", admin.getAdminId());
 			session.setAttribute("adminno", admin.getAdminNo());

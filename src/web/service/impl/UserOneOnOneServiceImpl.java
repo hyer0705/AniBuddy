@@ -127,5 +127,12 @@ public class UserOneOnOneServiceImpl implements UserOneOnOneService{
 		usero3Dao.delete(o3);
 		
 	}
+
+	@Override
+	public OneOnOne detailQ(OneOnOne detailO3) {
+		OneOnOne result = usero3Dao.selectReplyByNo(detailO3);
+		
+		return result;
+	}
 	
 }

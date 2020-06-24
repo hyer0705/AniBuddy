@@ -46,6 +46,21 @@ $(document).ready(function(){
 		<tr><td class="danger"  colspan="4">본문</td></tr>
 		<tr><td colspan="4">${detailO3.content }</td></tr>
 		
+		<c:if test="${not empty q }">
+		<tr><td class="danger"  colspan="4">답변</td></tr>
+
+		<tr>
+		<td class="danger">답변 제목</td><td colspan="3">${q.title }</td>
+		</tr>
+
+		<tr>		
+		<td class="danger">답변 작성일</td><td>${q.writeDate }</td>
+		</tr>
+
+		<tr><td class="danger"  colspan="4">답변 내용</td></tr>
+		<tr><td colspan="4">${q.content }</td></tr>
+		</c:if>
+		
 		</table>
 	</div>
 	<div class="text-center">	

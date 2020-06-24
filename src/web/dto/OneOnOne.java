@@ -14,12 +14,28 @@ public class OneOnOne {
 	private int replyNo;
 	private String condition;
 	private int userNo;
+	
+	// ** adminNo 추가
+	private int adminNo;
+	
 	@Override
 	public String toString() {
 		return "OneOnOne [oneononeNo=" + oneononeNo + ", title=" + title + ", content=" + content + ", writeDate="
 				+ writeDate + ", replyProgress=" + replyProgress + ", replyNo=" + replyNo + ", condition=" + condition
-				+ ", userNo=" + userNo + "]";
+				+ ", userNo=" + userNo + ", adminNo=" + adminNo + "]";
 	}
+	
+	
+	public int getAdminNo() {
+		return adminNo;
+	}
+
+
+	public void setAdminNo(int adminNo) {
+		this.adminNo = adminNo;
+	}
+
+
 	public int getOneononeNo() {
 		return oneononeNo;
 	}

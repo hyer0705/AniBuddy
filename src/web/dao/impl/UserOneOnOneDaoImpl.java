@@ -176,8 +176,8 @@ public class UserOneOnOneDaoImpl implements UserOneOnOneDao{
 		
 		// SQL 작성
 		String sql = "";
-		sql += "INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no)";
-		sql += " VALUES (oneonone_seq.nextval, ?, ?, sysdate, '0', 0, 'true', ?)";
+		sql += "INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no, admin_no)";
+		sql += " VALUES (oneonone_seq.nextval, ?, ?, sysdate, '0', null, 'true', ?, null)";
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -296,6 +296,51 @@ public class UserOneOnOneDaoImpl implements UserOneOnOneDao{
 			JDBCTemplate.close(ps);
 		}
 		
+	}
+	
+	@Override
+	public OneOnOne selectReplyByNo(OneOnOne detailO3) {
+		
+		// DB 연결 객체
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM oneonone";
+		sql += " WHERE reply_no = ?";
+		
+		// 결과 반환 객체
+		OneOnOne result = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, detailO3.getOneononeNo());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				result = new OneOnOne();
+				result.setOneononeNo(rs.getInt("oneonone_no"));
+				result.setTitle(rs.getString("title"));
+				result.setContent(rs.getString("content"));
+				result.setWriteDate(rs.getDate("write_date"));
+				result.setReplyProgress(rs.getBoolean("reply_progress"));
+				result.setReplyNo(rs.getInt("reply_no"));
+				result.setCondition(rs.getString("condition"));
+				result.setUserNo(rs.getInt("user_no"));
+				result.setAdminNo(rs.getInt("admin_no"));
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return result;
 	}
 	
 }

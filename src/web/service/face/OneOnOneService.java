@@ -49,4 +49,41 @@ public interface OneOnOneService {
 	 */
 	void oneOnOneDelete(String names);
 
+	/**
+	 * 문의 번호로 해당 문의 글 조회하기
+	 * 
+	 * @param o3 - 문의 번호를 가진 OneOnOne 객체
+	 * @return OneOnOne - 조회된 문의 글 객체 반환
+	 */
+	OneOnOne getOneOnOneByNo(OneOnOne o3);
+
+	/**
+	 * 관리자 1:1 글 작성
+	 * 
+	 * @param req - 요청 객체
+	 */
+	void write(HttpServletRequest req);
+
+	/**
+	 * reply_no 으로 질문글 조회하기
+	 * 
+	 * @param o3 - reply_no을 갖고 있는 OneOnOne 객체
+	 * @return OneOnONe - 조회된 질문글 객체 반환
+	 */
+	OneOnOne getOneOnOneByReplyNo(OneOnOne o3);
+
+	/**
+	 * 답변 수정
+	 * 
+	 * @param req - 요청 객체
+	 */
+	void update(HttpServletRequest req);
+
+	/**
+	 * 답변 삭제
+	 * 
+	 * @param o3
+	 */
+	void delete(OneOnOne o3);
+
 }
