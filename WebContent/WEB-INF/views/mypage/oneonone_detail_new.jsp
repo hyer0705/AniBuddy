@@ -64,8 +64,8 @@ $(document).ready(function(){
 		</table>
 	</div>
 	<div class="text-center margin-top20">	
-		<button type="button" id="btnO3Update" class="btn-common btn-write" style="margin-top: 0;" >1:1문의수정</button>
-		<button type="button" id="btnO3Delte" class="btn-common btn-delete" style="margin-top: 0;" >1:1문의삭제</button>
+		<button type="button" id="btnO3Update" class="btn-common btn-write" >1:1문의수정</button>
+		<button type="button" id="btnO3Delte" class="btn-common btn-delete" >1:1문의삭제</button>
 		<button type="button" id="btnToList" class="btn-common btn-cancel">목록</button>
 	</div>
 	<input type="hidden" id="o3No" value="${detailO3.oneononeNo }" />
