@@ -26,7 +26,7 @@ $(document).ready(function(){
 		console.log("array tostring : " + map.get().join(","));
 		
 		var $form = $("<form>")
-						.attr("action", "/anibuddy/mypage/deletepm")
+						.attr("action", "/anibuddy/mypage/deletesendpm")
 						.attr("method", "post")
 						.append(
 								$("<input>")
@@ -68,8 +68,8 @@ $(document).ready(function(){
 	})
 
 	// 보낸쪽지함 div 영역 클릭시
-	$("#toSendPmList").on("click", function(){
-		$(location).attr("href", "/anibuddy/mypage/sendpmlist")	
+	$("#toPmList").on("click", function(){
+		$(location).attr("href", "/anibuddy/mypage/pmlist")	
 	})
 	
 })
@@ -78,8 +78,8 @@ $(document).ready(function(){
 <main class="wrapper">
 <div class="pm_content o3-content">
 	<div class="pm_cont o3-cont">
-		<div class="pm_cont__title o3-cont__title">받은쪽지함</div>
-		<div class="pm_cont__send-title" id="toSendPmList" >보낸쪽지함 가기</div>
+		<div class="pm_cont__title o3-cont__title">보낸쪽지함</div>
+		<div class="pm_cont__send-title" id="toPmList" >받은쪽지함 가기</div>
 	</div>
 	
 	<table class="pm oneonone">
@@ -91,19 +91,19 @@ $(document).ready(function(){
 			<th>상태</th>
 		</tr>
 		<c:choose>
-			<c:when test="${not empty pmList }">
-				<c:forEach items="${pmList }" var="pm">
+			<c:when test="${not empty pmSendList }">
+				<c:forEach items="${pmSendList }" var="pm">
 					<tr>
 						<td><input type="checkbox" name="checkRow" value="${pm.pmNo }" /></td>
-						<td><a href="/anibuddy/mypage/pmdetail?pm_no=${pm.pmNo }">${pm.pmNo }</a></td>
-						<td><a href="/anibuddy/mypage/pmdetail?pm_no=${pm.pmNo }">${pm.title }</a></td>
-						<td><a href="/anibuddy/mypage/pmdetail?pm_no=${pm.pmNo }"><fmt:formatDate value="${pm.sendDate }"
-		 						pattern="yyyy.MM.dd" /></a></td>
-						<td><a href="/anibuddy/mypage/pmdetail?pm_no=${pm.pmNo }">${pm.isCheck }</a></td>
+						<td><a href="/anibuddy/mypage/sendpmdetail?pm_no=${pm.pmNo }">${pm.pmNo }</a></td>
+						<td><a href="/anibuddy/mypage/sendpmdetail?pm_no=${pm.pmNo }">${pm.title }</a></td>
+						<td><a href="/anibuddy/mypage/sendpmdetail?pm_no=${pm.pmNo }"><fmt:formatDate value="${pm.sendDate }"
+ 		 						pattern="yyyy.MM.dd" /></a></td>
+ 						<td><a href="/anibuddy/mypage/sendpmdetail?pm_no=${pm.pmNo }">${pm.isCheck }</a></td>
 					</tr>
 				</c:forEach>
 			</c:when>
-			<c:when test="${empty pmList }">
+			<c:when test="${empty pmSendList }">
 				<tr><td colspan="5">쪽지함 비어있음</td></tr>
 			</c:when>
 		</c:choose>
@@ -114,7 +114,7 @@ $(document).ready(function(){
 	</div>
 	<div class="clearfix"></div>
 	<c:if test="${paging.totalCount ne 0 }">
-	<c:import url="./postmessage_list_paging.jsp" />
+	<c:import url="./postmessage_send_list_paging.jsp" />
 	</c:if>
 </div>
 

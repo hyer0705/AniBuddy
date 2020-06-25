@@ -1,0 +1,15 @@
+@charset "UTF-8";
+.pm_cont {
+	position: relative;
+}
+
+.pm_cont .pm_cont__send-title {
+    width: 150px;
+    text-align: center;
+    font-size: 20px;
+    position: absolute;
+    font-weight: 700;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}

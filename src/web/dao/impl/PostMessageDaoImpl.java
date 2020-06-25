@@ -300,4 +300,135 @@ public class PostMessageDaoImpl implements PostMessageDao{
 		}
 	}
 	
+	@Override
+	public int selectCntAllByPMSenderId(UserTB currUser) {
+		// DB 연결
+		conn = JDBCTemplate.getConnection();
+
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM post_message";
+		sql += " WHERE pm_sender_id = ?";
+		sql += " ORDER BY pm_no DESC";
+
+		// 결과 저장 변수 선언
+		int cnt = 0;
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, currUser.getUserNo());
+
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+
+
+		return cnt;
+	}
+	
+	@Override
+	public List<PostMessage> selectPmBySenderNo(Paging paging, UserTB currUser) {
+		// DB 연결 객체
+		conn = JDBCTemplate.getConnection();
+
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "	    SELECT rownum rnum, P.* FROM (";
+		sql += "	        SELECT * FROM post_message";
+		sql += "	        WHERE pm_sender_id = ?";
+		sql += "	        ORDER BY pm_no DESC";
+		sql += "	    ) P";
+		sql += "	) PM";
+		sql += "	WHERE rnum BETWEEN ? AND ?";
+
+		
+		// 결과 반환 리스트
+		List<PostMessage> pmSendList = new ArrayList<PostMessage>();
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, currUser.getUserNo());
+			ps.setInt(2, paging.getStartNo());
+			ps.setInt(3, paging.getEndNo());
+
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				PostMessage pm = new PostMessage();
+				pm.setPmNo(rs.getInt("pm_no"));
+				pm.setPmSenderId(rs.getInt("pm_sender_id"));
+				pm.setTitle(rs.getString("title"));
+				pm.setContent(rs.getString("content"));
+				pm.setSendDate(rs.getDate("send_date"));
+				pm.setPmRecipientId(rs.getInt("pm_recipient_id"));
+				pm.setIsCheck(rs.getString("is_check"));
+
+				pmSendList.add(pm);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		return pmSendList;
+	}
+	
+	@Override
+	public UserTB selectPmRecipient(PostMessage pm) {
+		// DB 연결 객체
+		conn = JDBCTemplate.getConnection();
+
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM user_tb";
+		sql += " WHERE user_no = ? ";
+
+		// 결과 반환 객체
+		UserTB result = null;
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, pm.getPmRecipientId());
+
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				result = new UserTB();
+				result.setUserNo(rs.getInt("user_no"));
+				result.setUserId(rs.getString("user_id"));
+				result.setUserName(rs.getString("user_name"));
+				result.setBirth(rs.getDate("birth"));
+				result.setGender(rs.getString("gender").charAt(0));
+				result.setNick(rs.getString("nick"));
+				result.setEmail(rs.getString("email"));
+				result.setTel(rs.getString("tel"));
+				result.setFirstAddr(rs.getString("first_addr"));
+				result.setSecondAddr(rs.getString("second_addr"));
+				result.setAnimal(rs.getString("animal"));
+				result.setIsExpert(rs.getString("is_expert"));
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
 }

@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="../css/join.css">
 <link rel="stylesheet" href="../css/user_update.css" />
 <link rel="stylesheet" href="../css/mypage_oneonone.css" />
+<link rel="stylesheet" href="../css/mypage_pm_main.css" />
 
 <style type="text/css">
 .pm-cont__wrap {

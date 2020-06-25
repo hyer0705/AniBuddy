@@ -10,39 +10,6 @@
 <!-- 네이버 스마트 에디터2 라이브러리 -->
 <script type="text/javascript" src="/anibuddy/resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
-<!-- <form>태그의 submit을 수행하면 editor에 작성한 내용을 <textarea>에 반영 -->
-<script type="text/javascript">
-function submitContents(elClickedObj) {
-	
-	var elClickedObj = $("#fm")
-	
-	//에디터의 내용을 #content에 반영
-	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-	
-	var con = $("#content").val();
-	
-// 	var con = document.getElementById("content").value;
-	if(con == "" || con == null || con == '&nbsp;' || con == '<p>&nbsp;</p>' || con == '<br>' || con == '<br/>') {
-		alert("내용을 입력해주세요~")
-		oEditors.getById["content"].exec("FOCUS");
-		return false;
-	}
-	
-	// 일단 나중으로 미루기
-// 	if( con.length > 500 ){
-// 		alert("쪽지는 500자 제한입니다. - " + con.length)
-// 		oEditors.getById["content"].exec("FOCUS");
-// 		return false;
-// 	}
-
-	try {
-		// <form>태그의 submit 수행
-		elClickedObj.form.submit();
-	} catch (e) { }
-}
-
-
-</script>
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -56,16 +23,18 @@ $(document).ready(function() {
 			return;
 		}
 		
+		if(!form.content.value){
+			alert("내용을 적어주세요!")
+			form.content.focus()
+			return;
+		}
+		
         
 		var message = confirm ("작성하시겠습니까?");	
 		if(message) {		
 			
-// 		스마트에디터의 내용을 <textarea>에 적용하는 함수 호출
-// 		submitContents( $("#btnWrite") );
-		submitContents();
-		
-		//<form>태그 submit
-		$("form").submit();
+			//<form>태그 submit
+			$("form").submit();
 		
 		} else {
 			return false;
@@ -85,7 +54,8 @@ $(document).ready(function() {
 
 <style type="text/css">
 #content {
-	width: 98%;
+    width: 98%;
+    height: 300px;
 }
 </style>
 
@@ -114,17 +84,5 @@ $(document).ready(function() {
 	<button type="button" id="btnCancel" class="btn btn-danger">취소</button>
 </div>
 </div>
-
-<!-- 스마트 에디터 적용하는 코드 -->
-<!-- <textarea>에 스마트 에디터의 스킨을 입히는 코드 -->
-<script type="text/javascript">
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
-	oAppRef: oEditors,
-	elPlaceHolder: "content", // 에디터가 적용되는 <textarea>의 id를 입력
-	sSkinURI: "/anibuddy/resources/se2/SmartEditor2Skin.html",
-	fCreator: "createSEditor2"
-})
-</script>
 
 <jsp:include page="/layout/footer.jsp"></jsp:include>

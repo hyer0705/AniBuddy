@@ -11,17 +11,13 @@ $(document).ready(function(){
 	
 	// 목록 버튼 클릭시
 	$("#btnToList").on("click", function(){
-		$(location).attr("href", "/anibuddy/mypage/pmlist")
+		$(location).attr("href", "/anibuddy/mypage/sendpmlist")
 	})
 	
-	// 쪽지 보내기 버튼 클릭시
-	$("#btnSendPm").on("click", function(){
-		$(location).attr("href", "/anibuddy/mypage/sendpm?pm_recipient_id=" + $("#recipient").val())
-	})
 	
 	// 쪽지 삭제 버튼 클릭시
 	$("#btnPMDelete").on("click", function(){
-		$(location).attr("href", "/anibuddy/mypage/deletepm?pm_no=" + $("#pmNo").val())
+		$(location).attr("href", "/anibuddy/mypage/deletesendpm?pm_no=" + $("#pmNo").val())
 	})
 	
 })
@@ -30,7 +26,7 @@ $(document).ready(function(){
 <main class="wrapper">
 <div class="o3-content">
 	<div class="o3-cont">
-		<div class="o3-cont__title">받은쪽지 상세보기</div>
+		<div class="o3-cont__title">보낸쪽지 상세보기</div>
 	</div>
 	<div class="o3-cont">
 		<table class="table table-bordered" >
@@ -39,14 +35,14 @@ $(document).ready(function(){
 		</tr>
 	
 		<tr>		
-		<td class="danger">받은 날짜</td><td>${pm.sendDate }</td>
+		<td class="danger">보낸 날짜</td><td>${pm.sendDate }</td>
 		</tr>
 		
 		<tr>		
-		<td class="danger">보낸 사람</td>
+		<td class="danger">받은 사람</td>
 		<td>
-			${sender }
-			<input type="hidden" id="recipient" value="${pm.pmSenderId }"/>
+			${recipient }
+			<input type="hidden" id="recipient" value="${pm.pmRecipientId }"/>
 		</td>
 		</tr>
 		
@@ -56,7 +52,6 @@ $(document).ready(function(){
 		</table>
 	</div>
 	<div class="text-center">	
-		<button type="button" id="btnSendPm" class="btn btn-info" style="margin-top: 0;" >쪽지보내기</button>
 		<button type="button" id="btnToList" class="btn btn-primary">목록</button>
 		<button type="button" id="btnPMDelete" class="btn btn-danger" style="margin-top: 0;" >쪽지삭제</button>
 	</div>

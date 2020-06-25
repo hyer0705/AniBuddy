@@ -169,4 +169,45 @@ public class PostMessageServiceImpl implements PostMessageService{
 		
 	}
 	
+	@Override
+	public Paging getSendPaging(HttpServletRequest req) {
+		// 한글 인코딩
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// 현재 페이지
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if( param != null && !"".equals(param) ) {
+			curPage = Integer.parseInt(param);
+		}
+
+
+		// 현재 사용자의 번호로 자신이 받은 쪽지함 조회
+		int userno = (int)req.getSession().getAttribute("userno");
+		UserTB currUser = new UserTB();
+		currUser.setUserNo(userno);
+		// POST_MESSAGE 테이블의 총 게시글 수를 조회한다
+		int totalCnt = pmDao.selectCntAllByPMSenderId(currUser);
+
+		// Paging 객체 생성 - 현재 페이지(curPage), 총 게시글 수 (totalCnt) 활용
+		Paging paging = new Paging(totalCnt, curPage);
+
+		return paging;
+	}
+	
+	@Override
+	public List<PostMessage> getPmSendList(Paging paging, UserTB currUser) {
+		return pmDao.selectPmBySenderNo(paging, currUser);
+	}
+	
+	@Override
+	public UserTB getRecipient(PostMessage pm) {
+		return pmDao.selectPmRecipient(pm);
+	}
+	
 }

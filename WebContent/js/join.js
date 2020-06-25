@@ -175,8 +175,8 @@ $(document).ready(function(){
 			emptyMsg(currNode, errNode)
 		} else {
 			// #nick : 닉네임은 2자 이상의 영어대소문자, 숫자만 사용가능합니다.
-			reg = /^[A-Za-z0-9]{2,20}$/
-			msg = "<h4>닉네임은 2자 이상, 20자 이하의 영어대소문자, 숫자만 사용가능합니다.</h4>"
+			reg = /^[A-Za-z0-9가-힣]{2,20}$/
+			msg = "<h4>닉네임은 2자 이상, 20자 이하의 영어대소문자, 숫자 또는 6자 이하의 한글만 사용가능합니다.</h4>"
 
 			if( !reg.test( $(currNode).val() )){
 				invalidMsg( currNode, reg, msg)

@@ -87,4 +87,29 @@ public interface PostMessageService {
 	 */
 	void delete(String names);
 
+	/**
+	 * 보낸쪽지함 페이징
+	 * 
+	 * @param req
+	 * @return
+	 */
+	Paging getSendPaging(HttpServletRequest req);
+
+	/**
+	 * 보낸 쪽지함 전체 조회하기
+	 * 
+	 * @param paging - 페이징 정보 객체
+	 * @param currUser - sender 정보를 가진 객체
+	 * @return
+	 */
+	List<PostMessage> getPmSendList(Paging paging, UserTB currUser);
+
+	/**
+	 * 쪽지 받은 사람 조회
+	 * 
+	 * @param pm
+	 * @return
+	 */
+	UserTB getRecipient(PostMessage pm);
+
 }

@@ -69,4 +69,29 @@ public interface PostMessageDao {
 	 */
 	void delete(String names);
 
+	/**
+	 * 쪽지 발신자 정보로 조회된 쪽지 행의 갯수
+	 * 
+	 * @param currUser - pm_sender_id(=user_no) 정보를 갖는 UserTB 객체
+	 * @return int - 조회된 쪽지 행의 갯수 반환
+	 */
+	int selectCntAllByPMSenderId(UserTB currUser);
+
+	/**
+	 * 쪽지 발신자 번호로 쪽지 조회하기
+	 * 
+	 * @param paging - 페이징 객체
+	 * @param currUser - 현재 로그인한 유저 정보를 가진 객체
+	 * @return List<PostMessage> - 조회된 쪽지 리스트 반환
+	 */
+	List<PostMessage> selectPmBySenderNo(Paging paging, UserTB currUser);
+
+	/**
+	 * 쪽지 받은 사람 조회
+	 * 
+	 * @param pm
+	 * @return
+	 */
+	UserTB selectPmRecipient(PostMessage pm);
+
 }
