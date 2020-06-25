@@ -1,0 +1,627 @@
+-- 2020.06.24 관리자페이지 1:1문의 글 작성
+-- 외래키 추가
+
+DROP TABLE OneOnOne;
+
+CREATE TABLE OneOnOne (
+	oneonone_no NUMBER primary key, --문의글 번호
+	title VARCHAR2(500), -- 문의글 제목
+    content CLOB, -- 내용
+    write_date DATE DEFAULT sysdate, -- 최초작성일
+	reply_progress VARCHAR2(1), -- 문의유형 
+    reply_no NUMBER,
+	condition VARCHAR2(100), -- 문의확인 여부 
+	user_no NUMBER,
+    CONSTRAINT pk_oneonone_user_no FOREIGN KEY(user_no) REFERENCES user_tb(user_no) on delete cascade,
+    CONSTRAINT fk_oneonone_reply_no FOREIGN KEY(reply_no) REFERENCES oneonone(oneonone_no) on delete cascade
+);
+
+DROP SEQUENCE OneOnOne_seq;
+CREATE SEQUENCE OneOnOne_seq;
+
+-- admin column 추가
+ALTER TABLE oneonone
+ADD(admin_no NUMBER);
+
+--SELECT * FROM oneonone;
+
+ALTER TABLE oneonone
+ADD CONSTRAINT oneonone_fk_admin_no 
+FOREIGN KEY(admin_no) REFERENCES ADMIN(admin_no);
+
+
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~1', 	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.111', 	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~2',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.112',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~3',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.113',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~4',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.114',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~5',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.115',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~6',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.116',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~7',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.117',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~8',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.118',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~9',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.119',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~10',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.120',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~11',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.121',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~12',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.122',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~13',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.123',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~14',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.124',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~15',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.125',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~16',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.126',	sysdate,	'0',	null,	'true', 	36);
+
+
+-- 더미데이터 3차 삽입
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~19',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.129',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~20',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.130',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~21',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.131',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~22',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.132',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~23',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.133',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~24',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.134',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~25',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.135',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~26',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.136',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~27',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.137',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~28',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.138',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~29',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.139',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~30',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.140',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~31',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.141',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~32',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.142',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~33',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.143',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~34',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.144',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~35',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.145',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~36',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.146',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~37',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.147',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~38',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.148',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~39',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.149',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~40',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.150',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~41',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.151',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~42',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.152',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~43',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.153',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~44',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.154',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~45',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.155',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~46',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.156',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~47',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.157',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~48',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.158',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~49',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.159',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~50',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.160',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~51',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.161',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~52',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.162',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~53',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.163',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~54',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.164',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~55',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.165',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~56',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.166',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~57',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.167',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~58',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.168',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~59',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.169',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~60',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.170',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~61',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.171',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~62',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.172',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~63',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.173',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~64',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.174',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~65',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.175',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~66',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.176',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~67',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.177',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~68',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.178',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~69',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.179',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~70',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.180',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~71',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.181',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~72',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.182',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~73',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.183',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~74',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.184',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~75',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.185',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~76',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.186',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~77',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.187',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~78',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.188',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~79',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.189',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~80',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.190',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~81',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.191',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~82',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.192',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~83',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.193',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~84',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.194',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~85',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.195',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~86',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.196',	sysdate,	'0',	null,	'true', 	36);
+-- commit;
+
+-- 더미 데이터 4차 삽입
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~88',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.198',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~89',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.199',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~90',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.200',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~91',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.201',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~92',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.202',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~93',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.203',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~94',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.204',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~95',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.205',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~96',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.206',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~97',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.207',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~98',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.208',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~99',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.209',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~100',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.210',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~101',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.211',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~102',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.212',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~103',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.213',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~104',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.214',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~105',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.215',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~106',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.216',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~107',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.217',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~108',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.218',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~109',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.219',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~110',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.220',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~111',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.221',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~112',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.222',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~113',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.223',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~114',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.224',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~115',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.225',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~116',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.226',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~117',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.227',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~118',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.228',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~119',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.229',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~120',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.230',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~121',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.231',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~122',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.232',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~123',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.233',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~124',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.234',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~125',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.235',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~126',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.236',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~127',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.237',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~128',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.238',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~129',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.239',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~130',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.240',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~131',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.241',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~132',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.242',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~133',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.243',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~134',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.244',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~135',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.245',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~136',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.246',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~137',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.247',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~138',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.248',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~139',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.249',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~140',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.250',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~141',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.251',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~142',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.252',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~143',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.253',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~144',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.254',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~145',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.255',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~146',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.256',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~147',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.257',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~148',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.258',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~149',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.259',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~150',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.260',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~151',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.261',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~152',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.262',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~153',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.263',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~154',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.264',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~155',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.265',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~156',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.266',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~157',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.267',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~158',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.268',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~159',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.269',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~160',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.270',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~161',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.271',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~162',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.272',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~163',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.273',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~164',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.274',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~165',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.275',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~166',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.276',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~167',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.277',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~168',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.278',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~169',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.279',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~170',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.280',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~171',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.281',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~172',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.282',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~173',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.283',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~174',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.284',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~175',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.285',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~176',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.286',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~177',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.287',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~178',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.288',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~179',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.289',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~180',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.290',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~181',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.291',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~182',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.292',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~183',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.293',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~184',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.294',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~185',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.295',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~186',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.296',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~187',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.297',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~188',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.298',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~189',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.299',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~190',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.300',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~191',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.301',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~192',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.302',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~193',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.303',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~194',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.304',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~195',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.305',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~196',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.306',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~197',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.307',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~198',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.308',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~199',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.309',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~200',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.310',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~201',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.311',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~202',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.312',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~203',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.313',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~204',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.314',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~205',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.315',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~206',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.316',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~207',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.317',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~208',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.318',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~209',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.319',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~210',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.320',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~211',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.321',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~212',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.322',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~213',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.323',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~214',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.324',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~215',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.325',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~216',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.326',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~217',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.327',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~218',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.328',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~219',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.329',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~220',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.330',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~221',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.331',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~222',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.332',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~223',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.333',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~224',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.334',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~225',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.335',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~226',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.336',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~227',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.337',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~228',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.338',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~229',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.339',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~230',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.340',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~231',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.341',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~232',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.342',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~233',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.343',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~234',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.344',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~235',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.345',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~236',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.346',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~237',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.347',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~238',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.348',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~239',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.349',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~240',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.350',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~241',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.351',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~242',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.352',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~243',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.353',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~244',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.354',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~245',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.355',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~246',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.356',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~247',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.357',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~248',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.358',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~249',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.359',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~250',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.360',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~251',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.361',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~252',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.362',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~253',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.363',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~254',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.364',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~255',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.365',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~256',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.366',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~257',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.367',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~258',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.368',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~259',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.369',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~260',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.370',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~261',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.371',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~262',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.372',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~263',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.373',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~264',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.374',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~265',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.375',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~266',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.376',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~267',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.377',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~268',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.378',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~269',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.379',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~270',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.380',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~271',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.381',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~272',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.382',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~273',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.383',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~274',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.384',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~275',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.385',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~276',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.386',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~277',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.387',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~278',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.388',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~279',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.389',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~280',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.390',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~281',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.391',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~282',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.392',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~283',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.393',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~284',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.394',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~285',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.395',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~286',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.396',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~287',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.397',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~288',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.398',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~289',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.399',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~290',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.400',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~291',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.401',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~292',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.402',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~293',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.403',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~294',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.404',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~295',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.405',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~296',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.406',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~297',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.407',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~298',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.408',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~299',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.409',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~300',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.410',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~301',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.411',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~302',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.412',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~303',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.413',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~304',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.414',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~305',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.415',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~306',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.416',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~307',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.417',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~308',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.418',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~309',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.419',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~310',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.420',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~311',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.421',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~312',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.422',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~313',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.423',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~314',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.424',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~315',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.425',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~316',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.426',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~317',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.427',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~318',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.428',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~319',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.429',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~320',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.430',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~321',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.431',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~322',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.432',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~323',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.433',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~324',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.434',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~325',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.435',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~326',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.436',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~327',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.437',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~328',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.438',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~329',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.439',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~330',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.440',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~331',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.441',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~332',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.442',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~333',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.443',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~334',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.444',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~335',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.445',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~336',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.446',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~337',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.447',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~338',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.448',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~339',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.449',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~340',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.450',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~341',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.451',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~342',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.452',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~343',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.453',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~344',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.454',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~345',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.455',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~346',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.456',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~347',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.457',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~348',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.458',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~349',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.459',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~350',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.460',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~351',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.461',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~352',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.462',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~353',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.463',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~354',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.464',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~355',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.465',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~356',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.466',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~357',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.467',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~358',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.468',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~359',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.469',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~360',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.470',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~361',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.471',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~362',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.472',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~363',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.473',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~364',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.474',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~365',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.475',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~366',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.476',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~367',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.477',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~368',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.478',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~369',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.479',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~370',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.480',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~371',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.481',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~372',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.482',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~373',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.483',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~374',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.484',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~375',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.485',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~376',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.486',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~377',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.487',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~378',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.488',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~379',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.489',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~380',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.490',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~381',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.491',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~382',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.492',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~383',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.493',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~384',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.494',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~385',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.495',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~386',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.496',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~387',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.497',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~388',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.498',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~389',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.499',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~390',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.500',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~391',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.501',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~392',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.502',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~393',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.503',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~394',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.504',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~395',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.505',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~396',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.506',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~397',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.507',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~398',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.508',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~399',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.509',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~400',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.510',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~401',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.511',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~402',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.512',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~403',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.513',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~404',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.514',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~405',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.515',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~406',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.516',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~407',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.517',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~408',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.518',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~409',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.519',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~410',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.520',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~411',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.521',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~412',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.522',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~413',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.523',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~414',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.524',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~415',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.525',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~416',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.526',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~417',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.527',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~418',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.528',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~419',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.529',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~420',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.530',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~421',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.531',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~422',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.532',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~423',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.533',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~424',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.534',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~425',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.535',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~426',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.536',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~427',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.537',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~428',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.538',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~429',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.539',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~430',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.540',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~431',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.541',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~432',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.542',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~433',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.543',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~434',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.544',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~435',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.545',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~436',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.546',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~437',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.547',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~438',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.548',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~439',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.549',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~440',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.550',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~441',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.551',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~442',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.552',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~443',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.553',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~444',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.554',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~445',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.555',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~446',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.556',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~447',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.557',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~448',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.558',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~449',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.559',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~450',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.560',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~451',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.561',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~452',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.562',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~453',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.563',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~454',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.564',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~455',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.565',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~456',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.566',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~457',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.567',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~458',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.568',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~459',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.569',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~460',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.570',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~461',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.571',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~462',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.572',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~463',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.573',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~464',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.574',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~465',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.575',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~466',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.576',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~467',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.577',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~468',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.578',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~469',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.579',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~470',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.580',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~471',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.581',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~472',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.582',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~473',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.583',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~474',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.584',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~475',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.585',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~476',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.586',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~477',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.587',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~478',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.588',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~479',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.589',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~480',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.590',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~481',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.591',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~482',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.592',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~483',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.593',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~484',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.594',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~485',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.595',	sysdate,	'0',	null,	'true', 	36);
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no) VALUES (	oneonone_seq.nextval, 	'사이트가 느려요~486',	'이것은 내용내용 사이트가 어느 순간 멈춰있어요. 서버가 매우 느립니다.596',	sysdate,	'0',	null,	'true', 	36);
+-- commit;
+
+SELECT oneonone_no, title, content, user_no, admin_no FROM oneonone
+ORDER BY write_date DESC, oneonone_no DESC;
+
+-- 답변 글 삽입
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no, admin_no) 
+VALUES (oneonone_seq.nextval, 	'답변1',	'답변 내용입니다.',	sysdate,	'1',	null,	'checked', 	null, 1);
+
+UPDATE oneonone
+SET reply_no = 501
+WHERE oneonone_no = 500;
+
+SELECT * FROM oneonone
+ORDER BY oneonone_no DESC;
+
+SELECT * FROM expert_post p
+ORDER BY group_no DESC, depth, post_no;
+
+SELECT * FROM oneonone q, oneonone a
+WHERE q.reply_no = a.oneonone_no(+)
+ORDER BY q.oneonone_no DESC;
+
+SELECT * FROM oneonone order by oneonone_no desc;
+
+SELECT count(*) FROM oneonone
+WHERE reply_no IS NULL;
+
+SELECT * FROM oneonone
+START WITH reply_no IS NULL
+CONNECT BY reply_no = PRIOR oneonone_no
+ORDER SIBLINGS BY oneonone_no DESC;
+
+-- 답변 테스트 글 삽입
+INSERT INTO oneonone ( oneonone_no, title, content, write_date, reply_progress, reply_no, condition, user_no, admin_no) 
+VALUES (oneonone_seq.nextval, 	'502번글 답변',	'502글 답변 내용입니다.',	sysdate,	'1',	502,	'checked', 	null, 1);
+
+-- 답변글 삽입 후 답변이 달린 해당 질문 UPDATE
+UPDATE oneonone
+SET
+    condition = 'checked'
+    , reply_progress = '1'
+WHERE oneonone_no = 502;
+
+--rollback;
+--
+
+-- 질문글에 답변한 글을 조회
+SELECT * FROM oneonone
+--WHERE reply_no = oneonone_no
+WHERE reply_no = 505;
+
+-- 답변글 덕분에 수정된 페이징 처리
+SELECT * FROM (
+    SELECT rownum rnum, O.* FROM (
+        SELECT * FROM oneonone
+        WHERE 1=1
+            AND title LIKE '%'||'사이트'||'%'
+        START WITH reply_no IS NULL
+        CONNECT BY reply_no = PRIOR oneonone_no
+        ORDER SIBLINGS BY oneonone_no DESC
+    ) O
+) One
+WHERE rnum BETWEEN 1 AND 10;
+
+-- 답변글 조회
+SELECT * FROM oneonone
+WHERE oneonone_no=506;
+
+-- 답변글의 질문글 조회
+SELECT * FROM oneonone
+WHERE oneonone_no = (
+    SELECT reply_no FROM oneonone
+    WHERE oneonone_no=506
+);
+
+-- 답변글 수정 쿼리문
+UPDATE oneonone
+SET
+    title = '답변 제목 수정'
+    , content = '답변 내용 수정'
+WHERE oneonone_no = 506;
+
+-- rollback;
+
+-- 답변글 먼저 지우고 질문글 지우기
+-- 답변글이 있을 경우!
+SELECT count(*) FROM oneonone
+WHERE oneonone_no IN (
+    SELECT oneonone_no FROM oneonone
+    WHERE reply_no = 510);
+
+DELETE FROM oneonone
+WHERE oneonone_no IN (
+    SELECT oneonone_no FROM oneonone
+    WHERE reply_no = 510);
+    
+DELETE FROM oneonone
+WHERE oneonone_no = 510;
+
+-- rollback;
+
+SELECT * FROM oneonone
+START WITH reply_no IS NULL
+CONNECT BY reply_no = PRIOR oneonone_no
+ORDER SIBLINGS BY oneonone_no DESC;

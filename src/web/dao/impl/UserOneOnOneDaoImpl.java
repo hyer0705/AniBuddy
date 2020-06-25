@@ -102,7 +102,7 @@ public class UserOneOnOneDaoImpl implements UserOneOnOneDao{
 	
 	@Override
 	public List<OneOnOne> selectOneOnOne(Paging paging, UserTB currUser) {
-		System.out.println("UserO3DaoImpl paging.getSearch(): " + paging.getSearch());
+//		System.out.println("UserO3DaoImpl paging.getSearch(): " + paging.getSearch());
 		
 		// DB 연결객체
 		conn = JDBCTemplate.getConnection();

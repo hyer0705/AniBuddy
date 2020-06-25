@@ -14,6 +14,13 @@ $(document).ready(function() {
 // 		console.log("1:1문의하기 clicked")
 		$(location).attr("href", "/anibuddy/mypage/oneononelist")
 	})
+
+	// 쪽지함 div 영역 클릭시
+	$("#toPostMessage").on("click", function(){
+// 		console.log("쪽지함 clicked")
+		$(location).attr("href", "/anibuddy/mypage/pmlist")
+	})
+	
 })
 </script>
 
@@ -45,7 +52,7 @@ $(document).ready(function() {
 			<span>관리자에게 문의하기</span>
 		</div>
 	</div>
-	<div class="menu-card">
+	<div class="menu-card" id="toPostMessage">
 		<div class="menu-card__icon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></div>
 		<div class="menu-card__title">
 			<h4>쪽지함</h4>

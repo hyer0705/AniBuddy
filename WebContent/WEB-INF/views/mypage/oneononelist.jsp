@@ -94,16 +94,16 @@ function checkAll(){
 			<th>등록일</th>
 			<th>상태</th>
 		</tr>
-			<c:forEach items="${o3 }" var="oneonone">
-				<tr>
-					<td><input type="checkbox" name="checkRow" value="${oneonone.oneononeNo }" /></td>
-					<td><a href="/anibuddy/mypage/oneononedetail?oneonone_no=${oneonone.oneononeNo }">${oneonone.oneononeNo }</a></td>
-					<td><a href="/anibuddy/mypage/oneononedetail?oneonone_no=${oneonone.oneononeNo }">${oneonone.title }</a></td>
-					<td><a href="/anibuddy/mypage/oneononedetail?oneonone_no=${oneonone.oneononeNo }"><fmt:formatDate value="${oneonone.writeDate }"
-							pattern="yyyy.MM.dd" /></a></td>
-					<td><a href="/anibuddy/mypage/oneononedetail?oneonone_no=${oneonone.oneononeNo }">${oneonone.condition }</a></td>
-				</tr>
-			</c:forEach>
+		<c:forEach items="${o3 }" var="oneonone">
+			<tr>
+				<td><input type="checkbox" name="checkRow" value="${oneonone.oneononeNo }" /></td>
+				<td><a href="/anibuddy/mypage/oneononedetail?oneonone_no=${oneonone.oneononeNo }">${oneonone.oneononeNo }</a></td>
+				<td><a href="/anibuddy/mypage/oneononedetail?oneonone_no=${oneonone.oneononeNo }">${oneonone.title }</a></td>
+				<td><a href="/anibuddy/mypage/oneononedetail?oneonone_no=${oneonone.oneononeNo }"><fmt:formatDate value="${oneonone.writeDate }"
+						pattern="yyyy.MM.dd" /></a></td>
+				<td><a href="/anibuddy/mypage/oneononedetail?oneonone_no=${oneonone.oneononeNo }">${oneonone.condition }</a></td>
+			</tr>
+		</c:forEach>
 	</table>
 	
 	<div class="o3-cont__wrap">

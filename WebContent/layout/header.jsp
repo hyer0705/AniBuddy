@@ -30,6 +30,20 @@
 <link rel="stylesheet" href="../css/user_update.css" />
 <link rel="stylesheet" href="../css/mypage_oneonone.css" />
 
+<style type="text/css">
+.pm-cont__wrap {
+	margin-top: 10px;
+}
+
+.pm-cont__wrap button {
+	background-color: #ffce00;
+}
+
+.pm-cont__wrap button:hover {
+	font-weight: bolder;
+}
+</style>
+
 </head>
 <body>
 	<div class="header" style="width:1000px;">
@@ -78,7 +92,7 @@
 							<ul class="dropdown-content">
 								<li><a href="/anibuddy/mypage/userupdate">회원정보</a></li>
 								<li><a href="#">활동 내역</a></li>
-								<li><a href="#">쪽지함</a></li>
+								<li><a href="<%=request.getContextPath() %>/mypage/pmlist">쪽지함</a></li>
 								<li><a href="<%=request.getContextPath() %>/mypage/oneononelist">1:1 문의</a></li>
 							</ul></li>
 					</c:when>

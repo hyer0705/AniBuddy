@@ -18,6 +18,15 @@ public class UserOneOnOneServiceImpl implements UserOneOnOneService{
 	
 	@Override
 	public Paging getPaging(HttpServletRequest req) {
+		
+		// 한글 인코딩
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		String param = req.getParameter("curPage");
 		int curPage = 0;
 		if( param != null && !"".equals(param) ) {
