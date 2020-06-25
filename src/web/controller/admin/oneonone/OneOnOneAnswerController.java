@@ -43,7 +43,7 @@ public class OneOnOneAnswerController extends HttpServlet {
 		// 조회된 답변글 req 값 설정
 		req.setAttribute("q", q);
 
-		req.getRequestDispatcher("/WEB-INF/views/admin/answer.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/admin/answer_new.jsp").forward(req, resp);
 
 	}
 	

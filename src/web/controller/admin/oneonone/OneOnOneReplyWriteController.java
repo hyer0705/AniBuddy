@@ -59,7 +59,7 @@ public class OneOnOneReplyWriteController extends HttpServlet {
 		req.setAttribute("userid", user.getUserId());
 		
 		
-		req.getRequestDispatcher("/WEB-INF/views/admin/oneonone_reply_write.jsp")
+		req.getRequestDispatcher("/WEB-INF/views/admin/oneonone_reply_write_new.jsp")
 			.forward(req, resp);
 	}
 	

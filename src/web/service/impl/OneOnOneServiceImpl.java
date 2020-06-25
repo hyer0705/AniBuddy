@@ -2,12 +2,14 @@ package web.service.impl;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import web.dao.face.OneOnOneDao;
 import web.dao.impl.OneOnOneDaoImpl;
 import web.dto.OneOnOne;
+import web.dto.UserTB;
 import web.service.face.OneOnOneService;
 import web.util.Paging;
 
@@ -157,6 +159,12 @@ public class OneOnOneServiceImpl implements OneOnOneService{
 	@Override
 	public void delete(OneOnOne o3) {
 		oneOnOneDao.deleteOne(String.valueOf(o3.getOneononeNo()));
+	}
+	
+	
+	@Override
+	public List<Map<UserTB, OneOnOne>> getUserAndOneOnOne(Paging paging) {
+		return oneOnOneDao.selectJoinUserAndOneOnOne(paging);
 	}
 	
 }

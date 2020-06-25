@@ -1,8 +1,10 @@
 package web.dao.face;
 
 import java.util.List;
+import java.util.Map;
 
 import web.dto.OneOnOne;
+import web.dto.UserTB;
 import web.util.Paging;
 
 public interface OneOnOneDao {
@@ -74,5 +76,13 @@ public interface OneOnOneDao {
 	 * @param q
 	 */
 	void update(OneOnOne q);
+
+	/**
+	 * 동등조인으로 사용자와 OneOnOne 게시글 조회하기
+	 * 
+	 * @param paging
+	 * @return
+	 */
+	List<Map<UserTB, OneOnOne>> selectJoinUserAndOneOnOne(Paging paging);
 
 }

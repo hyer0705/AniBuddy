@@ -63,7 +63,7 @@ public class OneOnOneReplyUpdateController extends HttpServlet {
 		req.setAttribute("q", q);
 		req.setAttribute("userid", user.getUserId());
 
-		req.getRequestDispatcher("/WEB-INF/views/admin/oneonone_reply_update.jsp")
+		req.getRequestDispatcher("/WEB-INF/views/admin/oneonone_reply_update_new.jsp")
 		.forward(req, resp);
 		
 	}

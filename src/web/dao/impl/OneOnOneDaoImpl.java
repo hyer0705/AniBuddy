@@ -5,11 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import web.dao.face.OneOnOneDao;
 import web.dbutil.JDBCTemplate;
 import web.dto.OneOnOne;
+import web.dto.UserTB;
 import web.util.Paging;
 
 public class OneOnOneDaoImpl implements OneOnOneDao{
@@ -352,6 +355,85 @@ public class OneOnOneDaoImpl implements OneOnOneDao{
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public List<Map<UserTB, OneOnOne>> selectJoinUserAndOneOnOne(Paging paging) {
+		
+		//DB 연결
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "	    SELECT rownum rnum, O.* FROM(";
+		sql += "	        SELECT u.user_id, o.*";
+		sql += "	        FROM user_tb u, oneonone o";
+		sql += "	        WHERE 1=1";
+		if( paging.getSearch() != null && !"".equals(paging.getSearch())) {
+			sql += "	            AND title LIKE '%'||?||'%'";
+		}
+		sql += "	            AND u.user_no(+) = o.user_no";
+		sql += "	        START WITH reply_no IS NULL";
+		sql += "	        CONNECT BY reply_no = PRIOR oneonone_no";
+		sql += "	        ORDER SIBLINGS BY oneonone_no DESC";
+		sql += "	    ) O";
+		sql += "	) One";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		
+		// Map에 추가할 UserTB, OneOnOne 변수 선언
+		UserTB resUser = null;
+		OneOnOne resOneOnOne = null;
+		Map<UserTB, OneOnOne> resMap = null;
+		
+		// 결과 반환 객체
+		List<Map<UserTB, OneOnOne>> list = new ArrayList<Map<UserTB,OneOnOne>>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			int idx = 0;
+			if( paging.getSearch() != null && !"".equals(paging.getSearch())) {
+				ps.setString(++idx, paging.getSearch());	
+			}
+			ps.setInt(++idx, paging.getStartNo());	//페이징 게시글 시작 번호
+			ps.setInt(++idx, paging.getEndNo());	//페이징 게시글 끝 번호
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				resUser = new UserTB();
+				resOneOnOne = new OneOnOne();
+				resMap = new HashMap<UserTB, OneOnOne>();
+				
+				resUser.setUserId(rs.getString("user_id"));
+				resUser.setUserNo(rs.getInt("user_no"));
+				
+				resOneOnOne.setUserNo(rs.getInt("user_no"));
+				resOneOnOne.setOneononeNo(rs.getInt("oneonone_no"));
+				resOneOnOne.setTitle(rs.getString("title"));
+				resOneOnOne.setContent(rs.getString("content"));
+				resOneOnOne.setWriteDate(rs.getDate("write_date"));
+				resOneOnOne.setReplyProgress(rs.getBoolean("reply_progress"));
+				resOneOnOne.setReplyNo(rs.getInt("reply_no"));
+				resOneOnOne.setCondition(rs.getString("condition"));
+				resOneOnOne.setAdminNo(rs.getInt("admin_no"));
+				
+				resMap.put(resUser, resOneOnOne);
+				
+				list.add(resMap);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return list;
 	}
 	
 }

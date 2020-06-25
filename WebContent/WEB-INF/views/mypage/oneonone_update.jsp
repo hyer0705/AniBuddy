@@ -67,7 +67,7 @@ $(document).ready(function() {
 	});
 	
 	//취소버튼 동작
-	$("#btnCancel").click(function() {
+	$("#btnO3Cancel").click(function() {
 		history.go(-1)
 	});
 	
@@ -77,7 +77,8 @@ $(document).ready(function() {
 </script>
 
 <style type="text/css">
-#content {
+#content
+, .width98 {
 	width: 98%;
 }
 </style>
@@ -90,19 +91,19 @@ $(document).ready(function() {
 <div>
 <form action="/anibuddy/mypage/oneononeUpdate" method="post" enctype="application/x-www-form-urlencoded" name="fm">
 <input type="hidden" name="oneonone_no" value="${detail.oneononeNo }" />
-<table class="table table-bordered">
-<tr><td class="info">아이디</td><td>${loginid } 님</td></tr>
-<tr><td class="info">제목</td><td><input type="text" id="title" name="title" style="width:100%" value="${detail.title }"/></td></tr>
-<tr><td class="info" colspan="2">본문</td></tr>
+<table class="">
+<tr><td class="bgBlue">아이디</td><td>${loginid } 님</td></tr>
+<tr><td class="bgBlue">제목</td><td><input class="width98" type="text" id="title" name="title" value="${detail.title }"/></td></tr>
+<tr><td class="" colspan="2">본문</td></tr>
 <tr><td colspan="2"><textarea id="content" name="content">${detail.content }</textarea></td></tr>
 </table>
 
 </form>
 </div>
 
-<div class="text-center">	
-	<button type="button" id="btnO3" class="btn btn-info" style="margin-top: 0;" >수정하기</button>
-	<button type="button" id="btnCancel" class="btn btn-danger">취소</button>
+<div class="text-center margin-top20">	
+	<button type="button" id="btnO3" class="btn-common btn-write" style="margin-top: 0;" >수정하기</button>
+	<button type="button" id="btnO3Cancel" class="btn-common btn-cancel">취소</button>
 </div>
 </div>
 

@@ -67,10 +67,10 @@ $(document).ready(function() {
 <div>
 <form action="/anibuddy/mypage/sendpm" method="post" enctype="application/x-www-form-urlencoded" id="fm" name="fm">
 
-<table class="table table-bordered">
-<tr><td class="info">받는사람</td><td>${recipient.userId } 님</td></tr>
-<tr><td class="info">쪽지 제목</td><td><input type="text" id="title" name="title" style="width:100%"/></td></tr>
-<tr><td class="info" colspan="2">쪽지 본문</td></tr>
+<table class="">
+<tr><td class="">받는사람</td><td>${recipient.userId } 님</td></tr>
+<tr><td class="">쪽지 제목</td><td><input type="text" id="title" name="title" style="width:100%"/></td></tr>
+<tr><td class="" colspan="2">쪽지 본문</td></tr>
 <tr><td colspan="2"><textarea id="content" name="content"></textarea></td></tr>
 <!-- <tr><td colspan="2"><span id="cntChar">0 / 500자</span></td></tr> -->
 </table>

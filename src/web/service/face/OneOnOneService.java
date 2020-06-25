@@ -1,10 +1,12 @@
 package web.service.face;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import web.dto.OneOnOne;
+import web.dto.UserTB;
 import web.util.Paging;
 
 public interface OneOnOneService {
@@ -85,5 +87,13 @@ public interface OneOnOneService {
 	 * @param o3
 	 */
 	void delete(OneOnOne o3);
+
+	/**
+	 * 조인을 이용하여 사용자 아이디와 등록글 조회하기
+	 * 
+	 * @param paging
+	 * @return
+	 */
+	List<Map<UserTB, OneOnOne>> getUserAndOneOnOne(Paging paging);
 
 }

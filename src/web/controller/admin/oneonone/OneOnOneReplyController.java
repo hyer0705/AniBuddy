@@ -1,7 +1,10 @@
 package web.controller.admin.oneonone;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import web.dto.OneOnOne;
+import web.dto.UserTB;
 import web.service.face.OneOnOneService;
 import web.service.impl.OneOnOneServiceImpl;
 import web.util.Paging;
@@ -37,10 +41,25 @@ public class OneOnOneReplyController extends HttpServlet {
 
 		List<OneOnOne> oneonone = oneOnOneService.getOneOnOne(paging);
 		
+		List<Map<UserTB, OneOnOne>> testList = oneOnOneService.getUserAndOneOnOne(paging);
+//		Iterator<Map<UserTB, OneOnOne>> testIter = testList.iterator();
+//		while(testIter.hasNext()) {
+//			Map<UserTB, OneOnOne> m = testIter.next();
+//			Set<UserTB> set = m.keySet();
+//			Iterator<UserTB> key = set.iterator();
+//			
+//			while(key.hasNext()) {
+//				UserTB userKey = key.next();
+//				System.out.println(userKey + ": " + m.get(userKey));
+//			}
+//		}
+		
+		
 		req.setAttribute("paging", paging);
 		req.setAttribute("oneonone", oneonone);
+		req.setAttribute("testList", testList);
 
-		req.getRequestDispatcher("/WEB-INF/views/admin/oneonone.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/admin/oneonone_test.jsp").forward(req, resp);
 
 	}
 	

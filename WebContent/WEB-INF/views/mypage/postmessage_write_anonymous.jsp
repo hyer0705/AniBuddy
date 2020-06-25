@@ -39,7 +39,7 @@ $(document).ready(function() {
 	});
 	
 	//취소버튼 동작
-	$("#btnCancel").click(function() {
+	$("#btnPmCancel").click(function() {
 		history.go(-1)
 	});
 	
@@ -53,6 +53,10 @@ $(document).ready(function() {
     width: 98%;
     height: 300px;
 }
+
+.width98 {
+	width: 98%;
+}
 </style>
 
 <div class="container" style="width: 900px;">
@@ -63,13 +67,13 @@ $(document).ready(function() {
 <div>
 <form action="/anibuddy/mypage/sendtoanonymous" method="post" enctype="application/x-www-form-urlencoded" id="fm" name="fm">
 
-<table class="table table-bordered">
+<table class="">
 <tr>
-	<td class="info">받는사람</td>
-	<td><input type="text" name="recipient_id" placeholder="받는 사람 아이디를 입력해주세요" style="width:100%" /></td>
+	<td class="bgBlue">받는사람</td>
+	<td><input class="width98" type="text" name="recipient_id" placeholder="받는 사람 아이디를 입력해주세요" /></td>
 </tr>
-<tr><td class="info">쪽지 제목</td><td><input type="text" id="title" name="title" style="width:100%"/></td></tr>
-<tr><td class="info" colspan="2">쪽지 본문</td></tr>
+<tr><td class="bgBlue">쪽지 제목</td><td><input class="width98" type="text" id="title" name="title"/></td></tr>
+<tr><td class="" colspan="2">쪽지 본문</td></tr>
 <tr><td colspan="2"><textarea id="content" name="content"></textarea></td></tr>
 <!-- <tr><td colspan="2"><span id="cntChar">0 / 500자</span></td></tr> -->
 </table>
@@ -78,9 +82,9 @@ $(document).ready(function() {
 </form>
 </div>
 
-<div class="text-center">	
-	<button type="button" id="btnSendPm" class="btn btn-info" style="margin-top: 0;" >쪽지 보내기</button>
-	<button type="button" id="btnCancel" class="btn btn-danger">취소</button>
+<div class="text-center margin-top20">	
+	<button type="button" id="btnSendPm" class="btn-common btn-write" >쪽지 보내기</button>
+	<button type="button" id="btnPmCancel" class="btn-common btn-cancel">취소</button>
 </div>
 </div>
 

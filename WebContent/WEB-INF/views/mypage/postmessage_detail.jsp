@@ -33,32 +33,32 @@ $(document).ready(function(){
 		<div class="o3-cont__title">받은쪽지 상세보기</div>
 	</div>
 	<div class="o3-cont">
-		<table class="table table-bordered" >
+		<table class="" >
 		<tr>
-		<td class="danger">제목</td><td colspan="3">${pm.title }</td>
+		<td class="bgBlue">제목</td><td colspan="3">${pm.title }</td>
 		</tr>
 	
 		<tr>		
-		<td class="danger">받은 날짜</td><td>${pm.sendDate }</td>
+		<td class="bgBlue">받은 날짜</td><td colspan="3">${pm.sendDate }</td>
 		</tr>
 		
 		<tr>		
-		<td class="danger">보낸 사람</td>
-		<td>
+		<td class="bgBlue">보낸 사람</td>
+		<td colspan="3">
 			${sender }
 			<input type="hidden" id="recipient" value="${pm.pmSenderId }"/>
 		</td>
 		</tr>
 		
 		<tr><td class="danger"  colspan="4">쪽지 내용</td></tr>
-		<tr><td colspan="4">${pm.content }</td></tr>
+		<tr><td class="height300 text-left" colspan="4">${pm.content }</td></tr>
 		
 		</table>
 	</div>
-	<div class="text-center">	
-		<button type="button" id="btnSendPm" class="btn btn-info" style="margin-top: 0;" >쪽지보내기</button>
-		<button type="button" id="btnToList" class="btn btn-primary">목록</button>
-		<button type="button" id="btnPMDelete" class="btn btn-danger" style="margin-top: 0;" >쪽지삭제</button>
+	<div class="text-center margin-top20">	
+		<button type="button" id="btnSendPm" class="btn-common btn-write" style="margin-top: 0;" >쪽지보내기</button>
+		<button type="button" id="btnToList" class="btn-common btn-cancel">목록</button>
+		<button type="button" id="btnPMDelete" class="btn-common btn-delete" style="margin-top: 0;" >쪽지삭제</button>
 	</div>
 	<input type="hidden" id="pmNo" value="${pm.pmNo }" />
 </div>

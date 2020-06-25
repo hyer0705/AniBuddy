@@ -20,12 +20,12 @@
 
 table {
     overflow: scroll;
-    border: 1px solid #ccc;
-    width: 700px;
+    border: 1px solid#99d4d9;
+    width: 100%;
 }
 
 th{
-	border : 1px solid #ccc;
+	border : 1px solid #99d4d9;
 	height : 50px;	
 	padding : 0;
 	text-align: center;
@@ -35,8 +35,50 @@ th{
 
 tr {
     height: 50px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #99d4d9;
     text-align: center;
+}
+
+.bgBlue{
+	background: #99d4d9;
+}
+
+.height300 {
+	height: 300px;
+}
+
+.text-left {
+	text-align: start;
+	padding: 10px;
+}
+
+.margin-top20{
+	margin-top: 20px;
+}
+
+.btn-common {
+	margin: 0;
+    color: black;
+    padding: 7px;
+    border-radius: 7px;
+}
+.btn-write{
+	background: #99d4d9;
+    border: 1px solid #b8d3d2;
+}
+
+.btn-cancel{
+    background: #ffaf9a;
+    border: 1px solid #ffaf9a;
+}
+
+.btn-delete {
+	background: #ffbf00;
+	border: 1px solid #ffbf00; 
+}
+
+.oneonone {
+	width: 700px;
 }
 
 .oneonone th.check{
@@ -52,7 +94,8 @@ tr {
 }
 
 #btnDelete:hover
-, #btnO3:hover {
+, #btnO3:hover
+, #btnO3Cancel:hover {
     font-weight: bold;
     font-size: 14px;
 }

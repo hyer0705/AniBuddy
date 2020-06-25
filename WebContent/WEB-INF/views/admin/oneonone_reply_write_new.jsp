@@ -39,8 +39,8 @@ function submitContents(elClickedObj) {
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	//작성버튼 동작
-	$("#btnO3").click(function() {
+	// 답변 작성버튼 동작
+	$("#btnO3Reply").click(function() {
 		var form = document.fm;
 		
 		if(!form.title.value) {
@@ -84,32 +84,35 @@ $(document).ready(function() {
 </script>
 
 <style type="text/css">
-#content
-, .width98 {
+#content {
 	width: 98%;
 }
 </style>
 
 <div class="container" style="width: 900px;">
 
-<h3>1:1문의 작성하기</h3>
+<h3>1:1문의 답변 작성하기</h3>
 <hr>
 
 <div>
-<form action="/anibuddy/mypage/oneononewrite" method="post" enctype="application/x-www-form-urlencoded" name="fm">
+<form action="/anibuddy/oneonone/replywrite" method="post" enctype="application/x-www-form-urlencoded" name="fm">
 
 <table class="">
-<tr><td class="bgBlue">아이디</td><td>${loginid } 님</td></tr>
-<tr><td class="bgBlue">제목</td><td><input type="text" id="title" name="title" class="width98"/></td></tr>
-<tr><td class="" colspan="2">본문</td></tr>
+<tr><td class="bgBlue">1:1문의고객</td><td>${userid } 님</td></tr>
+<tr><td class="bgBlue">문의 제목</td><td>${o3.title }</td></tr>
+<tr><td class="" colspan="2">문의 내용</td></tr>
+<tr><td class="height300 text-left" colspan="2">${o3.content }</td></tr>
+<tr><td class="bgBlue">답변 제목</td><td><input type="text" id="title" name="title" style="width:100%" value="[답변] ${o3.title }" /></td></tr>
+<tr><td class="" colspan="2">답변 내용</td></tr>
 <tr><td colspan="2"><textarea id="content" name="content"></textarea></td></tr>
 </table>
 
+<input type="hidden" name="oneonone_no" value="${o3.oneononeNo }" />
 </form>
 </div>
 
 <div class="text-center margin-top20">	
-	<button type="button" id="btnO3" class="btn-common btn-write" style="margin-top: 0;" >1:1문의하기</button>
+	<button type="button" id="btnO3Reply" class="btn-common btn-write" style="margin-top: 0;" >1:1답변하기</button>
 	<button type="button" id="btnO3Cancel" class="btn-common btn-cancel">취소</button>
 </div>
 </div>

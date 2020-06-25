@@ -51,7 +51,7 @@ public class MypageOneOnOneDetailController extends HttpServlet {
 		// 조회된 답변글 req에 설정
 		req.setAttribute("q", q);
 		
-		req.getRequestDispatcher("/WEB-INF/views/mypage/oneonone_detail.jsp")
+		req.getRequestDispatcher("/WEB-INF/views/mypage/oneonone_detail_new.jsp")
 			.forward(req, resp);
 		
 	}
