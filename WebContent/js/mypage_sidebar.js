@@ -16,4 +16,13 @@ $(document).ready(function(){
 // 		console.log("회원 탈퇴 clicked")
 		$(location).attr("href", "/anibuddy/mypage/userdelete")
 	})
+	
+	$("#mactivity").on("click", function(){
+		$(location).attr("href", "/anibuddy/activity/postlist")
+	})
+	
+	$("#mpostmessage").on("click", function(){
+		$(location).attr("href", "/anibuddy/mypage/pmlist")
+	})
+	
 })

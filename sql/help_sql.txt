@@ -1,0 +1,144 @@
+drop table help_post;
+
+CREATE TABLE help_POST
+(
+    POST_NO           NUMBER , 
+    BOARD_NO          NUMBER , 
+    TITLE             VARCHAR2(500), 
+    CONTENT           CLOB, 
+    WRITE_DATE        DATE default sysdate, 
+    HIT               NUMBER , 
+    DEAL_PROGRESS     VARCHAR2(50), 
+    ANIMAL_SPECIES    VARCHAR2(100), 
+    DEAL_TYPE         VARCHAR2(50), 
+    USER_NO           NUMBER, 
+    CONSTRAINT HELP_POST_PK PRIMARY KEY (POST_NO)
+);
+
+ALTER TABLE HELP_POST
+    ADD CONSTRAINT FK_HELP_POST_BOARD_NO_HELP_P 
+        FOREIGN KEY (BOARD_NO)
+        REFERENCES BOARD (BOARD_NO);
+
+
+ALTER TABLE HELP_POST
+    ADD CONSTRAINT FK_HELP_POST_USER_NO_HELP_PO 
+    FOREIGN KEY (USER_NO)
+    REFERENCES USER_TB (USER_NO) on delete cascade;
+
+
+SELECT * FROM HELP_POST 
+ORDER BY POST_NO;
+
+DROP SEQUENCE HELP_POST_seq;
+CREATE SEQUENCE HELP_POST_seq;
+
+
+
+
+drop table help_comment;
+CREATE TABLE help_COMMENT(
+    COMMENT_NO        NUMBER , 
+    POST_NO           NUMBER, 
+    USER_NO           NUMBER, 
+    CONTENT           VARCHAR2(500), 
+    WRITE_DATE        DATE default sysdate, 
+    CONSTRAINT help_COMMENT_PK PRIMARY KEY (COMMENT_NO)
+);
+
+
+
+
+ALTER TABLE help_COMMENT
+    ADD CONSTRAINT FK_help_COMMENT_POST_NO_help FOREIGN KEY (POST_NO)
+        REFERENCES help_post (post_NO)  On DELETE CASCADE;
+
+
+ALTER TABLE help_COMMENT
+    ADD CONSTRAINT FK_help_COMMENT_USER_NO_help FOREIGN KEY (USER_NO)
+        REFERENCES USER_TB (user_NO) On DELETE CASCADE;
+        
+
+
+DROP SEQUENCE help_COMMENT_SEQ;
+CREATE SEQUENCE help_COMMENT_SEQ;
+
+
+
+
+drop table help_call_dibs;
+CREATE TABLE help_CALL_DIBS
+(
+    CALLDIBS_NO  NUMBER, 
+    USER_ID   NUMBER, 
+    POST_NO NUMBER, 
+    CONSTRAINT help_CALL_DIBS_PK PRIMARY KEY (CALLDIBS_NO)
+);
+
+
+ALTER TABLE help_CALL_DIBS
+    ADD CONSTRAINT FK_help_CALL_DIBS_USER_ID_SHA FOREIGN KEY (USER_ID)
+        REFERENCES user_TB (user_no) on delete cascade;
+        
+        
+        
+SELECT * FROM (
+    SELECT rownum rnum, O.* FROM (
+        SELECT
+        u.user_id, p.*
+        FROM share_post p, user_tb u
+            WHERE u.user_no = p.user_no
+            ORDER BY write_date DESC
+        ) O
+    ) One
+ WHERE rnum BETWEEN 1 AND 10;        
+
+
+
+ALTER TABLE help_CALL_DIBS
+    ADD CONSTRAINT FK_help_CALL_DIBS_POST_NO_SHA FOREIGN KEY (POST_NO)
+        REFERENCES help_post (post_no);
+
+
+
+DROP SEQUENCE help_CALL_DIBS_SEQ;
+CREATE SEQUENCE help_CALL_DIBS_SEQ;
+
+
+
+drop table help_file;
+
+CREATE TABLE help_FILE
+(
+    FILENO         NUMBER, 
+    POST_NO        NUMBER , 
+    ORIGIN_NAME    VARCHAR2(300), 
+    STORED_NAME    VARCHAR(300), 
+    FILESIZE       NUMBER, 
+    write_date     DATE default sysdate,
+    CONSTRAINT help_FILE_PK PRIMARY KEY (FILENO)
+);
+
+
+
+ALTER TABLE help_FILE
+    ADD CONSTRAINT FK_help_FILE_POST_NO_help_FI FOREIGN KEY (POST_NO)
+        REFERENCES help_post (post_no);
+        
+DROP SEQUENCE help_FILE_SEQ;
+CREATE SEQUENCE help_FILE_SEQ;
+     
+    
+    INSERT INTO HELP_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( HELP_POST_SEQ.NEXTVAL ,	1	,	 '제목1' 	,	 '내용' 	,	1	,	 '구인중' 	,	 'dog'	,	 '후원'	,	2 );
+INSERT INTO HELP_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( HELP_POST_SEQ.NEXTVAL ,	1	,	 '제목2'	,	 '내용' 	,	2	,	 '구인중' 	,	 'dog'	,	 '자원봉사자'	,	3 );
+INSERT INTO HELP_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( HELP_POST_SEQ.NEXTVAL ,	1	,	 '제목3'	,	 '내용' 	,	3	,	 '구인중' 	,	 'dog'	,	 '직거래'	,	4 );
+INSERT INTO HELP_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( HELP_POST_SEQ.NEXTVAL ,	1	,	 '제목4'	,	 '내용' 	,	4	,	 '구인중' 	,	 'dog'	,	 '후원'	,	5 );
+INSERT INTO HELP_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( HELP_POST_SEQ.NEXTVAL ,	1	,	 '제목5'	,	 '내용' 	,	5	,	 '구인중' 	,	 'dog'	,	 '자원봉사자'	,	6 );
+INSERT INTO HELP_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( HELP_POST_SEQ.NEXTVAL ,	1	,	 '제목6'	,	 '내용' 	,	6	,	 '구인중' 	,	 'dog'	,	 '직거래'	,	7 );
+INSERT INTO HELP_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( HELP_POST_SEQ.NEXTVAL ,	1	,	 '제목7'	,	 '내용' 	,	7	,	 '구인중' 	,	 'dog'	,	 '후원'	,	8 );
+INSERT INTO HELP_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( HELP_POST_SEQ.NEXTVAL ,	1	,	 '제목8'	,	 '내용' 	,	8	,	 '구인중' 	,	 'dog'	,	 '자원봉사자'	,	9 );
+INSERT INTO HELP_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( HELP_POST_SEQ.NEXTVAL ,	1	,	 '제목9'	,	 '내용' 	,	9	,	 '구인중' 	,	 'dog'	,	 '직거래'	,	10 );
+INSERT INTO HELP_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( HELP_POST_SEQ.NEXTVAL ,	1	,	 '제목10'	,	 '내용' 	,	10	,	 '구인중' 	,	 'dog'	,	 '후원'	,	11 );
+INSERT INTO HELP_POST ( POST_NO, BOARD_NO, TITLE, CONTENT, HIT, DEAL_PROGRESS, ANIMAL_SPECIES, DEAL_TYPE,  USER_NO) VALUES ( HELP_POST_SEQ.NEXTVAL ,	1	,	 '제목11'	,	 '내용' 	,	11	,	 '구인중' 	,	 'dog'	,	 '자원봉사자'	,	12 );
+
+     

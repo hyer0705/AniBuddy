@@ -57,9 +57,9 @@ public class OneOnOneReplyController extends HttpServlet {
 		
 		req.setAttribute("paging", paging);
 		req.setAttribute("oneonone", oneonone);
-		req.setAttribute("testList", testList);
+//		req.setAttribute("testList", testList);
 
-		req.getRequestDispatcher("/WEB-INF/views/admin/oneonone_test.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/admin/oneonone.jsp").forward(req, resp);
 
 	}
 	

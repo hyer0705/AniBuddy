@@ -24,7 +24,7 @@ public class UserFindIdController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/user/findid - [GET]");
+//		System.out.println("/anibuddy/user/findid - [GET]");
 		
 		req.getRequestDispatcher("/WEB-INF/views/user/findId.jsp")
 			.forward(req, resp);
@@ -33,7 +33,7 @@ public class UserFindIdController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/user/findid - [POST]");
+//		System.out.println("/anibuddy/user/findid - [POST]");
 		
 		// 조회할 회원 정보 얻기
 		UserTB user = userService.getFindUser(req);

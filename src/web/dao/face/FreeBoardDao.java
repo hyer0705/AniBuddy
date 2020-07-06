@@ -89,4 +89,8 @@ public interface FreeBoardDao {
 	 */
 	void delete(FreeBoard board);
 
+	List<UserID> selectChart();
+
+	int selectCntFreeSearch(String search);
+
 }

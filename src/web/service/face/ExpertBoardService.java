@@ -122,4 +122,6 @@ public interface ExpertBoardService {
 	 */
 	boolean deleteComment(ExpertComment comment);
 
+	List<UserID> list();
+
 }

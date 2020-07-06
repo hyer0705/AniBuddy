@@ -97,7 +97,7 @@ $(document).ready(function(){
 		<ul class="dropdown-menu" role="menu">
 			
 			<li><a href="/anibuddy/board/main">나눔&중고거래</a></li>
-			<li><a href="#">봉사</a></li>
+			<li><a href="/anibuddy/board/help">봉사</a></li>
 			<li><a href="/anibuddy/board/expert">전문가QnA</a></li>
 			<li><a href="/anibuddy/board/free">자유 게시판</a></li>
 		</ul>
@@ -114,14 +114,14 @@ $(document).ready(function(){
 		</tr>
 		<c:forEach items="${share }" var="share">
 			<tr>
-				<td><input type="checkbox" name="checkRow"value="${share.postNo }" /></td>
-				<td><a href="/anibuddy/share/answer?post_no=${share.postNo }">${share.postNo }</a></td>
-				<td><a href="/anibuddy/share/answer?post_no=${share.postNo }">${share.title }</a></td>
-				<td><a href="/anibuddy/share/answer?post_no=${share.postNo }">${share.userNo }</a></td>
-				<td><a href="/anibuddy/share/answer?post_no=${share.postNo }">
-						<fmt:formatDate value="${share.writeDate }" pattern="yyyy.MM.dd" />
+				<td><input type="checkbox" name="checkRow"value="${share.postno }" /></td>
+				<td><a href="/anibuddy/share/view?post_no=${share.postno }">${share.postno }</a></td>
+				<td><a href="/anibuddy/share/view?post_no=${share.postno }">${share.title }</a></td>
+				<td><a href="/anibuddy/share/view?post_no=${share.postno }">${share.userno }</a></td>
+				<td><a href="/anibuddy/share/view?post_no=${share.postno }">
+						<fmt:formatDate value="${share.writedate }" pattern="yyyy.MM.dd" />
 				</a></td>
-				<td><a href="/anibuddy/share/answer?post_no=${share.postNo }">${share.dealProgress }</a></td>
+				<td><a href="/anibuddy/share/view?post_no=${share.postno }">${share.dealProgress }</a></td>
 			</tr>
 		</c:forEach>
 	</table>

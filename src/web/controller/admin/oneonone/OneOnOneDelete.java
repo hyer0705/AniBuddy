@@ -30,10 +30,10 @@ public class OneOnOneDelete extends HttpServlet {
 		}
 		
 		// 일반 사용자 일 때
-		if( req.getSession().getAttribute("login") != null) {
-			resp.sendRedirect("/anibuddy/mypage/oneononelist");
-			return;
-		}
+//		if( req.getSession().getAttribute("login") != null || req.getSession().getAttribute("adminLogin") == null) {
+//			resp.sendRedirect("/anibuddy/mypage/oneononelist");
+//			return;
+//		}
 
 		resp.sendRedirect( req.getContextPath() + "/oneonone/reply");
 

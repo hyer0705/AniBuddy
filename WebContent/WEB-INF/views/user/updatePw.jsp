@@ -17,7 +17,11 @@
 <!-- external javascript file -->
 
 <script type="text/javascript" src="../js/updatePw.js"></script>
-
+<style type="text/css">
+#footer{
+	line-height: 25px;
+}
+</style>
 </head>
 <body>
 

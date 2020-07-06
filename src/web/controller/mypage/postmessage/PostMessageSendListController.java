@@ -33,7 +33,7 @@ public class PostMessageSendListController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/sendpmlist - [GET]");
+//		System.out.println("/anibuddy/mypage/sendpmlist - [GET]");
 		
 		// 페이징 정보 설정
 		Paging paging = pmService.getSendPaging(req);

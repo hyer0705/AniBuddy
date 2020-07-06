@@ -29,7 +29,7 @@ public class MypageOneOnOneWriteController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/oneononewrite - [GET]");
+//		System.out.println("/anibuddy/mypage/oneononewrite - [GET]");
 		
 		req.getRequestDispatcher("/WEB-INF/views/mypage/oneonone_write.jsp")
 			.forward(req, resp);
@@ -44,7 +44,7 @@ public class MypageOneOnOneWriteController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/oneononewrite - [POST]");
+//		System.out.println("/anibuddy/mypage/oneononewrite - [POST]");
 		
 		// 작성글 삽입
 		userO3Service.write(req);

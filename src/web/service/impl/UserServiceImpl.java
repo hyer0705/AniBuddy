@@ -199,7 +199,7 @@ public class UserServiceImpl implements UserService{
 		String userid = null;
 		if( req.getParameter("userid") != null ) { // 파라미터 값 아이디가 비어있지 않을 때(존재할 때)
 			userid = req.getParameter("userid");
-			System.out.println("UserServiceImpl getFindUser() - userid: " + userid);
+//			System.out.println("UserServiceImpl getFindUser() - userid: " + userid);
 			user.setUserId(userid);
 		}
 		

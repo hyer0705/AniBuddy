@@ -98,4 +98,7 @@ public class HelpPost {
 		this.usernick = usernick;
 	}
 	
+	
+	
+	
 }

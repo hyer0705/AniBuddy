@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<jsp:include page="/layout/header.jsp"></jsp:include>
+<jsp:include page="/layout/header1.jsp"></jsp:include>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -20,6 +20,11 @@ $(document).ready(function() {
 // 		console.log("쪽지함 clicked")
 		$(location).attr("href", "/anibuddy/mypage/pmlist")
 	})
+
+	$("#toActivity").on("click", function(){
+// 		console.log("활동내역 clicked")
+		$(location).attr("href", "/anibuddy/activity/postlist")
+	})
 	
 })
 </script>
@@ -35,7 +40,7 @@ $(document).ready(function() {
 			<span>회원정보 수정하기</span>
 		</div>
 	</div>
-	<div class="menu-card">
+	<div class="menu-card" id="toActivity">
 		<div class="menu-card__icon"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></div>
 		<div class="menu-card__title">
 			<h4>활동 내역</h4>

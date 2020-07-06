@@ -33,7 +33,7 @@ public class UserNickCheckController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/user/chkNick - [POST] ");
+//		System.out.println("/user/chkNick - [POST] ");
 		
 		// 보내는 파일 한글 인코딩
 		resp.setContentType("application/json;charset=utf-8");

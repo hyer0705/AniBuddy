@@ -24,6 +24,9 @@ html, body {
 .input-empty{
 	display: none;
 }
+#footer{
+	line-height: 25px;
+}
 
 </style>
 </head>

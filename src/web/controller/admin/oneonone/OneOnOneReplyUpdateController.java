@@ -34,21 +34,21 @@ public class OneOnOneReplyUpdateController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/oneonone/replyupdate - [GET]");
+//		System.out.println("/anibuddy/oneonone/replyupdate - [GET]");
 		
 		// 1:1 문의 내용 얻어오기 - 제목, 내용
 		//	1) 문의 번호 얻기
 		OneOnOne o3 = o3Service.getparam(req);
-		System.out.println("O3ReplyController o3: " + o3);
+//		System.out.println("O3ReplyController o3: " + o3);
 
 		// 1:1 문의 답변 얻어오기
 		OneOnOne q = o3Service.getOneOnOneByNo(o3);
-		System.out.println("O3ReplyupdateController q: " + q);
+//		System.out.println("O3ReplyupdateController q: " + q);
 		
 		//	2) 문의 번호를 통해서 해당 문의글 조회하기
 		//	지금은 답변글의 번호를 통해 질문글을 찾는 방법을 사용
 		o3 = o3Service.getOneOnOneByReplyNo(o3);
-		System.out.println("O3ReplyupdateController o3: " + o3);
+//		System.out.println("O3ReplyupdateController o3: " + o3);
 
 		//	3) 문의글 객체를 통해 사용자 아이디 얻기 
 		// 답변글인 경우 다른 식으로 사용자 검색!

@@ -35,7 +35,7 @@ public class MypageOneOnOneListController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/oneononelist - [GET]");
+//		System.out.println("/anibuddy/mypage/oneononelist - [GET]");
 		
 		// 페이징 정보 설정
 		Paging paging = usero3Service.getPaging(req);

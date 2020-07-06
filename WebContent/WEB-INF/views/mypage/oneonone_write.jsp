@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/layout/header.jsp"></jsp:include>
+<jsp:include page="/layout/header1.jsp"></jsp:include>
 
 
 <!-- 네이버 스마트 에디터2 라이브러리 -->

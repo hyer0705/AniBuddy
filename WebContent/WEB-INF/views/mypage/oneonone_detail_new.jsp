@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/layout/header.jsp"></jsp:include>
+<jsp:include page="/layout/header1.jsp"></jsp:include>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -44,7 +44,7 @@ $(document).ready(function(){
 		
 		
 		<tr><td class=""  colspan="4">본문</td></tr>
-		<tr><td class="height300" colspan="4">${detailO3.content }</td></tr>
+		<tr><td class="height300 text-left" colspan="4">${detailO3.content }</td></tr>
 		
 		<c:if test="${not empty q }">
 		<tr><td class=""  colspan="4">답변</td></tr>

@@ -17,51 +17,58 @@ import web.dao.face.HangOutDao;
 import web.dao.face.UserDao;
 import web.dao.impl.HangOutDaoImpl;
 import web.dao.impl.UserDaoImpl;
+import web.dto.BookMarkHangOut;
 import web.dto.HangOut;
 import web.dto.HangOutFile;
+import web.dto.PostMessage;
 import web.dto.UserTB;
 import web.service.face.HangOutService;
+import web.util.Paging;
 
-public class HangOutServiceImpl implements HangOutService{
+public class HangOutServiceImpl implements HangOutService {
 
-	private HangOutDao hangoutDao = new HangOutDaoImpl();
+	HangOutDao hangoutDao = new HangOutDaoImpl();
 	
 	@Override
 	public List<HangOut> list() {
+
 		return hangoutDao.selectAll();
 	}
-	
+
 	@Override
-	public List<HangOutFile> fileList() {
-		return hangoutDao.selectFileAll();
-	}
-	
-	@Override
-	public List<HangOut> viewPlaceList(HangOut hangout, String[] filters){
+	public List<HangOut> viewPlaceList(HangOut hangout, String[] filters) {
 		
 		String city1 = hangout.gethCity1(); 
 		String city2 = hangout.gethCity2(); 
 		
-		if(filters.length == 0) {
-			return hangoutDao.selectByCity(hangout);
-			
-		} else if(city1.equals("") && city2.equals("")) {
-			return hangoutDao.selectByFilter(filters);
-			
-		} else if(!city1.equals("") && city2.equals("")) {
-			return hangoutDao.selectByCity1(hangout, filters);
-			
-		} else if(!city1.equals("") && !city2.equals("")){
-			return hangoutDao.selectByCityFilter(hangout, filters);
+		String result = "";
+		for(String a : filters) {
+			result += a;
 		}
 		
-		return null;
+			if(result.equals("")) {
+				if(!city1.equals("") && city2.equals("")) {
+					return hangoutDao.selectByCity1(hangout);
+				} else if (!city1.equals("") && !city2.equals("")){
+					return hangoutDao.selectByCity(hangout);
+				}
+			} else {
+				if(city1.equals("") && city2.equals("")) {
+					return hangoutDao.selectByFilter(filters);
+				} else if(!city1.equals("") && city2.equals("")) {
+					return hangoutDao.selectByCity1(hangout, filters);
+				} else if(!city1.equals("") && !city2.equals("")) {
+					return hangoutDao.selectByCityFilter(hangout, filters);
+				}
+			}
+
 		
+		return null;
 	}
-	
+
 	@Override
 	public HangOut gethNo(HttpServletRequest req) {
-
+		
 		HangOut hangout = new HangOut();
 		
 		int hNo = Integer.parseInt((String)req.getParameter("hNo"));
@@ -70,19 +77,13 @@ public class HangOutServiceImpl implements HangOutService{
 		
 		return hangout;
 	}
-	
+
 	@Override
 	public HangOut view(HangOut hangout) {
 		
 		return hangoutDao.selectByhNo(hangout);
 	}
-	
-	@Override
-	public HangOutFile viewFile(HangOut hangout) {
-		
-		return hangoutDao.selectFileByhNo(hangout);
-	}
-	
+
 	@Override
 	public void addPlace(HttpServletRequest req) {
 
@@ -97,7 +98,7 @@ public class HangOutServiceImpl implements HangOutService{
 		isMultipart = ServletFileUpload.isMultipartContent(req);
 		
 		if(!isMultipart) {
-			System.out.println("[ERROR] multipart/form-data 형식이 아님");
+//			System.out.println("[ERROR] multipart/form-data 형식이 아님");
 			
 			return;
 		}
@@ -111,8 +112,7 @@ public class HangOutServiceImpl implements HangOutService{
 		
 		factory.setSizeThreshold(1 * 1024 * 1024);
 		
-		System.out.println("insert - req.getServletContext().getRealPath: " + req.getServletContext().getRealPath("tmp"));
-		System.out.println("insert - req.getServletContext().getRealPath: " + req.getServletContext().getRealPath("upload"));
+		
 		File repository = new File(req.getServletContext().getRealPath("tmp")); //임시 저장 폴더
 		factory.setRepository(repository);
 		
@@ -239,18 +239,11 @@ public class HangOutServiceImpl implements HangOutService{
 				String u = uuid.toString().split("-")[0];
 				
 				
-//				List<File> files = new ArrayList<>();
-//
-//				for(int i=0; i<files.size(); i++) {
 				
 					File up = new File(
 							req.getServletContext().getRealPath("upload")
 							,item.getName() + "_" + u 
 							);
-
-//				}
-				
-				
 
 
 				hangoutFile = new HangOutFile();
@@ -294,12 +287,12 @@ public class HangOutServiceImpl implements HangOutService{
 			hangoutFile.sethNo(hNo);
 			hangoutFile.setUserNo(userTB.getUserNo());
 			
-			
 			hangoutDao.insertFile(hangoutFile);
 		}
 		
+		
 	}
-	
+
 	@Override
 	public void delete(HangOut hangout) {
 		
@@ -308,7 +301,119 @@ public class HangOutServiceImpl implements HangOutService{
 		
 		hangoutDao.deleteFile(hangoutFile);
 		hangoutDao.delete(hangout);
+
+	}
+
+	@Override
+	public List<HangOutFile> fileList() {
 		
+		return hangoutDao.selectFileAll();
+	}
+
+	@Override
+	public HangOutFile viewFile(HangOut hangout) {
+		
+		return hangoutDao.selectFileByhNo(hangout);
+	}
+
+	@Override
+	public List<HangOut> viewLocation(HangOut hangout) {
+		String city1 = hangout.gethCity1();
+		
+		if(!city1.equals("")) {
+//			System.out.println("도시1, 도시명 검색");
+			return hangoutDao.selectByNameCity1(hangout);
+		} else if(city1.equals("")) {
+//			System.out.println("도시명 검색");
+			return hangoutDao.selectByName(hangout);
+		}
+		
+		return null;
+	}
+
+	@Override
+	public List<HangOut> viewCity(HangOut hangout) {
+		
+		return hangoutDao.selectByCity1(hangout);
+	}
+
+	@Override
+	public List<BookMarkHangOut> bmList() {
+		
+		return hangoutDao.selectBookMarkList();
+	}
+
+	@Override
+	public void deleteBookMark(BookMarkHangOut bm) {
+		
+		hangoutDao.deleteBookMark(bm);
+	}
+
+	@Override
+	public void insertBookMark(BookMarkHangOut bm) {
+		
+		hangoutDao.insertBookMark(bm);
+	}
+
+	@Override
+	public void delete(String names) {
+		hangoutDao.delete(names);
+	}
+
+	@Override
+	public BookMarkHangOut getParamBmNo(HttpServletRequest req) {
+		// 한글 인코딩
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		// 결과 객체
+		BookMarkHangOut bm = new BookMarkHangOut();
+		
+		String param = req.getParameter("bm_no");
+		if(param != null && !"".equals(param)) {
+			bm.setBmNo(Integer.parseInt(param));
+		}
+		
+		return bm;
+	}
+
+	@Override
+	public void deleteBookMarkNo(BookMarkHangOut bm) {
+		
+		hangoutDao.deleteBookMarkNo(bm);
+	}
+
+	@Override
+	public Paging getPaging(HttpServletRequest req) {
+		// 한글 인코딩
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		// 현재 페이지
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if( param != null && !"".equals(param) ) {
+			curPage = Integer.parseInt(param);
+		}
+		
+		
+		// 현재 사용자의 번호로 찜한 장소 목록 조회
+		int userno = (int)req.getSession().getAttribute("userno");
+		UserTB currUser = new UserTB();
+		currUser.setUserNo(userno);
+		// BookMarkHangOut 테이블의 총 게시글 수를 조회한다
+		int totalCnt = hangoutDao.selectCntAllByUserno(currUser);
+		
+		// Paging 객체 생성 - 현재 페이지(curPage), 총 게시글 수 (totalCnt) 활용
+		Paging paging = new Paging(totalCnt, curPage);
+		
+		return paging;
 	}
 	
 }

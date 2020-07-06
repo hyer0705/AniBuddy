@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <jsp:include page="/layout/header.jsp"></jsp:include>
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/hangout.css" />
@@ -9,7 +9,14 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	   
+	
+	$(".thumb-image").each(function() {
+		if($(this).find("img").length == 0) {
+			$(this).prepend($("<img src='<%=request.getContextPath() %>/img/no-image.png' width='289.8' height='215'/>"))
+		}
+	})
+
+
 	
 	   $("#btnSearch").click(function() {
 
@@ -22,20 +29,49 @@ $(document).ready(function() {
 					, city2: $("#city2").val()
 					, h_filters: $("#h_filters").val()
 				}
-				, error: function(error) {
-					console.log(error)
+				, error: function() {
 					alert("[ERROR]검색 에러")
 					
 				}
 				, success: function(h) {
-					console.log(h)
-					$(".searchList").html(h)
+					$(".p-searchList").html(h)
 					
+					$(".thumb-image").each(function() {
+						if($(this).find("img").length == 0) {
+							$(this).prepend($("<img src='<%=request.getContextPath() %>/img/no-image.png' width='289.8' height='215'/>"))
+						}
+					})
+					
+					$("#load").css('display', 'inline-block');
+					var total_li = $(".p-searchList .row").length;
+					var view_list = 6;
+					
+					for (var i=0; i<view_list;i++ )	{
+						$(".p-searchList .row").eq(i).css('display', 'inline-block');
+					}
+					
+					if($(".row:visible").size()==total_li) {
+						$("#load").css('display', 'none');
+					}				
+					
+					$("#load").click(function() {
+				
+							view_list += 6;
+				
+							for (var i=0; i<view_list;i++ )	{
+								$(".p-searchList .row").eq(i).fadeIn();
+								$(".p-searchList .row").eq(i).css('display', 'inline-block');
+							}
+							
+							if($(".row:visible").size()==total_li) {
+								$("#load").css('display', 'none');
+							}
+				
+					})
+
 				}
 			
-				
 			})
-
 
 	   });
 	   
@@ -58,8 +94,8 @@ $(document).ready(function() {
 	<h2>놀거리 <span class="h2-inner"> 장소 검색</span></h2>
 		
 	<div class="top-menu">
-		<button class="btn btn-info" id="btnLocation">위치검색</button>
-		<button class="btn btn-info" id="btnAdd">장소추가</button>
+		<button class="btn" id="btnLocation">위치검색</button>
+		<button class="btn" id="btnAdd">장소추가</button>
 	</div>
 </div>
 
@@ -67,13 +103,14 @@ $(document).ready(function() {
 
 <div class="p-content">
 
-<div class="frm">
-<form class="form">
-
-	<div class="c1">
-		<span class="contentTitle">위치</span> 
-			<select id="city1" name="city1" onchange="categoryChange(this)" class="form-control select-city">
-				<option value="">시/도</option>
+	<div class="frm">
+	
+	<form class="form">
+	
+		<div class="c1">
+			<div class="contentTitle">위치</div> 
+				<select id="city1" name="city1" onchange="categoryChange(this)" class="form-control select-city">
+					<option value="">시/도</option>
 				<option value='서울특별시'>서울특별시</option>
 				<option value='인천광역시'>인천광역시</option>
 				<option value='대전광역시'>대전광역시</option>
@@ -90,86 +127,136 @@ $(document).ready(function() {
 				<option value='경상북도'>경상북도</option>
 				<option value='경상남도'>경상남도</option>
 				<option value='제주도'>제주도</option>
-			</select>
-			<select id="city2" name="city2" class="form-control select-city">
-				<option value="">시/군/구</option>
-			</select>
-	</div>
-	
-	<div class="c2">
-		<span class="contentTitle">장소</span>	
-			<input type="button" id="cafe" name="h_filter" value="카페" class="btn btnF">
-			<input type="button" id="restaurant" name="h_filter" value="식당" class="btn btnF">
-			<input type="button" id="camp" name="h_filter" value="캠핑" class="btn btnF">
-			<input type="button" id="field" name="h_filter" value="운동장" class="btn btnF">
-			<input type="button" id="pension" name="h_filter" value="펜션" class="btn btnF">
-			<input type="button" id="etc" name="h_filter" value="기타" class="btn btnF">
-	</div>
-	
-	<div>
-		<span class="contentTitle">행사</span>	
-			<input type="button" id="expo" name="h_filter" value="박람회" class="btn btnF">
-			<input type="button" id="festival" name="h_filter" value="축제" class="btn btnF">
-			<input type="button" id="contest" name="h_filter" value="대회" class="btn btnF">
-	</div>
-	
-	<div class="c3">
-		<span class="contentTitle">필터</span>
-		<div class="filter">
-			<input type="button" value="전체" class="btn btnAll">
-			<div class="filter-select"></div>
-			<input type="hidden" id="h_filters" name="h_filters" />
-							
-			<button type="button" class="btn" id="btnSearch"><img alt="검색" src="../img/search.png" width="25px" height="25px"></button>
+				</select>
+				<select id="city2" name="city2" class="form-control select-city">
+					<option value="">시/군/구</option>
+				</select>
 		</div>
+		
+		<div class="c2">
+			<div class="contentTitle">장소</div>	
+				<input type="button" id="cafe" name="h_filter" value="카페" class="btn btnF">
+				<input type="button" id="restaurant" name="h_filter" value="식당" class="btn btnF">
+				<input type="button" id="camp" name="h_filter" value="캠핑" class="btn btnF">
+				<input type="button" id="field" name="h_filter" value="운동장" class="btn btnF">
+				<input type="button" id="pension" name="h_filter" value="펜션" class="btn btnF">
+				<input type="button" id="etc" name="h_filter" value="기타" class="btn btnF">
+		</div>
+		
+		<div>
+			<div class="contentTitle">행사</div>	
+				<input type="button" id="expo" name="h_filter" value="박람회" class="btn btnF">
+				<input type="button" id="festival" name="h_filter" value="축제" class="btn btnF">
+				<input type="button" id="contest" name="h_filter" value="대회" class="btn btnF">
+		</div>
+		
+		<div class="c3">
+			<div class="contentTitle">필터</div>
+			<div class="filter">
+	<!-- 			<input type="button" value="전체" class="btn btnAll"> -->
+				<div class="filter-select"></div>
+				<input type="hidden" id="h_filters" name="h_filters" />
+								
+				<button type="button" class="btn" id="btnSearch"><img alt="검색" src="<%=request.getContextPath() %>/img/search.png" width="25px" height="25px"></button>
+			</div>
+		</div>
+		
+	</form>
+	
 	</div>
-	
-</form>
 
-</div>
+<div class="m-image"></div>
 
-<div class="searchList">
+	<div class="p-searchList">
+	<c:forEach items="${list }" var="i">
 	
-<c:forEach items="${list }" var="i">
-	<div class="placeContent">
-		<div class="placeImg" id="placeImg" onclick="location.href='<%=request.getContextPath() %>/hangout/view?hNo=${i.hNo}'">
-			<c:forEach items="${fileList }" var="j">
+	<div class="row" id="row">
+	  <div class="col-sm-6 col-md-4">
+	    <div class="thumbnail">
+	    	<div class="thumb-image">
+	    	<c:forEach items="${fileList }" var="j">
 				<c:if test="${j.hNo eq i.hNo }">
-					<div>
-						<img src="<%=request.getContextPath() %>/upload/${j.storedName }" alt="장소 이미지" width="320" height="220">
-					</div> 
-				</c:if>
+	      			<img src="<%=request.getContextPath() %>/upload/${j.storedName }" alt="장소 이미지" width="289.8" height="215">
+	      		</c:if>
 			</c:forEach>
-		</div>
-		<div class="place" id="place" onclick="location.href='<%=request.getContextPath() %>/hangout/view?hNo=${i.hNo}'">
-			<p class="place-title">${i.hName }</p>
-			<p>분류 : ${i.hFilter }</p>
+			</div>
+	      <div class="caption">
+	        <h3>${i.hName }</h3>
+	        <p>분류 : ${i.hFilter }</p>
 			<p>주소 : ${i.hAddress }</p>
 			<p>운영시간 : ${i.hTime }</p>
 			<p>연락처 : ${i.hTel }</p>
 			<p>기타사항 : ${i.hContent }</p>
-			<p>사이트 주소 : ${i.hDomain }</p>
-		</div>
-		<c:if test="${i.userNo eq userno }">
-			<div class="delete-place" id="delete">
-				<button type="button" class="btn" id="btnDelete"
-				onclick="if(confirm('정말 삭제하시겠습니까?')==true){location.href='<%=request.getContextPath() %>/hangout/delete?hNo=${i.hNo }'} else return;">삭제</button>
+	      </div>
+			<div class="btnP">	
+				<button type="button" class="btn" id="btnView" 
+				onclick="location.href='<%=request.getContextPath()%>/hangout/view?hNo=${i.hNo}'">상세보기</button>
+				<c:if test="${(i.userNo eq userno) || adminLogin}">
+			        <button type="button" class="btn" id="btnDelete"
+			        onclick="if(confirm('정말 삭제하시겠습니까?')==true){location.href='<%=request.getContextPath() %>/hangout/delete?hNo=${i.hNo }'} else return;">삭제</button>
+				</c:if>
 			</div>
-		</c:if>
+			<div class="like" id="${i.hNo }" >
+				<c:if test="${not empty login }">
+				<div class="like1">
+					<img src='<%=request.getContextPath() %>/img/like.png' width='70' />
+				</div>
+				</c:if>
+				<div class="like2">
+					<img src="<%=request.getContextPath() %>/img/like2.png" width="70"/>
+				</div>
+				<c:forEach items="${bmList }" var="b">
+					<c:if test="${(b.hNo eq i.hNo) and (b.userNo eq userno)}">
+						<script>$("#${i.hNo} .like2").css('display', 'inline-block');</script>
+					</c:if>
+				</c:forEach>
+			</div>
+	    </div>
+	  </div>
 	</div>
-</c:forEach>
+		
+	</c:forEach>
+	</div>
 	
+	<div id="load" >더보기</div>
+
+
 
 </div>
 
-
-</div>
-
-
+<style>
+.row {
+	display: none;
+}
+</style>
 
 
 <script type="text/javascript">
-$(document).ready(function() {
+$(document).ready(function() {	
+
+	var total_li = $(".p-searchList .row").length;
+
+	var view_list = 6;
+	
+	for (var i=0; i<view_list;i++ )	{
+		$(".p-searchList .row").eq(i).css('display', 'inline-block');
+	}
+
+	
+	$("#load").click(function() {
+
+			view_list += 6;
+
+			for (var i=0; i<view_list;i++ )	{
+				$(".p-searchList .row").eq(i).fadeIn();
+				$(".p-searchList .row").eq(i).css('display', 'inline-block');
+			}
+			
+			if($(".row:visible").size()==total_li) {
+				$("#load").css('display', 'none');
+			}
+
+	})
 	
 	
 	$('.btnF').on('click', function() {
@@ -177,6 +264,7 @@ $(document).ready(function() {
 		if($(this).hasClass("pink")) {
 			
 			$(this).removeClass("pink");
+			$(this).addClass("btnF");
 			
 			var child = $(this).val();
 			$(".filter-select").children('.' + child).remove();
@@ -184,6 +272,7 @@ $(document).ready(function() {
 		} else {
 			
 			$(this).addClass("pink");
+			$(this).removeClass("btnF");
 			
 			var h = $(".filter-select").html();
 			
@@ -197,37 +286,52 @@ $(document).ready(function() {
 	});
 	
 	
-	$('.btnAll').on('click', function() {
-		
-		if($(this).hasClass("blue")) {
-			
-			$(this).removeClass("blue");
-			$(".btnF").removeClass("pink");
-			
-			$(".filter-select").children().remove();
-			$("#h_filters").val($(".filter-select").text())
-
-		} else {
-			
-			$(this).addClass("blue");
-			$(".btnF").addClass("pink");
-			
-			var h = $(".filter-select").html();
-			
-			for(i in $("input").filter(".btnF")) {
-				if($(".filter-select").children().length<9) {
-					h += "<span class='text " + $("input").filter(".btnF").eq(i).val() + "'>" + $("input").filter(".btnF").eq(i).val() + "</span> ";
-					$(".filter-select").html(h);
+	$(document).on("click", ".like1", function() {
+		var hNo = $(this).closest(".like").attr("id");
+		   $.ajax({
+				type: "post"
+				, url: "<%=request.getContextPath() %>/hangout/bmInsert"
+				, dataType: "html"
+				, data: {
+					hNo: hNo
 				}
-			}
-
-			$("#h_filters").val($(".filter-select").text())
-		}
-		
+				, error: function() {
+					alert("[ERROR]즐겨찾기 추가 오류")
+				}
+			})
+			
+			$(this).next().css('display', 'inline-block');
 	});
 	
 	
+	$(document).on("click", ".like2", function() {
+		var hNo = $(this).closest(".like").attr("id");
+		   $.ajax({
+				type: "post"
+				, url: "<%=request.getContextPath() %>/hangout/bmDelete"
+				, dataType: "html"
+				, data: {
+					hNo: hNo
+				}
+				, error: function() {
+					alert("[ERROR]즐겨찾기 삭제 오류")
+				}
+			})
+			$(this).css('display', 'none');
+	});
+	
+	
+
+	
+	
+	
 });
+
+
+
+
+		
+
 
 
 

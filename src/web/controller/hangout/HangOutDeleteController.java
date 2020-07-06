@@ -27,6 +27,7 @@ public class HangOutDeleteController extends HttpServlet {
 		String hNo = req.getParameter("hNo");
 		
 		HangOut hangout = new HangOut();
+		
 		hangout.sethNo(Integer.parseInt(hNo));
 		
 		hangoutService.delete(hangout);

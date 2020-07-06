@@ -10,7 +10,7 @@
 $(document).ready(function() {
 	//목록버튼 동작
 	$("#btnList").click(function() {
-		$(location).attr("href", "<%=request.getContextPath() %>/expertboard/list");
+		history.go(-1);
 	});
 	
 	//수정버튼 동작
@@ -142,8 +142,10 @@ margin-top: 70px;
 
 <tr><td class="danger"  colspan="4">본문</td></tr>
 <tr></tr>
-<tr><td colspan="4">${viewBoard.content }</td></tr>
-
+<tr><td colspan="4">
+<div class="text-center">
+<c:if test="${boardFile.fileno ne null}"><img src="<%=request.getContextPath() %>/upload/${boardFile.storedname }" width="500" ></c:if></div>
+${viewBoard.content }</td></tr>
 </table>
 
 
@@ -159,6 +161,9 @@ margin-top: 70px;
  		<button id="btnUpdate" class="btn btn-info btn-sm">수정</button> 
  		<button id="btnDelete" class="btn btn-danger btn-sm">삭제</button> 
 	</c:if> 
+ 	<c:if test="${adminLogin }"> 
+ 		<button id="btnDelete" class="btn btn-danger btn-sm">삭제</button> 
+	</c:if> 
 	
 	<c:if test="${isexpert eq 'Y' }">
 		<button id="btnReply" class="btn btn-default btn-sm">답변달기</button>
@@ -172,21 +177,36 @@ margin-top: 70px;
 <hr>
 <br><br>
 <!-- 비로그인상태 -->
-<c:if test="${not login }">
-<strong>로그인이 필요합니다</strong><br>
-<button onclick='location.href="<%=request.getContextPath() %>/user/login";'>로그인</button>
-<button onclick='location.href="<%=request.getContextPath() %>/user/join";'>회원가입</button>
-</c:if>
-
-<!-- 로그인상태 -->
-<c:if test="${login }">
-<!-- 댓글 입력 -->
-<div class="form-inline text-center">
-	<input type="text" size="10" class="form-control" id="commentWriter" value="${loginid }" readonly="readonly"/>
-	<textarea rows="2" cols="60" class="form-control" id="commentContent" style="height: 34px;"></textarea>
-	<button id="btnCommInsert" class="btn">입력</button>
-</div>	<!-- 댓글 입력 end -->
-</c:if>
+<c:choose>
+		<c:when test="${login }">
+				<div class="form-inline text-center">
+				<input type="text" size="10" class="form-control" id="commentWriter"
+					value="${loginid }" readonly="readonly" />
+				<textarea rows="2" cols="60" class="form-control"
+					id="commentContent" style="height: 34px;"></textarea>
+				<button id="btnCommInsert" class="btn">입력</button>
+			</div>
+			<!-- 댓글 입력 end --></c:when>
+		<c:otherwise>
+		<c:choose>
+			<c:when test="${adminLogin }" >
+					<div class="form-inline text-center">
+				<input type="text" size="10" class="form-control" id="commentWriter"
+					value="${adminid }" readonly="readonly" />
+				<textarea rows="2" cols="60" class="form-control"
+					id="commentContent" style="height: 34px;"></textarea>
+				<button id="btnCommInsert" class="btn">입력</button>
+			</div>
+			<!-- 댓글 입력 end --></c:when>
+			<c:otherwise>
+			<strong>로그인이 필요합니다</strong>
+			<br>
+			<button onclick='location.href="/anibuddy/user/login";'>로그인</button>
+			<button onclick='location.href="/anibuddy/user/join";'>회원가입</button>
+			</c:otherwise>
+			</c:choose>
+		</c:otherwise>
+	</c:choose>
 <br><br>
 <!-- 댓글 리스트 -->
 <table class="table table-striped table-hover table-condensed">
@@ -199,11 +219,18 @@ margin-top: 70px;
 	<th style="width: 5%;"></th>
 </tr>
 </thead>
-<tbody id="commentBody">
-<c:forEach items="${commentList }" var="comment">
+<tbody>
+<c:choose>
+	<c:when test="${empty commentList }">
+	<tr><td style="text-align: center;" colspan="4">작성된 댓글이 없습니다</td></tr>
+	</c:when>
+	<c:otherwise>
+	<c:forEach items="${commentList }" var="comment">
+
+<c:if test="${not empty commentList }">
 <tr data-commentno="${comment.commentno }">
 <%-- 	<td>${comment.rnum }</td> --%>
-	<td>${comment.userid }</td><!-- 닉네임으로 해도 좋음 -->
+	<td>${comment.userid }</td>
 	<td>${comment.content }</td>
 	<td><fmt:formatDate value="${comment.writedate }" pattern="yy-MM-dd" /></td> 
 	<td>
@@ -211,9 +238,15 @@ margin-top: 70px;
 		<button class="btn btn-default btn-xs"
 			onclick="deleteComment(${comment.commentno });">삭제</button>
 		</c:if>
+		<c:if test="${adminLogin  }">
+		<button class="btn btn-default btn-xs"
+			onclick="deleteComment(${comment.commentno });">삭제</button>
+		</c:if>
 	</td>
-</tr>
+</tr></c:if>
 </c:forEach>
+	</c:otherwise>
+</c:choose>
 </tbody>
 </table>	<!-- 댓글 리스트 end -->
 

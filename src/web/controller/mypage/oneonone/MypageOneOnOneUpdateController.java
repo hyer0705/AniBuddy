@@ -30,7 +30,7 @@ public class MypageOneOnOneUpdateController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/oneononeUpdate - [GET]");
+//		System.out.println("/anibuddy/mypage/oneononeUpdate - [GET]");
 		
 		// 게시글 번호 얻어오기
 		OneOnOne detail = userO3Service.getParam(req);
@@ -57,7 +57,7 @@ public class MypageOneOnOneUpdateController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/oneononeUpdate - [POST]");
+//		System.out.println("/anibuddy/mypage/oneononeUpdate - [POST]");
 		
 		userO3Service.update(req);
 		

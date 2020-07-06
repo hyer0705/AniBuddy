@@ -2,10 +2,12 @@ package web.dao.face;
 
 import java.util.List;
 
+import web.dto.Email;
 import web.dto.ExpertBoard;
 import web.dto.FreeBoard;
 import web.dto.HelpPost;
 import web.dto.SharePost;
+import web.dto.UserID;
 import web.util.Paging;
 
 public interface BoardDao {
@@ -23,7 +25,7 @@ public interface BoardDao {
 	 * @param paging
 	 * @return
 	 */
-	List<SharePost> selectShare(Paging paging);
+	List<UserID> selectShare(Paging paging);
 
 	/**
 	 * 전문가 게시판 글 조회
@@ -129,5 +131,15 @@ public interface BoardDao {
 	 * @param param
 	 */
 	void deleteHelp(String param);
+	  /**
+	    * 보낸 메일 조회
+	    * @param paging
+	    * @return
+	    */
+	List<Email> selectMail(Paging paging);
+
+	int selectCntMailSearch(String search);
+
+	int selectCntMail();
 
 }

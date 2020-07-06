@@ -18,7 +18,7 @@ public class AdminPageMainController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/admin/main - [GET] ");
+//		System.out.println("/anibuddy/admin/main - [GET] ");
 		
 		req.getRequestDispatcher("/WEB-INF/views/admin/admin_main.jsp")
 			.forward(req, resp);

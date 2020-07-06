@@ -29,12 +29,12 @@ public interface UserManageDao {
 	 */
 	void deleteUser(String param);
 
-	/**
-	 * 검색어를 입력했을 때 페이징
-	 * 
-	 * @param search - 사용자가 입력한 검색어
-	 * @return int - 검색어에 의해 조회된 행의 갯수 반환
-	 */
+	
+	
+	List<UserTB> selectUser();
+
+	
+	
 	int selectCntBySearch(String search);
 
 }

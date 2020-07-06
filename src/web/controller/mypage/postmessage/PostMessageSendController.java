@@ -33,15 +33,15 @@ public class PostMessageSendController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/sendpm - [GET]");
+//		System.out.println("/anibuddy/mypage/sendpm - [GET]");
 		
 		// pm_recipient_id 로 사용자 번호 설정
 		UserTB recipient = pmService.getUserByRecipientId(req);
-		System.out.println("PMSendController recipient 조회 전: " + recipient);
+//		System.out.println("PMSendController recipient 조회 전: " + recipient);
 		
 		// 사용자 조회
 		recipient = userService.getFindUserByUserno(recipient);
-		System.out.println("PMSendController recipient 조회 후: " + recipient);
+//		System.out.println("PMSendController recipient 조회 후: " + recipient);
 		
 		
 		// req 받는 사람 설정
@@ -61,7 +61,7 @@ public class PostMessageSendController extends HttpServlet {
 			return;
 		}
 
-		System.out.println("/anibuddy/mypage/sendpm - [POST]");
+//		System.out.println("/anibuddy/mypage/sendpm - [POST]");
 		
 		pmService.write(req);
 		

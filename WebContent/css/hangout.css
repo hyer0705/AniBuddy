@@ -11,8 +11,22 @@ h2 {
 	margin-top: 20px;
 }
 
+#btnLocation, #btnAdd {
+	width: 85px;
+	height: 40px;
+	margin-left: 6px;
+}
+
+#btnAdd {
+	background-color: #ffaf9a;
+}
+
 .filter, .filter-select {
 	display: inline-block;
+}
+
+.filter {
+	vertical-align: middle;
 }
 
 .filter-select {
@@ -20,31 +34,56 @@ h2 {
 	margin-left: 10px;
 	color: #99d4d9;
 	font-weight: bold;
+	height: 20px;
+	vertical-align: middle;
+    margin-top: 11px;
 }
 
 .pink {
-	background-color: #ffaf9a;
+/* 	background-color: #ffaf9a; */
+	background-color: #ffffff;
+	color: #ffaf9a;
+	border: 2px solid #ffaf9a;
+	border-radius: 20px;
+}
+
+.pink:hover, .pink:focus {
+	color: #ffaf9a;
 }
 
 .blue {
 	background-color: #99d4d9;
 }
 
-.btnAll {
-	color: black;
-	margin-left: 10px;
-	text-align: center;
+.btnF {
+	border: 2px solid #cacaca;
+	background: #ffffff;
+	border-radius: 20px;
 }
+
+.btnF:hover {
+	color: #cacaca;
+}
+
+
+/* .btnAll { */
+/* 	color: black; */
+/* 	margin-left: 10px; */
+/* 	text-align: center; */
+/* } */
 
 #btnSearch {
 	background-color: #99d4d9;
+	height: 48px;
 }
 
 
 .contentTitle {
-	font-size: 1.5em;
+	display: inline-block;
+	font-size: 1.6em;
 	font-weight: bold;
 	margin-right: 30px;
+	vertical-align: middle;
 }
 
 .top {
@@ -53,7 +92,8 @@ h2 {
 }
 
 .p-content {
-	margin: 0 50px;
+	width: 1000px;
+	margin: 70px auto;
 }
 
 .c1, .c2, .c3 {
@@ -67,7 +107,7 @@ h2 {
 
 input[type=button] {
 	width: 80px;
-	height: 40px;
+	height: 43px;
 	margin: 0 10px;
 }
 
@@ -80,22 +120,19 @@ input[type=button] {
 }
 
 .searchList {
-	width: 770px;
-	height: 830px;
-	border: 1px solid #efefef;
-	padding: 10px;
-	margin: 90px auto;
-	overflow-y: scroll;
-	padding-top: 0px;
+    width: 411px;
+    height: 710px;
+    border: 1px solid #efefef;
+    margin: 70px auto;
+    overflow-y: scroll;
+    float: right;
+    margin-right: -12px;
 }
 
 .placeContent {
-	width: 750px;
-/* 	margin-bottom: 17px; */
-/* 	border: 2px solid #99d4d9; */
-	border-bottom: 2px solid #99d4d9;
-	margin-left: -10px;
-/* 	margin-top: 20px; */
+	width: 390px;
+    border-bottom: 1px solid #e4e4e4;
+    position: relative;
 }
 
 .placeContent:hover {
@@ -109,18 +146,16 @@ input[type=button] {
 }
 
 .place {
-/* 	margin: 5px 0 5px 35px; */
-	margin: 10px 0 0px 35px;
-    width: 330px;
-    height: 210px;
+	width: 325px;
+    height: 185px;
     display: inline-block;
+    padding-top: 10px;
+    padding-left: 10px;
 }
 
 .placeImg {
 	width: 310px;
 	height: 200px;
-/* 	background-repeat: no-repeat; */
-/*     background-size: contain; */
 	float: left;
 }
 
@@ -131,28 +166,127 @@ input[type=button] {
 .frm {
 	width: 900px;
 	padding: 20px;
-	margin: 35px 0 auto auto;
+	margin: 20px auto 80px auto;
 	box-shadow: 0 0 10px 5px rgba(0,0,0,0.1);
 }
 
 .form {
 	margin: 25px;
+	padding-left: 30px;
 }
 
 .delete-place {
 	float: right;
-	margin-right: 13px;
-	margin-top: 11px;
+	margin-right: 10px;
+	margin-top: 10px;
 }
 
 .delete-place button {
 	cursor: default;
-	z-index: 30;
 }
 
 p {
 	margin: 0 0 8px;
 }
+.b-plc, .b-add {
+   width: 85px;
+   height: 40px;
+   margin-left: 6px;
+}
+
+
+.thumb-image {
+	width: 289.8px;
+	height: 220px;
+}
+
+.thumbnail {
+	width: 300px;
+	height: 515px;
+	position: relative;
+}
+
+.thumbnail:hover {
+	cursor: default;
+	background-color: #fffff4;
+}
+
+.thumbnail h3 {
+	font-weight: bold;
+	margin-top: 8px;
+	margin-bottom: 20px;
+	display: inline-block;
+}
+
+#btnView {
+	background-color: #feb42ac4;
+}
+
+.row {
+	width: 300px;
+	display: inline-block;
+	margin: 0 10px;
+}
+
+
+.btnP {
+	display: inline-block;
+	position: absolute;
+    bottom: 15px;
+    left: 10px;
+}
+
+.like {
+	right: 5px;
+	bottom: 7px;
+	display: inline-block; 
+	position: absolute;	
+	cursor: pointer;
+}
+
+.like1 {
+	position: relative;
+	z-index: 1;
+	right: 5px;
+	bottom: 4px;
+}
+
+.like2 {
+	position: absolute;
+	z-index: 2;
+	right: 5px;
+	bottom: 4px;
+	display: none;
+}
+
+.caption {
+	padding-bottom: 0px;
+}
+
+#load {
+	display: inline-block;
+	width: 1000px;
+	text-align: center;
+	height: 45px;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	padding-top: 15px;
+}
+
+#load:hover {
+	cursor: pointer;
+}
+
+.m-image {
+	background-image: url('/anibuddy/img/m-image.jpg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	width: 1000px;
+	height: 200px;
+	margin: 120px 0 30px;
+}
+
 
 
 /* addPlace */
@@ -206,31 +340,42 @@ p {
 
 .form-horizontal {
 	padding-left: 15px;
+	margin-top: 40px;
 	width: 850px;
 }
 
 .btnAdd {
-	margin: 23px 40%;
+	height: 40px;
+    width: 90px;
+    background-color: #ffaf9a;
+}
+
+.btnCancel {
 	height: 40px;
     width: 90px;
 }
 
+.btnArea {
+	margin: 30px 8px 50px 33%;
+}
+
 .file {
 	display: inline-block;
-/*     padding: 5px 10px; */
-/*     color: #999; */
 	color: white;
     font-size: 15px;
     line-height: normal;
     vertical-align: middle;
     background-color: #ffaf9a;
     cursor: pointer;
-/*     border: 1px solid #ebebeb; */
     border-bottom-color: #e2e2e2;
     border-radius: .25em;
     margin-top: 1px;
     height: 35px;
     padding: 7.5px 10px 5px 10px;
+}
+
+.file-div {
+	width: 500px;
 }
 
 input[type=file] {
@@ -239,7 +384,7 @@ input[type=file] {
 	z-index: -10; 
 	border: 0; 
 	outline: none;
-	z-index: -10; 
+	opacity: 0;
 }
 
 .ad1, .ad2 {
@@ -266,19 +411,20 @@ input[type=file] {
 
 /* viewPlace */
 
+.view-top-menu {
+	float: right;
+	margin-top: 10px;
+}
+
 .view-content {
 	margin: 5px auto 100px auto;
-	width: 870px;
+	width: 900px;
 }
 
 .hName {
 	font-weight: bold;
 	font-size: 1.8em;
 	display: inline-block;
-}
-
-.info {
-	margin: 20px 0;
 }
 
 .info-title {
@@ -292,7 +438,7 @@ input[type=file] {
 .info-content {
 	display: inline-block;
 	font-size: 1.2em;
-	width: 270px;
+	width: 300px;
 }
 
 .place-name {
@@ -301,6 +447,7 @@ input[type=file] {
 
 .info {
 	margin-bottom: 10px;
+	margin: 20px 0;
 }
 
 .filter-icon {
@@ -337,12 +484,15 @@ input[type=file] {
 }
 
 #map {
-	margin-top: 70px;
+	margin: 80px;
 }
 
 .view-delete {
+	width: 85px;
+	height: 40px;
 	background-color: #ffbf00;
 	color: white;
+	padding-top: 9px;
 }
 
 .view-delete:hover {
@@ -357,7 +507,10 @@ input[type=file] {
 }
 
 .view-list {
+	width: 85px;
+	height: 40px;
 	margin: 11px 8px 0 0;
+	padding-top: 8px;
 }
 
 .view-list:hover {
@@ -370,5 +523,96 @@ input[type=file] {
 	text-align:center;
 	padding:6px 0;
 	border-radius: 10px;
+}
+
+
+/* 위치검색 */
+#delete {
+	margin-bottom: 8px;
+}
+
+.select-city1 {
+	border: none;
+    width: 110px;
+    height: 35px;
+    -webkit-appearance: none; /*네이티브 외형 감추기 */
+    font-size: 1.2em;
+}
+
+.city1 {
+	display: inline-block;
+	margin-top: 11px;
+    margin-left: 5px;
+}
+
+.loc-content {
+	margin: 0 auto;
+	width: 940px;
+	height: 800px;
+	margin-bottom: 130px;
+}
+
+
+#btnSearch {
+	background-color: #99d4d9;
+    width: 52px;
+    height: 48px;
+    border: 0px;
+    outline: none;
+    float: right;
+/*     border-radius: 3px; */
+}
+
+#search {
+    width: 390px;
+    border: 0px;
+    font-size: 16px;
+    padding: 10px;
+    outline: none;
+    float: left;
+    margin-top: 2px;
+    margin-left: 5px;
+}
+
+.search-form {
+	background: #ffffff;
+    border: 2px solid #99d4d9;
+    width: 451px;
+    height: 50px;
+    margin-top: 70px;
+    float: left;
+    border-radius: 5px;
+/*     margin-left: 10px; */
+}
+
+#searchMap {
+	float: left;
+	margin-top: 10px;
+	margin-left: -23px;
+}
+
+.btnL {
+	display: inline-block;
+	position: absolute;
+}
+
+.l-like {
+	right: 5px;
+    bottom: 5px;
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+}
+
+.l-like1 {
+	position: relative;
+	z-index: 1;
+}
+
+.l-like2 {
+	position: absolute;
+	z-index: 2;
+	bottom: 0px;
+	display: none;
 }
 

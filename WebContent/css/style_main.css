@@ -18,6 +18,14 @@
 /*   	box-shadow: 0 0 10px 5px rgba(0,0,0,0.1); */
 	overflow:hidden;
 }
+
+.boxText {
+	white-space: pre-line;
+    font-size: 17px;
+    padding: 50px;
+    line-height: 28px;
+}
+
 .boxItem {
 	float: left;
 	position: relative;
@@ -41,13 +49,6 @@
 }
 .intro3Img {
 	background-image: url(../img/intro3.png);
-}
-.boxText {
-	white-space: pre-line;
-	font-size: 16px;
-	padding: 50px;
-/* 	//font-family: 'Noto Sans KR', sans-serif; */
-  line-height: 20px;
 }
 .fwBold {
 	font-weight: bold;

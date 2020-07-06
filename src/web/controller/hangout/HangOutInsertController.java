@@ -23,13 +23,6 @@ public class HangOutInsertController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		if(req.getSession().getAttribute("login") == null) {
-			
-			resp.sendRedirect("/anibuddy/");
-			
-			return;
-		}
 		
 		HttpSession session = req.getSession();
 
@@ -41,18 +34,11 @@ public class HangOutInsertController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		if(req.getSession().getAttribute("login") == null) {
-
-			resp.sendRedirect("/anibuddy/");
-
-			return;
-		}
 		
 		// 한글 인코딩
 		req.setCharacterEncoding("UTF-8");
 		
-		System.out.println("hangout/insert - [POST]");
+//		System.out.println("hangout/insert - [POST]");
 		
 		hangoutService.addPlace(req);
 		

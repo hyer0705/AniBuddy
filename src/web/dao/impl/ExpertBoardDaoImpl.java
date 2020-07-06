@@ -259,6 +259,8 @@ public class ExpertBoardDaoImpl implements ExpertBoardDao{
 
 	@Override
 	public void insert(ExpertBoard board) {
+		System.out.println("dao insert()");
+		
 		conn = JDBCTemplate.getConnection();
 		
 		String sql = ""; 
@@ -288,11 +290,13 @@ public class ExpertBoardDaoImpl implements ExpertBoardDao{
 
 	@Override
 	public void insertFile(ExpertBoardFile boardFile) {
+		System.out.println("file dao insertFile()");
+		
 		conn = JDBCTemplate.getConnection();
 		
 		String sql = ""; 
 		sql += "INSERT INTO expert_file (fileno, post_no, origin_name, stored_name, filesize)";
-		sql += " VALUES ( boardfile_seq.nextval,?,?,?,?)";
+		sql += " VALUES ( expert_file_seq.nextval,?,?,?,?)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -428,6 +432,88 @@ public class ExpertBoardDaoImpl implements ExpertBoardDao{
 			JDBCTemplate.close(ps);
 		}
 		
+	}
+
+	@Override
+	public List<UserID> selectChart() {
+		conn = JDBCTemplate.getConnection();
+
+	      String sql = "";
+	      sql += "SELECT rownum, E.* FROM";
+	      sql += " (SELECT post_no, title, u.user_id, hit, write_date, range, is_expert, group_no, group_ord, depth";
+	      sql += " FROM expert_post p, user_tb u";
+	      sql += " WHERE u.user_no = p.user_no";
+	      sql += " ORDER BY hit DESC) E";
+	      sql += " WHERE rownum<4";
+	      
+	      List<UserID> list = new ArrayList<>();
+	      
+	      try {
+	         ps = conn.prepareStatement(sql);
+	         
+	         rs = ps.executeQuery();
+	         
+	         while(rs.next()) {
+	            UserID board = new UserID();
+	            
+	            board.setPostno(rs.getInt("post_no"));
+	            board.setTitle(rs.getString("title"));
+	            board.setUserid(rs.getString("user_id"));
+	            board.setHit(rs.getInt("hit"));
+	            board.setWritedate(rs.getDate("write_date"));
+	            board.setRange(rs.getString("range"));
+	            board.setIsexpert(rs.getString("is_expert"));
+	            board.setGroupno(rs.getInt("group_no"));
+	            board.setGroupord(rs.getInt("group_ord"));
+	            board.setDepth(rs.getInt("depth"));
+	            
+	            list.add(board);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         JDBCTemplate.close(rs);
+	         JDBCTemplate.close(ps);
+	      }
+	      return list;
+
+	}
+
+	@Override
+	public int selectCntExpertSearch(String search) {
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM expert_post";
+		sql += " WHERE 1=1";
+		sql += "    AND title LIKE '%'||?||'%'";
+		sql += " ORDER BY write_date DESC, post_no DESC";
+		
+		// 결과 반환 변수
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, search);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		
+		return cnt;
 	}
 
 }

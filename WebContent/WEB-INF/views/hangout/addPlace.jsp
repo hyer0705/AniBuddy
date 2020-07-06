@@ -27,7 +27,7 @@
 	
 	<div class="form-group">
 		<label class="control-label col-sm-2 lab" for="name">장소명</label>
-		<div class="col-sm-10"><input type="text" id="name" name="name" class="form-control add" placeholder="장소명을 입력해주세요"></div>
+		<div class="col-sm-10"><input type="text" id="name" name="name" class="form-control add" placeholder="장소명을 입력해주세요" required="required"></div>
 	</div>
 	
 	<div class="form-group">
@@ -54,7 +54,7 @@
 	<div class="form-group">
 		<label for="address" class="control-label col-sm-2 lab">주소</label>
 		<div class="col-sm-10">
-			<select id="city1" name="city1" onchange="categoryChange(this)" class="form-control ad1">
+			<select id="city1" name="city1" onchange="categoryChange(this)" class="form-control ad1" required="required">
 				<option value="">시/도</option>
 				<option value='서울특별시'>서울특별시</option>
 				<option value='인천광역시'>인천광역시</option>
@@ -73,21 +73,21 @@
 				<option value='경상남도'>경상남도</option>
 				<option value='제주도'>제주도</option>
 			</select>
-			<select id="city2" name="city2" class="form-control ad2">
+			<select id="city2" name="city2" class="form-control ad2" required="required">
 				<option value="">시/군/구</option>
 			</select>
 		
-			<input type="text" class="form-control add ad3" id="address" name="address" placeholder="상세주소를 입력해주세요">
+			<input type="text" class="form-control add ad3" id="address" name="address" placeholder="상세주소를 입력해주세요" required="required">
 		</div>
 	</div>
 	
 	<div class="form-group">
 		<label class="control-label col-sm-2 lab">사진 첨부</label>
-		<div class="col-sm-10"> 
-		<input type="file" id="file" name="file" >  <!-- multiple -->
-		<label class="file" for="file">사진 선택</label>
-<!-- 		<span class="img-info">사진은 최대 4장까지 추가할 수 있습니다</span> -->
-		<div id="preview"></div>
+		<div class="col-sm-10 file-div"> 
+			<input type="file" id="file" name="file" >
+			<label class="file" for="file">사진 선택</label>
+<!-- 			<span class="img-info">사진은 최대 4장까지 추가할 수 있습니다</span> -->
+			<div id="preview"></div>
 		</div>
 	</div>
 	
@@ -122,7 +122,10 @@
 		<div class="col-sm-10"><textarea id="content" name="content" placeholder="내용을 입력해주세요" class="form-control content" rows="4"></textarea></div>
 	</div>
 	
+<div class="btnArea">
+<button class="btn btnCancel" type="button" onclick="location.href='javascript:history.go(-1)'">취소</button>
 <button class="btn btnAdd">추가하기</button>
+</div>
 
 </form>
 
@@ -142,7 +145,7 @@ $(document).ready(function() {
 			
 			var p = $("#preview").html();
 			
-			p += "<div class='pre'><img src='"+ev.target.result+"' width='200' heidht='200' class='preview-img'/></div>"
+			p = "<div class='pre'><img src='"+ev.target.result+"' width='200' heidht='200' class='preview-img'/></div>"
 			$("#preview").html(p);
 			
 		}
@@ -150,6 +153,9 @@ $(document).ready(function() {
 		reader.readAsDataURL(files[0]) 
 		
 	})
+	
+
+	
 	
 })
 </script>

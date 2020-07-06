@@ -34,7 +34,7 @@ public class UserUpdatePwController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/user/updatepw - [POST]");
+//		System.out.println("/anibuddy/user/updatepw - [POST]");
 
 		// 조회할 회원 정보 얻기 - userpw, userno
 		UserTB user = userSerivce.getFindUserByUserno(req);
@@ -50,7 +50,7 @@ public class UserUpdatePwController extends HttpServlet {
 			
 			return;
 		} else { // 비밀번호 업데이트 실패시, 존재하는 회원이 아닙니다  보여주기
-			System.out.println("업데이트 실패~~~");
+//			System.out.println("업데이트 실패~~~");
 //			req.setAttribute("isUpdate", false);
 //			req.getRequestDispatcher("/WEB-INF/views/user/findPw_result.jsp")
 //				.forward(req, resp);

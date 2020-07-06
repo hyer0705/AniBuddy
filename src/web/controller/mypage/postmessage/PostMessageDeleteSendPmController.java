@@ -30,7 +30,7 @@ private PostMessageService pmService = new PostMessageServiceImpl();
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/deletesendpm - [GET]");
+//		System.out.println("/anibuddy/mypage/deletesendpm - [GET]");
 		
 		doPost(req, resp);
 		
@@ -45,7 +45,7 @@ private PostMessageService pmService = new PostMessageServiceImpl();
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/deletesendpm - [POST]");
+//		System.out.println("/anibuddy/mypage/deletesendpm - [POST]");
 		
 		String names = req.getParameter("names");
 		if(!"".equals(names) && names != null) {

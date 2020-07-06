@@ -9,10 +9,12 @@ import java.util.List;
 
 import web.dao.face.BoardDao;
 import web.dbutil.JDBCTemplate;
+import web.dto.Email;
 import web.dto.ExpertBoard;
 import web.dto.FreeBoard;
 import web.dto.HelpPost;
 import web.dto.SharePost;
+import web.dto.UserID;
 import web.util.Paging;
 
 public class BoardDaoImpl implements BoardDao{
@@ -53,7 +55,7 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public List<SharePost> selectShare(Paging paging) {
+	public List<UserID> selectShare(Paging paging) {
 		conn = JDBCTemplate.getConnection();
 
 		String sql = "";
@@ -69,7 +71,7 @@ public class BoardDaoImpl implements BoardDao{
 		sql += " ) One";
 		sql += " WHERE rnum BETWEEN ? AND ?";
 
-		List<SharePost> list = new ArrayList<SharePost>();
+		List<UserID> list = new ArrayList<>();
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -86,18 +88,16 @@ public class BoardDaoImpl implements BoardDao{
 
 			while(rs.next()) {
 
-				SharePost share = new SharePost();
+				UserID share = new UserID();
 				
-				share.setPostNo(rs.getInt("post_no"));
-				share.setBoardNo(rs.getInt("board_no"));
+				share.setPostno(rs.getInt("post_no"));
 				share.setTitle(rs.getString("title"));
 				share.setContent(rs.getString("content"));
-				share.setWriteDate(rs.getDate("write_date"));
+				share.setWritedate(rs.getDate("write_date"));
 				share.setHit(rs.getInt("hit"));
 				share.setDealProgress(rs.getString("deal_progress"));
-				share.setAnimalSpecies(rs.getString("animal_species"));
 				share.setDealType(rs.getString("deal_type"));
-				share.setUserNo(rs.getInt("user_no"));
+				share.setUserno(rs.getInt("user_no"));
 				
 				list.add(share);
 			}
@@ -621,6 +621,129 @@ public class BoardDaoImpl implements BoardDao{
 			JDBCTemplate.close(ps);
 		}
 		
+	}
+
+	@Override
+	public List<Email> selectMail(Paging paging) {
+		conn = JDBCTemplate.getConnection();
+
+	      String sql = "";
+	      sql += "SELECT * FROM (";
+	      sql += "    SELECT rownum rnum, O.* FROM (";
+	      sql += "        SELECT * FROM email";
+	      sql += "        WHERE 1=1";
+	      if( paging.getSearch() != null && !"".equals(paging.getSearch())) {
+	      sql += "      AND title LIKE '%'||?||'%'";
+	      }
+	      sql += "        ORDER BY email_no DESC";
+	      sql += "    ) O";
+	      sql += " ) One";
+	      sql += " WHERE rnum BETWEEN ? AND ?";
+
+	      List<Email> list = new ArrayList<Email>();
+
+	      try {
+	         ps = conn.prepareStatement(sql);
+
+	         int idx = 1;
+	         if( paging.getSearch() != null && !"".equals(paging.getSearch())) {
+	            ps.setString(idx++, paging.getSearch());   
+	         }
+	         ps.setInt(idx++, paging.getStartNo());   //페이징 게시글 시작 번호
+	         ps.setInt(idx++, paging.getEndNo());   //페이징 게시글 끝 번호
+
+
+	         rs = ps.executeQuery();
+
+	         while(rs.next()) {
+
+	            Email email = new Email();
+	            
+	            email.setEmailno(rs.getInt("email_no"));
+	            email.setTitle(rs.getString("title"));
+	            email.setContent(rs.getString("content"));
+	            email.setIsall(rs.getString("isall"));
+	            email.setWritedate(rs.getDate("write_date"));
+	            
+	            list.add(email);
+	         }
+
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         JDBCTemplate.close(rs);
+	         JDBCTemplate.close(ps);
+
+	      }
+	      return list;
+	}
+
+	@Override
+	public int selectCntMailSearch(String search) {
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM email";
+		sql += " WHERE 1=1";
+		sql += "    AND title LIKE '%'||?||'%'";
+		sql += " ORDER BY write_date DESC, email_no DESC";
+		
+		// 결과 반환 변수
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, search);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		
+		return cnt;
+	}
+
+	@Override
+	public int selectCntMail() {
+		conn = JDBCTemplate.getConnection(); //DB연결
+		
+		//SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM email";
+		
+		//최종 결과값
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			
+			rs = ps.executeQuery(); //SQL수행 및 결과집합 반환
+			
+			//조회결과 처리
+			while( rs.next() ) {
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return cnt;
 	}
 	
 }

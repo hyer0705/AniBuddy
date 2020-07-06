@@ -32,7 +32,7 @@ public class UserEmailCheckController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/user/chkEmail - [POST]");
+//		System.out.println("/user/chkEmail - [POST]");
 		
 		resp.setContentType("application/json;charset=utf-8");
 		

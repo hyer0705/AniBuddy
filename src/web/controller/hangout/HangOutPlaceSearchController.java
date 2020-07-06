@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import web.dto.BookMarkHangOut;
 import web.dto.HangOut;
 import web.dto.HangOutFile;
 import web.service.face.HangOutService;
@@ -33,7 +34,7 @@ public class HangOutPlaceSearchController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/hangout/placeSearch - [POST] ");
+//		System.out.println("/anibuddy/hangout/placeSearch - [POST] ");
 		
 		// 한글 인코딩
 		req.setCharacterEncoding("UTF-8");
@@ -48,10 +49,10 @@ public class HangOutPlaceSearchController extends HttpServlet {
 		String[] filters = filter.split(" ");
 		
 		List<HangOut> placeList = hangoutService.viewPlaceList(hangout, filters);
-		
-		
+		List<BookMarkHangOut> bmList = hangoutService.bmList();
+
 		if(placeList==null || placeList.size()==0) {
-			System.out.println("검색결과가 없음");
+//			System.out.println("검색결과가 없음");
 			
 			String msg = "검색결과가 없습니다";
 			
@@ -60,6 +61,8 @@ public class HangOutPlaceSearchController extends HttpServlet {
 
 			req.setAttribute("list", list);
 			req.setAttribute("fileList", fileList);
+			req.setAttribute("bmList", bmList);
+
 			req.setAttribute("msg", msg);
 			
 		} else {
@@ -67,6 +70,7 @@ public class HangOutPlaceSearchController extends HttpServlet {
 			
 			req.setAttribute("placeList", placeList);
 			req.setAttribute("fileList", fileList);
+			req.setAttribute("bmList", bmList);
 			
 		}
 		

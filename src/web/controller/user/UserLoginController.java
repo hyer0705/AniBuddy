@@ -25,7 +25,7 @@ public class UserLoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/user/login - [GET]");
+//		System.out.println("/anibuddy/user/login - [GET]");
 		
 		req.getRequestDispatcher("/WEB-INF/views/user/login.jsp")
 		.forward(req, resp);
@@ -35,7 +35,7 @@ public class UserLoginController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/user/login - [POST]");
+//		System.out.println("/anibuddy/user/login - [POST]");
 		
 		// 전달파라미터 얻기 - 로그인 정보
 		UserTB user = userService.getLoginUser(req);

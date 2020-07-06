@@ -49,6 +49,30 @@ a {
 }
 
 
+@font-face {
+  font-family: 'LotteMartHappy';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/anibuddy/font/LotteMartHappyMedium.woff2') format('woff2'), url('../font/LotteMartHappyMedium.woff') format('woff');
+}
+@font-face {
+  font-family: 'LotteMartDream';
+  font-style: normal;
+  font-weight: 300;
+  src: url('/anibuddy/font/LotteMartDreamLight.woff2') format('woff2'), url('../font/LotteMartDreamLight.woff') format('woff');
+}
 
 
+
+#wrapper {
+	font-family: 'LotteMartDream';
+	background-color: white;
+}
+
+
+
+
+*{ 
+	font-family: 'LotteMartDream';
+}
 

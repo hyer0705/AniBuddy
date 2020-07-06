@@ -6,8 +6,8 @@
 <ul>
 	<li><a href="/anibuddy/mypage/main">마이페이지</a></li>
 	<li id="muserinfo"><a href="/anibuddy/mypage/userupdate">회원정보</a></li>
-	<li><a href="#">활동내역</a></li>
-	<li><a href="/anibuddy/mypage/pmlist">쪽지함</a></li>
+	<li id="mactivity"><a href="/anibuddy/activity/postlist">활동내역</a></li>
+	<li id="mpostmessage"><a href="/anibuddy/mypage/pmlist">쪽지함</a></li>
 	<li id="moneonone"><a href="/anibuddy/mypage/oneononelist">1:1문의</a></li>
 	<li id="mdeleteuser"><a href="/anibuddy/mypage/userdelete">회원탈퇴</a></li>
 </ul>

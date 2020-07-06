@@ -44,7 +44,12 @@ public class ExpertBoardServiceImpl implements ExpertBoardService{
 		String search = (String)req.getParameter("search");
 
 		//Board 테이블의 총 게시글 수를 조회한다
-		int totalCount = expertboardDao.selectCntAll();
+		int totalCount = 0;
+	      if( search != null && !"".equals(search) ) {
+	         totalCount = expertboardDao.selectCntExpertSearch(search); 
+	      } else {
+	         totalCount = expertboardDao.selectCntAll(); 
+	      }
 
 		//Paging 객체 생성 - 현재 페이지(curPage), 총 게시글 수(totalCount) 활용
 		Paging paging = new Paging(totalCount, curPage);
@@ -97,6 +102,8 @@ public class ExpertBoardServiceImpl implements ExpertBoardService{
 	
 	@Override
 	public void write(HttpServletRequest req) {
+		
+		System.out.println("service wirte()");
 
 		//게시글 정보 저장할 객체
 		ExpertBoard board = null;
@@ -564,6 +571,11 @@ public class ExpertBoardServiceImpl implements ExpertBoardService{
 		} else {
 			return true;
 		}
+	}
+
+	@Override
+	public List<UserID> list() {
+		      return expertboardDao.selectChart();
 	}
 	
 }

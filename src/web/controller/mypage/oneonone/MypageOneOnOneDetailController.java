@@ -30,7 +30,7 @@ public class MypageOneOnOneDetailController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/oneononedetail - [GET]");
+//		System.out.println("/anibuddy/mypage/oneononedetail - [GET]");
 		
 		// oneonone_no 값 얻기
 		OneOnOne detailO3 = userO3Service.getParam(req);

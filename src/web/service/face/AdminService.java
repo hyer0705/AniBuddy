@@ -3,6 +3,7 @@ package web.service.face;
 import javax.servlet.http.HttpServletRequest;
 
 import web.dto.Admin;
+import web.dto.Email;
 
 public interface AdminService {
 
@@ -29,5 +30,46 @@ public interface AdminService {
 	 * @return Admin - 조회된 관리자 정보
 	 */
 	Admin info(Admin admin);
+
+	/**
+	 * 전체메일
+	 * @param req
+	 * @return 
+	 */
+	public Email mail(HttpServletRequest req);
+
+	/**
+	 * 메일 저장
+	 * @param email
+	 */
+	public void savemail(Email email);
+
+	/**
+	 * 메일 한개
+	 * @param req
+	 * @return
+	 */
+	public Email onemail(HttpServletRequest req);
+
+	/**
+	 * 한명 메일 저장
+	 * @param email
+	 */
+	public void saveonemail(Email email);
+
+	/**
+	 * 메일번호 가져오기
+	 * @param req
+	 * @return
+	 */
+	public Email getMailno(HttpServletRequest req);
+
+	/**
+	 * 보낸 메일 보기
+	 * @param email
+	 * @return
+	 */
+	public Email mailview(Email email);
 	
+
 }

@@ -30,7 +30,7 @@ public class PostMessageDeleteController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/deletepm - [GET]");
+//		System.out.println("/anibuddy/mypage/deletepm - [GET]");
 		
 		doPost(req, resp);
 		
@@ -45,7 +45,7 @@ public class PostMessageDeleteController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/deletepm - [POST]");
+//		System.out.println("/anibuddy/mypage/deletepm - [POST]");
 		
 		String names = req.getParameter("names");
 		if(!"".equals(names) && names != null) {

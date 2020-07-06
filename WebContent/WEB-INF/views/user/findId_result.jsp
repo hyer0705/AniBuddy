@@ -18,7 +18,11 @@
 
 <!-- external javascirpt file -->
 <script type="text/javascript" src="../js/findid.js"></script>
-
+<style type="text/css">
+#footer{
+	line-height: 25px;
+}
+</style>
 </head>
 <body>
 

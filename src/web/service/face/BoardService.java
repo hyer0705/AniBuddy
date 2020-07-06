@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import web.dto.Email;
 import web.dto.ExpertBoard;
 import web.dto.FreeBoard;
 import web.dto.HelpPost;
 import web.dto.SharePost;
+import web.dto.UserID;
 import web.util.Paging;
 
 public interface BoardService {
@@ -19,6 +21,27 @@ public interface BoardService {
 	 * @return
 	 */
 	Paging getPaging(HttpServletRequest req);
+	/**
+	 * 페이징~
+	 * 
+	 * @param req
+	 * @return
+	 */
+	Paging getPagingExpert(HttpServletRequest req);
+	/**
+	 * 페이징~
+	 * 
+	 * @param req
+	 * @return
+	 */
+	Paging getPagingFree(HttpServletRequest req);
+	/**
+	 * 페이징~
+	 * 
+	 * @param req
+	 * @return
+	 */
+	Paging getPagingHelp(HttpServletRequest req);
 
 	/**
 	 * 나눔 게시판 글 조회
@@ -26,7 +49,7 @@ public interface BoardService {
 	 * @param paging
 	 * @return
 	 */
-	List<SharePost> getShare(Paging paging);
+	List<UserID> getShare(Paging paging);
 
 	/**
 	 * 전문가 게시판 글 조회
@@ -66,42 +89,26 @@ public interface BoardService {
 	void deleteFree(String param);
 
 	/**
-	 * 전문가 게시판 관리 페이징
-	 * 
-	 * @param req - 요청 객체
-	 * @return Paging - 전문가 게시판에 대한 페이징 정보를 가진 페이징 객체 반환
-	 */
-	Paging getPagingExpert(HttpServletRequest req);
-
-	/**
-	 * 자유 게시판 관리 페이징
-	 * 
-	 * @param req
-	 * @return
-	 */
-	Paging getPagingFree(HttpServletRequest req);
-
-	/**
-	 * 봉사 게시판 관리 페이징
-	 * 
-	 * @param req
-	 * @return
-	 */
-	Paging getPagingHelp(HttpServletRequest req);
-
-	/**
-	 * 봉사 게시판 게시글 조회
+	 * 봉사 게시판 글 조회
 	 * 
 	 * @param paging
 	 * @return
 	 */
-	List<HelpPost> gethelp(Paging paging);
+	public List<HelpPost> gethelp(Paging paging);
 
 	/**
 	 * 봉사 게시판 글 삭제
 	 * 
 	 * @param param
 	 */
-	void deleteHelp(String param);
+	public void deleteHelp(String param);
+	
+	  /**
+	    * 메일 조회
+	    * @param paging
+	    * @return
+	    */
+	  public List<Email> getEmail(Paging paging);
+	Paging getPagingMail(HttpServletRequest req);
 
 }

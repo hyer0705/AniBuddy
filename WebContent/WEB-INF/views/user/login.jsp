@@ -21,6 +21,9 @@
 html, body{
 	width: 100%;
 }
+#footer{
+	line-height: 25px;
+}
 </style>
 
 
@@ -63,3 +66,6 @@ html, body{
 
 <%-- footer --%>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
+
+
+

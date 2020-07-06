@@ -387,4 +387,83 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		
 	}
 
+	   @Override
+	   public List<UserID> selectChart() {
+	      conn = JDBCTemplate.getConnection();
+	      
+	      String sql="";
+	      sql += "SELECT rownum, F.* FROM";
+	      sql += " (SELECT post_no, title, u.user_id, hit, write_date, range";
+	      sql += " FROM free_post p, user_tb u";
+	      sql += " WHERE u.user_no = p.user_no";
+	      sql += " ORDER BY hit DESC) F";
+	      sql += " WHERE rownum<4";
+	            
+	      List<UserID> list = new ArrayList<>();
+	      
+	      try {
+	         ps = conn.prepareStatement(sql);
+	         
+	         rs = ps.executeQuery();
+	         
+	         while(rs.next()) {
+	            UserID board = new UserID();
+	            
+	            board.setPostno(rs.getInt("post_no"));
+	            board.setTitle(rs.getString("title"));
+	            board.setUserid(rs.getString("user_id"));
+	            board.setHit(rs.getInt("hit"));
+	            board.setWritedate(rs.getDate("write_date"));
+	            board.setRange(rs.getString("range"));
+	            
+	            list.add(board);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         JDBCTemplate.close(rs);
+	         JDBCTemplate.close(ps);
+	      }
+	      
+	      return list;
+	   }
+
+	@Override
+	public int selectCntFreeSearch(String search) {
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT count(*) FROM free_post";
+		sql += " WHERE 1=1";
+		sql += "    AND title LIKE '%'||?||'%'";
+		sql += " ORDER BY write_date DESC, post_no DESC";
+		
+		// 결과 반환 변수
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, search);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		
+		return cnt;
+	}
+
+
 }

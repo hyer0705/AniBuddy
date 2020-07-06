@@ -1,4 +1,26 @@
 @charset "UTF-8";
+
+@font-face {
+  font-family: 'LotteMartHappy';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/anibuddy/font/LotteMartHappyMedium.woff2') format('woff2'), url('../font/LotteMartHappyMedium.woff') format('woff');
+}
+@font-face {
+  font-family: 'LotteMartDream';
+  font-style: normal;
+  font-weight: 300;
+  src: url('/anibuddy/font/LotteMartDreamLight.woff2') format('woff2'), url('../font/LotteMartDreamLight.woff') format('woff');
+}
+
+
+
+
+*{ 
+/* , body { */
+	font-family: 'LotteMartDream';
+}
+
 #header {
 /* 	text-align: center; */
 	top: 0;
@@ -54,8 +76,15 @@
 }
 
 .dropdown-content {
+	position : absolute;
+	z-index: 999;
 	display: none;
 	align-content: center;
+	width : 251px;
+}
+
+.dropdown-content .dummy {
+	color: #99d4d9;
 }
 
 nav li {
@@ -71,6 +100,7 @@ nav li {
 	padding-left: 70px;
 	padding-top: 5px;
     padding-bottom: 5px;
+	height : 30px;
 }
 
 ul:hover .dropdown-content {
@@ -99,38 +129,53 @@ ul:hover .dropdown-content {
 	bottom: 0;
 	height: 150px;
 	width: 100%;
-	margin-top: 30px;
-/* 	position : absolute; */
-/* 	margin-left: 15%; */
-/* 	margin-right: 15%; */
+	margin-top: 50px;
+
 }
 
 
 /* 배너 */
 
 #banner {
-/* 	position: absolute; */
-	top: 100px;
-	right: 20px;
-/*  top:25px;  */
-/*  left:1350px;  */
- 	width: 120px; 
- 	height: 500px;  
-	text-align: center; 
- 	background: #99d4d9;
- 	border-radius: 20px;
+    top: 100px;
+    right: 20px;
+    width: 120px; 
+    height: 522px;  
+    text-align: center; 
+    background: #99d4d9;
+    border-radius: 10px;
 }
 
 .banner-image {
-	position: relative;
-/* 	left : 17%; */
-	top : 20px;
+   position: relative;
+   top : 20px;
+   border-radius: 5px;
 }
 
 .top-button {
-	position: relative;
-	width : 50px;
-	top : 35px;
+   position: relative;
+   width : 50px;
+   top : 23px;
+   margin-top: 10px;
+   cursor: pointer;
+}
+
+#hospital {
+   position:absolute;
+   height: 100px;
+   width: 100px;
+   left: 10px;
+    top: 35px;
+    z-index: 9999;
+}
+
+#safety {
+   position:absolute;
+   height: 100px;
+   width: 100px;
+   left: 10px;
+    top: 160px;
+    z-index: 9999;
 }
 
 

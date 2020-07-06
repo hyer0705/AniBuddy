@@ -1,6 +1,7 @@
 package web.dao.face;
 
 import web.dto.Admin;
+import web.dto.Email;
 
 public interface AdminDao {
 
@@ -19,5 +20,24 @@ public interface AdminDao {
 	 * @return Admin - 조회된 Admin 객체
 	 */
 	Admin selectAdminByAdminid(Admin admin);
+
+	/**
+	 * 전체 메일 정보
+	 * @param email
+	 */
+	public void mail(Email email);
+
+	/**
+	 * 메일 하나
+	 * @param email
+	 */
+	public void onemail(Email email);
+
+	/**
+	 * 메일 정보 보기
+	 * @param emailno
+	 * @return
+	 */
+	public Email selectEmailByEmailno(Email emailno);
 
 }

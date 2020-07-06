@@ -24,7 +24,7 @@ public class UserFindPwController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/user/findpw - [GET]");
+//		System.out.println("/anibuddy/user/findpw - [GET]");
 		req.getRequestDispatcher("/WEB-INF/views/user/findPw.jsp")
 			.forward(req, resp);
 	}
@@ -32,7 +32,7 @@ public class UserFindPwController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/user/findpw - [POST]");
+//		System.out.println("/anibuddy/user/findpw - [POST]");
 		
 		// 조회할 회원 정보 얻기
 		UserTB user = userService.getFindUser(req);
@@ -44,14 +44,14 @@ public class UserFindPwController extends HttpServlet {
 		
 		// 회원 존재 여부
 		if( isUser == null) { // 조회한 회원이 없을 때
-			System.out.println("회원 없음~");
+//			System.out.println("회원 없음~");
 			req.setAttribute("isSuccess", false);
 			// VIEW 지정
 			req.getRequestDispatcher("/WEB-INF/views/user/findPw_result.jsp")
 			.forward(req, resp);
 		} else { // 조회한 회원이 있을 때
 			req.setAttribute("isSuccess", true);
-			System.out.println("회원 있음~");
+//			System.out.println("회원 있음~");
 			req.setAttribute("userno", isUser.getUserNo());
 			req.getRequestDispatcher("/WEB-INF/views/user/updatePw.jsp")
 			.forward(req, resp);

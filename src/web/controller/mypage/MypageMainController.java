@@ -19,7 +19,7 @@ public class MypageMainController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		
-		System.out.println("/anibuddy/mypage/main - [GET]");
+//		System.out.println("/anibuddy/mypage/main - [GET]");
 		
 		// 로그인 안되어 있으면 로그인 페이지로 이동
 		if(req.getSession().getAttribute("login") == null) {

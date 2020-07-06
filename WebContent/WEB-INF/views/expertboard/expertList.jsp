@@ -76,7 +76,7 @@ text-align: center;
 	<td>${expertboard.postno }</td>
 	<td>${expertboard.range }</td>
 	<td>
-	<c:if test="${expertboard.depth >0 }">&nbsp;ㄴ&nbsp;</c:if>
+	<c:if test="${expertboard.depth >0 }"><span><img src="../img/RE.png" width="25px"></span></c:if>
 	
 	<c:choose>
 		<c:when test="${login }">
@@ -127,7 +127,7 @@ text-align: center;
 </c:if> 
 <br><br>
 <div class="form-inline text-center">
-	<input class="form-control" type="text" id="search" />
+	<input class="form-control" type="text" id="search" placeholder="제목으로 검색" />
 	<button id="btnSearch" class="btn">검색</button>
 </div>
 

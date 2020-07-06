@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import web.dto.BookMarkHangOut;
 import web.dto.HangOut;
 import web.dto.HangOutFile;
+import web.util.Paging;
 
 public interface HangOutService {
 
@@ -71,5 +73,22 @@ public interface HangOutService {
 	 */
 	void delete(HangOut hangout);
 
+	List<HangOut> viewLocation(HangOut hangout);
+
+	List<HangOut> viewCity(HangOut hangout);
+
+	List<BookMarkHangOut> bmList();
+
+	void deleteBookMark(BookMarkHangOut bm);
+
+	void insertBookMark(BookMarkHangOut bm);
+
+	void delete(String names);
+
+	BookMarkHangOut getParamBmNo(HttpServletRequest req);
+
+	void deleteBookMarkNo(BookMarkHangOut bm);
+
+	Paging getPaging(HttpServletRequest req);
 
 }

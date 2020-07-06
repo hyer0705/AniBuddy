@@ -31,7 +31,7 @@ public class AdminLoginController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/admin/login - [GET]");
+//		System.out.println("/anibuddy/admin/login - [GET]");
 		
 		// VIEW 지정 - forward
 		req.getRequestDispatcher("/WEB-INF/views/admin/admin_login.jsp")
@@ -41,7 +41,7 @@ public class AdminLoginController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/admin/login - [POST]");
+//		System.out.println("/anibuddy/admin/login - [POST]");
 		
 		// 전달파라미터 얻기 - 로그인 정보
 		Admin admin = adminService.getLoginAdmin(req);

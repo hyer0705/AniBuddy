@@ -44,7 +44,12 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		String search = (String)req.getParameter("search");
 
 		//Board 테이블의 총 게시글 수를 조회한다
-		int totalCount = freeboardDao.selectCntAll();
+		int totalCount = 0;
+	      if( search != null && !"".equals(search) ) {
+	         totalCount = freeboardDao.selectCntFreeSearch(search); 
+	      } else {
+	         totalCount = freeboardDao.selectCntAll(); 
+	      }
 
 		//Paging 객체 생성 - 현재 페이지(curPage), 총 게시글 수(totalCount) 활용
 		Paging paging = new Paging(totalCount, curPage);
@@ -410,14 +415,23 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 			e.printStackTrace();
 		}
 		
+		
 		String postno = req.getParameter("postno");
 		HttpSession session = req.getSession();
-		session.getAttribute("userno");
+		
+		Object obj = session.getAttribute("userno");
+		
+		if(obj == null) {
+			obj = session.getAttribute("adminno");
+		}
+		
+		int tmpno = (int)obj;
+		
 		String content = (String) req.getParameter("content");
 		
 		FreeComment comment = new FreeComment();
 		comment.setPostno( Integer.parseInt(postno) );
-		comment.setUserno((int)session.getAttribute("userno"));
+		comment.setUserno(tmpno);
 		comment.setContent(content);
 		
 		return comment;
@@ -437,6 +451,11 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		} else {
 			return true;
 		}
+	}
+
+	@Override
+	public List<UserID> list() {
+		      return freeboardDao.selectChart();
 	}
 	
 }

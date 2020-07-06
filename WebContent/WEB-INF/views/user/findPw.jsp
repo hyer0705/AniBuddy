@@ -27,6 +27,11 @@ $(document).ready(function(){
 	})
 })
 </script>
+<style type="text/css">
+#footer{
+	line-height: 25px;
+}
+</style>
 </head>
 <body>
 

@@ -30,7 +30,11 @@
     display: flex;
     align-items: center;
     border-radius: 7px;
-    cursor: pointer;
+}
+
+.menu-card:hover {
+	cursor: pointer;
+	background-color: #fff1e8;
 }
 
 .card-wrapper .menu-card:first-child {

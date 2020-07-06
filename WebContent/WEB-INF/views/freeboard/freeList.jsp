@@ -87,7 +87,10 @@ text-align: center;
 			</c:otherwise>
 			</c:choose>
 		</c:otherwise>
-	</c:choose></td>
+	</c:choose>
+		<c:if test="${freeboard.hit > 10 }"><span style="color: coral;" >&nbsp;hit!</span></c:if>
+	</td>
+	
 <%-- 	<td><a href="/anibuddy/freeboard/view?postno=${freeboard.postno }" >${freeboard.title }</a></td> --%>
 	<td>${freeboard.userid }</td>
 	<td>${freeboard.hit }</td>
@@ -104,7 +107,7 @@ text-align: center;
 </c:if> 
 <br><br>
 <div class="form-inline text-center">
-	<input class="form-control" type="text" id="search" />
+	<input class="form-control" type="text" id="search"placeholder="제목으로 검색" />
 	<button id="btnSearch" class="btn">검색</button>
 </div>
 

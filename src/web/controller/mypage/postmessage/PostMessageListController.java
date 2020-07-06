@@ -33,11 +33,11 @@ public class PostMessageListController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/pmlist - [GET]");
+//		System.out.println("/anibuddy/mypage/pmlist - [GET]");
 		
 		// 페이징 정보 설정
 		Paging paging = pmService.getPaging(req);
-		System.out.println("PostMessageListController paging: " + paging);
+//		System.out.println("PostMessageListController paging: " + paging);
 		
 		// 유저정보 얻기
 		UserTB currUser = new UserTB();

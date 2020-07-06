@@ -32,7 +32,7 @@ public class UserUpdateController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/userupdate- - [GET]");
+//		System.out.println("/anibuddy/mypage/userupdate- - [GET]");
 		
 		// 사용자 정보 얻어오기
 		UserTB user = userService.getLoginUserByUserno(req);
@@ -78,7 +78,7 @@ public class UserUpdateController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		// post 요청 완료 출력
-		System.out.println("/anibuddy/mypage/userupdate - [POST]");
+//		System.out.println("/anibuddy/mypage/userupdate - [POST]");
 		
 		// 회원정보 수정
 		userService.updateUserInfo(req);

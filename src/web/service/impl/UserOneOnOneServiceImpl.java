@@ -42,6 +42,8 @@ public class UserOneOnOneServiceImpl implements UserOneOnOneService{
 		// 현재 사용자의 번호로 자신이 작성한 문의 내역 보여주기
 		int userno = (int)req.getSession().getAttribute("userno");
 		UserTB currUser = new UserTB();
+		
+		
 		currUser.setUserNo(userno);
 		int totalCnt = usero3Dao.selectCntByUserno(search, currUser);
 //		System.out.println("getPaging() totalCnt: " + totalCnt);

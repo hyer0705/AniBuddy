@@ -36,6 +36,8 @@ public class ExpertBoardWriteController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		System.out.println("ex write post");
+		
 		//작성글 삽입
 		expertboardService.write(req);
 		//목록으로 리다이렉션

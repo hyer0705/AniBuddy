@@ -112,4 +112,6 @@ public interface FreeBoardService {
 	 */
 	boolean deleteComment(FreeComment comment);
 
+	List<UserID> list();
+
 }

@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/layout/header.jsp"></jsp:include>
+<jsp:include page="/layout/header1.jsp"></jsp:include>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -61,7 +61,7 @@ $(document).ready(function() {
 
 <div class="container" style="width: 900px;">
 
-<h3>쪽지 작성하기</h3>
+<h3><b>쪽지 작성하기</b> <span class="glyphicon glyphicon-pencil"></span></h3>
 <hr>
 
 <div>

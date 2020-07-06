@@ -30,7 +30,7 @@ public class MypageOneOnOneDelete extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/oneononeDelete - [GET]");
+//		System.out.println("/anibuddy/mypage/oneononeDelete - [GET]");
 		
 		// oneonone_no 정보 얻기
 		OneOnOne o3 = userO3Service.getParam(req);

@@ -33,7 +33,7 @@ public class UserIdCheckController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/user/chkId [POST]");
+//		System.out.println("/user/chkId [POST]");
 		
 		resp.setContentType("application/json;charset=utf-8");
 		// 응답 출력 스트림

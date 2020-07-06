@@ -27,8 +27,7 @@ private ExpertBoardService expertboardService = new ExpertBoardServiceImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// 관리자라면 볼 수 있도록
-		if(req.getSession().getAttribute("login") == null) {
+		if(req.getSession().getAttribute("login") == null && req.getSession().getAttribute("adminLogin") == null) {
 			
 			resp.sendRedirect("/anibuddy/expertboard/list");
 			return;

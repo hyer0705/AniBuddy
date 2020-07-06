@@ -181,3 +181,48 @@
 , #btnCancel:hover {
 	background: #99d4d9; 
 }
+
+/* 배너 */
+
+#banner {
+/*    position: absolute; */
+   top: 100px;
+   right: 20px;
+/*  top:25px;  */
+/*  left:1350px;  */
+    width: 120px; 
+    height: 500px;  
+   text-align: center; 
+    background: #99d4d9;
+    border-radius: 10px;
+}
+
+.banner-image {
+   position: relative;
+/*    left : 17%; */
+   top : 20px;
+}
+
+.top-button {
+   position: relative;
+   width : 50px;
+   top : 23px;
+}
+
+#hospital {
+   position:absolute;
+   height: 100px;
+   width: 100px;
+   left: 10px;
+    top: 35px;
+    z-index: 9999;
+}
+
+#safety {
+   position:absolute;
+   height: 100px;
+   width: 100px;
+   left: 10px;
+    top: 160px;
+    z-index: 9999;
+}

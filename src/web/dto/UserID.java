@@ -8,17 +8,47 @@ public class UserID {
 	private int postno;
 	private String title;
 	private String userid;
+	private String adminid;
 	private int hit;
 	private Date writedate;
 	private String range;
 	private String content;
 	private int userno;
-	private int usernick;
+	private int adminno;
+	private String usernick;
 	private String isexpert;
 	private int groupno; //답글을 쓸 글번호
 	private int groupord; //들여쓰기
 	private int depth; //글 순서
+	private String dealProgress;
+	private String dealType;
 	
+	
+	
+	public String getAdminid() {
+		return adminid;
+	}
+	public void setAdminid(String adminid) {
+		this.adminid = adminid;
+	}
+	public int getAdminno() {
+		return adminno;
+	}
+	public void setAdminno(int adminno) {
+		this.adminno = adminno;
+	}
+	public String getDealProgress() {
+		return dealProgress;
+	}
+	public void setDealProgress(String dealProgress) {
+		this.dealProgress = dealProgress;
+	}
+	public String getDealType() {
+		return dealType;
+	}
+	public void setDealType(String dealType) {
+		this.dealType = dealType;
+	}
 	public int getGroupno() {
 		return groupno;
 	}
@@ -43,10 +73,10 @@ public class UserID {
 	public void setIsexpert(String isexpert) {
 		this.isexpert = isexpert;
 	}
-	public int getUsernick() {
+	public String getUsernick() {
 		return usernick;
 	}
-	public void setUsernick(int usernick) {
+	public void setUsernick(String usernick) {
 		this.usernick = usernick;
 	}
 	public String getContent() {

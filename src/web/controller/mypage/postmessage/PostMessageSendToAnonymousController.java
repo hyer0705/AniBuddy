@@ -29,7 +29,7 @@ public class PostMessageSendToAnonymousController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/sendtoanonymous - [GET]");
+//		System.out.println("/anibuddy/mypage/sendtoanonymous - [GET]");
 		
 		req.getRequestDispatcher("/WEB-INF/views/mypage/postmessage_write_anonymous.jsp")
 			.forward(req, resp);
@@ -45,7 +45,7 @@ public class PostMessageSendToAnonymousController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/sendtoanonymous - [POST]");
+//		System.out.println("/anibuddy/mypage/sendtoanonymous - [POST]");
 		
 		pmService.write(req);
 		

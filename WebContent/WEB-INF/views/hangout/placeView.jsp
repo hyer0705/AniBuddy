@@ -12,12 +12,12 @@
 <div class="top">
 	<h2>놀거리 <span class="h2-inner"> 장소 상세보기</span></h2>
 
-	<div class="top-menu">
-		<button type="button" class="btn view-list" onclick="location.href='<%=request.getContextPath() %>/hangout/place'">장소검색</button>
-		<c:if test="${hangout.userNo eq userno }">
+	<div class="view-top-menu">
+		<button type="button" class="btn view-list" onclick="location.href='javascript:history.go(-1)'">목록으로</button>
+		<c:if test="${hangout.userNo eq userno || adminLogin}">
 			<div class="delete-place" id="delete">
 				<button type="button" class="btn view-delete" id="btnDelete"
-				onclick="if(confirm('정말 삭제하시겠습니까?')==true){location.href='<%=request.getContextPath() %>/hangout/delete?hNo=${i.hNo }'} else return;">
+				onclick="if(confirm('정말 삭제하시겠습니까?')==true){location.href='<%=request.getContextPath() %>/hangout/delete?hNo=${hangout.hNo }'} else return;">
 				삭제하기</button>
 			</div>
 		</c:if>
@@ -30,7 +30,7 @@
 <div class="info-box">
 	<div class="place-name">
 		<p class="hName">${hangout.hName }</p>
-		<div class="filter-icon">${hangout.hFilter }</div>
+		<div class="filter-icon">#${hangout.hFilter }</div>
 	</div>
 
 	<div class="info">
@@ -55,7 +55,7 @@
 
 	<div class="info">
 		<div class="info-title">사이트</div>
-		<div class="info-content"><a href="${hangout.hDomain }">${hangout.hDomain }</a></div>
+		<div class="info-content"><a href="http://${hangout.hDomain }" target="_blank">${hangout.hDomain }</a></div>
 	</div>
 
 	<div class="info">
@@ -67,7 +67,7 @@
 	
 <div class="info-image">
 	<img src="<%=request.getContextPath() %>/upload/${hangoutFile.storedName}" alt="장소 이미지" width="430" height="340"
-	 onerror="this.src='<%=request.getContextPath() %>/img/intro2.png'">
+	 onerror="this.src='<%=request.getContextPath() %>/img/no-image.png'">
 </div>
 
 

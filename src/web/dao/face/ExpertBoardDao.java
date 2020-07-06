@@ -97,4 +97,8 @@ public interface ExpertBoardDao {
 	 */
 	void replyinsert(ExpertBoard board);
 
+	List<UserID> selectChart();
+
+	int selectCntExpertSearch(String search);
+
 }

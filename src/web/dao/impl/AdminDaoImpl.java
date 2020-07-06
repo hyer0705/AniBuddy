@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import web.dao.face.AdminDao;
 import web.dbutil.JDBCTemplate;
 import web.dto.Admin;
+import web.dto.Email;
 
 public class AdminDaoImpl implements AdminDao{
 
@@ -92,6 +93,95 @@ public class AdminDaoImpl implements AdminDao{
 			JDBCTemplate.close(ps);
 		}
 				
+		return result;
+	}
+	
+	@Override
+	public void mail(Email email) {
+		
+		conn = JDBCTemplate.getConnection();
+		
+		String sql="";
+		sql+="INSERT INTO email(email_no, title, content, isall)";
+		sql+=" VALUES (email_no_seq.nextval, ?,?,1)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email.getTitle());
+			ps.setString(2, email.getContent());
+			
+			rs = ps.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+	}
+	
+	@Override
+	public void onemail(Email email) {
+
+		conn = JDBCTemplate.getConnection();
+		
+		String sql="";
+		sql+="INSERT INTO email(email_no, title, content, isall, user_email)";
+		sql+=" VALUES (email_no_seq.nextval, ?,?,0, ?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email.getTitle());
+			ps.setString(2, email.getContent());
+			ps.setString(3, email.getUseremail());
+			
+			rs = ps.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+	}
+	
+	@Override
+	public Email selectEmailByEmailno(Email email) {
+
+		// DB 연결 객체
+		conn = JDBCTemplate.getConnection();
+		
+		// SQL 작성
+		String sql = "";
+		sql += "SELECT * FROM email";
+		sql += " WHERE email_no=?";
+		
+		Email result = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, email.getEmailno());
+			
+			rs = ps.executeQuery();
+			
+			// 조회 결과 처리
+			while(rs.next()) {
+				result = new Email();
+				result.setEmailno(rs.getInt("email_no"));
+				result.setTitle(rs.getString("title"));
+				result.setContent(rs.getString("content"));
+				result.setIsall(rs.getString("isall"));
+				result.setUseremail(rs.getString("user_email"));
+				result.setWritedate(rs.getDate("write_date"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
 		return result;
 	}
 }

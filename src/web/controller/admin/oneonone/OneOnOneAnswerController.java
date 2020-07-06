@@ -31,7 +31,7 @@ public class OneOnOneAnswerController extends HttpServlet {
 
 		// 질문글 보여주기
 		viewOneOnOne = oneOnOneService.view(viewOneOnOne);
-		System.out.println("/anibuddy/oneonone/answer 질문글 viewOnOnOne: " + viewOneOnOne);
+//		System.out.println("/anibuddy/oneonone/answer 질문글 viewOnOnOne: " + viewOneOnOne);
 		
 		// 해당 질문글에 대한 답변글 조회 
 		OneOnOne q = userO3Service.detailQ(viewOneOnOne);

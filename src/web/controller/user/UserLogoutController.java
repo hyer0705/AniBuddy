@@ -19,7 +19,7 @@ public class UserLogoutController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/user/logout - [GET]");
+//		System.out.println("/anibuddy/user/logout - [GET]");
 		
 		// 세션 객체 얻기
 		HttpSession session = req.getSession();

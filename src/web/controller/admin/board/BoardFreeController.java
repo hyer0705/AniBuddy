@@ -27,7 +27,7 @@ public class BoardFreeController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		Paging paging = boardService.getPagingFree(req);
-		System.out.println("BoardFreeController paging: " + paging);
+//		System.out.println("BoardFreeController paging: " + paging);
 
 		List<FreeBoard> free = boardService.getFree(paging);		
 

@@ -30,19 +30,19 @@ public class PostMessageSendDetailController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/sendpmdetail - [GET]");
+//		System.out.println("/anibuddy/mypage/sendpmdetail - [GET]");
 		
 		// pm_no 값 얻기
 		PostMessage pm = pmService.getParamPmNo(req);
-		System.out.println("PMSendDetailController pm: " + pm);
+//		System.out.println("PMSendDetailController pm: " + pm);
 		
 		// pm_no 값으로 쪽지 조회
 		pm = pmService.detail(pm);
-		System.out.println("PMDetailController pm: " + pm);
+//		System.out.println("PMDetailController pm: " + pm);
 		
 		// 조회된 쪽지로 받은 사람 조회
 		UserTB recipient = pmService.getRecipient(pm);
-		System.out.println("PMDetailController recipient: " + recipient);
+//		System.out.println("PMDetailController recipient: " + recipient);
 
 		// 조회된 쪽지 req 값 설정
 		req.setAttribute("pm", pm);

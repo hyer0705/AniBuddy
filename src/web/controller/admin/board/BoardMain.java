@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import web.dto.SharePost;
+import web.dto.UserID;
 import web.service.face.BoardService;
 import web.service.impl.BoardServiceImpl;
 import web.util.Paging;
@@ -28,9 +29,9 @@ public class BoardMain extends HttpServlet {
 
 
 		Paging paging = boardService.getPaging(req);
-		System.out.println("BoardMain paging: " + paging);
+//		System.out.println("BoardMain paging: " + paging);
 
-		List<SharePost> share = boardService.getShare(paging);		
+		List<UserID> share = boardService.getShare(paging);		
 
 		req.setAttribute("paging", paging);
 		req.setAttribute("share", share);

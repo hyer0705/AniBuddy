@@ -154,9 +154,7 @@ $(document).ready(function(){
 			reg = /^[가-힣]{2,}$/
 			msg = "<h4>이름은 2자 이상의 한글만 사용 가능합니다.</h4>"
 
-			if( !reg.test( $(currNode).val() )){
-				invalidMsg( currNode, reg, msg)
-			}
+			invalidMsg( currNode, reg, msg)
 		}
 		
 	})
@@ -174,9 +172,9 @@ $(document).ready(function(){
 		if( $(this).val() == ''){
 			emptyMsg(currNode, errNode)
 		} else {
-			// #nick : 닉네임은 2자 이상의 영어대소문자, 숫자만 사용가능합니다.
+			// #nick : 닉네임은 2자 이상의 한글과 영어대소문자, 숫자만 사용가능합니다.
 			reg = /^[A-Za-z0-9가-힣]{2,20}$/
-			msg = "<h4>닉네임은 2자 이상, 20자 이하의 영어대소문자, 숫자 또는 6자 이하의 한글만 사용가능합니다.</h4>"
+			msg = "<h4>닉네임은 2자 이상, 20자 이하의 한글과 영어대소문자, 숫자만 사용가능합니다.</h4>"
 
 			if( !reg.test( $(currNode).val() )){
 				invalidMsg( currNode, reg, msg)
@@ -372,15 +370,6 @@ $(document).ready(function(){
 		
 	})
 	
-	// 9.2 상세주소
-	$("#sample6_detailAddress").on("blur", function(){
-		var currNode = $(this)
-		var errNode = $("#err-addr")
-		
-		/* 에러메시지 띄워주는 함수 */
-		emptyMsg(currNode, errNode)
-	})
-	
 	
 	/* form submit 이벤트시 */
 	$("#join-form").on("submit", function(){
@@ -453,7 +442,7 @@ $(document).ready(function(){
 			// submit 중단
 			return false
 		} else if( $("#nick").val() != ''){ // 닉네임 폼이 비어있지 않을 때
-			var nickReg = /^[A-Za-z0-9]{2,20}$/
+			var nickReg = /^[A-Za-z0-9가-힣]{2,20}$/
 			if( !nickReg.test( $("#nick").val() ) ){
 				// 닉네임 폼 비우고 포커스
 				$("#nick").val("")

@@ -140,45 +140,95 @@ public class UserManageDaoImpl implements UserManageDao{
 	}
 
 	@Override
-	public int selectCntBySearch(String search) {
-		
-		// DB 연결
-		conn = JDBCTemplate.getConnection();
-		
-		// SQL 작성
-		String sql = "";
-		sql += "SELECT count(*) FROM user_tb";
-		sql += " WHERE 1=1";
-		sql += "    AND user_id LIKE '%'||?||'%'";
-		sql += " ORDER BY user_no";
-		
-		// 결과 반환 변수 선언
-		int cnt = 0;
+	public List<UserTB> selectUser() {
+		 conn = JDBCTemplate.getConnection();
 
-		try {
-			// 쿼리 수행
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, search);
-			
-			// 쿼리 결과 저장
-			rs = ps.executeQuery();
-			
-			// 결과 조회 처리
-			while(rs.next()) {
-				cnt = rs.getInt(1);
-				
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(ps);
-		}
-		
-		
-		return cnt;
+	      String sql="";
+	      
+	      sql += "SELECT * FROM user_tb";
+	      
+	      List<UserTB> list = new ArrayList<UserTB>();
+
+	      try {
+	         ps = conn.prepareStatement(sql);
+
+	         rs = ps.executeQuery();
+
+	         while(rs.next()) {
+
+	            UserTB user = new UserTB();
+	            
+	            user.setUserNo(rs.getInt("user_no"));
+	            user.setUserId(rs.getString("user_id"));
+	            user.setUserPw(rs.getString("user_pw"));
+	            user.setUserName(rs.getString("user_name"));
+	            user.setBirth(rs.getDate("birth"));
+	            user.setGender(rs.getString("gender").charAt(0));
+	            user.setNick(rs.getString("nick"));
+	            user.setEmail(rs.getString("email"));
+	            user.setTel(rs.getString("tel"));
+	            user.setFirstAddr(rs.getString("first_addr"));
+	            user.setSecondAddr(rs.getString("second_addr"));
+	            user.setAnimal(rs.getString("animal"));
+	            user.setIsExpert(rs.getString("is_expert"));
+	            
+	            list.add(user);
+	         }
+
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         JDBCTemplate.close(rs);
+	         JDBCTemplate.close(ps);
+
+	      }
+
+
+	      return list;
+
+	}
+
+	@Override
+	public int selectCntBySearch(String search) {
+		  
+	      // DB 연결
+	      conn = JDBCTemplate.getConnection();
+	      
+	      // SQL 작성
+	      String sql = "";
+	      sql += "SELECT count(*) FROM user_tb";
+	      sql += " WHERE 1=1";
+	      sql += "    AND user_id LIKE '%'||?||'%'";
+	      sql += " ORDER BY user_no";
+	      
+	      // 결과 반환 변수 선언
+	      int cnt = 0;
+
+	      try {
+	         // 쿼리 수행
+	         ps = conn.prepareStatement(sql);
+	         ps.setString(1, search);
+	         
+	         // 쿼리 결과 저장
+	         rs = ps.executeQuery();
+	         
+	         // 결과 조회 처리
+	         while(rs.next()) {
+	            cnt = rs.getInt(1);
+	            
+	         }
+	         
+	      } catch (SQLException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      } finally {
+	         JDBCTemplate.close(rs);
+	         JDBCTemplate.close(ps);
+	      }
+	      
+	      
+	      return cnt;
+
 	}
 	
 }

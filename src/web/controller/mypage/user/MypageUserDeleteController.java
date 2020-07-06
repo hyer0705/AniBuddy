@@ -25,7 +25,7 @@ public class MypageUserDeleteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/mypage/userdelete - [GET]");
+//		System.out.println("/anibuddy/mypage/userdelete - [GET]");
 		
 		// VIEW 지정 - forward
 		req.getRequestDispatcher("/WEB-INF/views/mypage/userdelete.jsp")
@@ -36,7 +36,7 @@ public class MypageUserDeleteController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/mypage/usertdelete - [POST]");
+//		System.out.println("/anibuddy/mypage/usertdelete - [POST]");
 		
 		// 삭제할 사용자 객체 정보 알아오기
 		UserTB deleteUser = userService.getFindDeleteUser(req);

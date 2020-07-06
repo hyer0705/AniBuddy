@@ -29,11 +29,11 @@ public class OneOnOneReplyDeleteController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/oneonone/replydelete - [GET]");
+//		System.out.println("/anibuddy/oneonone/replydelete - [GET]");
 		
 		// oneonone_no 정보 얻기
 		OneOnOne o3 = o3Service.getparam(req);
-		System.out.println("delete controller o3: " + o3);
+//		System.out.println("delete controller o3: " + o3);
 		
 		// 삭제~
 		o3Service.delete(o3);

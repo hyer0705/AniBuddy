@@ -24,7 +24,7 @@ public class UserJoinController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/user/join - [GET]");
+//		System.out.println("/anibuddy/user/join - [GET]");
 		
 		req.getRequestDispatcher("/WEB-INF/views/user/join.jsp")
 			.forward(req, resp);
@@ -34,7 +34,7 @@ public class UserJoinController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("/anibuddy/user/join - [POST]");
+//		System.out.println("/anibuddy/user/join - [POST]");
 		
 		// 요청 파라미터 처리
 		UserTB param = userService.getJoinUser(req);

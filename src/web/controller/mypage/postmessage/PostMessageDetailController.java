@@ -31,7 +31,7 @@ public class PostMessageDetailController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("/anibuddy/mypage/pmdetail - [GET]");
+//		System.out.println("/anibuddy/mypage/pmdetail - [GET]");
 		
 		// pm_no 값 얻기
 		PostMessage pm = pmService.getParamPmNo(req);
