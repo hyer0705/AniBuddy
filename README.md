@@ -1,5 +1,5 @@
 # AniBuddy
-kh정보교육원 semi project
+side team project
 
 # AniBuddy 아이디어 개요
 반려동물 보유 가구 수가 증가함에 따라 다음 네 가지 기능을 가진 사이트를 만들고자 한다.
